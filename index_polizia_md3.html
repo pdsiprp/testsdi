@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S.D.I. - Database Questura | Polizia di Stato</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+
+    <style>
+        /* =========================================
+           REFINED MATERIAL DESIGN 3 - OFFICIAL POLIZIA THEME (DARK)
+        ========================================= */
+        :root {
+            /* Base Colors */
+            --md-sys-color-background: #101216; 
+            --md-sys-color-surface: #1B1D22;
+            --md-sys-color-surface-variant: #262A30;
+            --md-sys-color-surface-container: #1E2126;
+            
+            --md-sys-color-on-background: #E1E2E7;
+            --md-sys-color-on-surface: #E1E2E7;
+            --md-sys-color-on-surface-variant: #C3C6CF;
+
+            /* Primary (Police Blue/Avio) */
+            --md-sys-color-primary: #8AB8FE;
+            --md-sys-color-on-primary: #002F68;
+            --md-sys-color-primary-container: #004493;
+            --md-sys-color-on-primary-container: #D6E3FF;
+
+            /* Error */
+            --md-sys-color-error: #FFB4AB;
+            --md-sys-color-on-error: #690005;
+
+            /* Outline */
+            --md-sys-color-outline: #8D9199;
+
+            /* Shapes */
+            --shape-corner-small: 8px;
+            --shape-corner-medium: 16px;
+            --shape-corner-large: 28px;
+            --shape-corner-full: 999px;
+
+            /* Elevations */
+            --md-elevation-1: 0px 1px 3px rgba(0,0,0,0.2), 0px 1px 2px rgba(0,0,0,0.1);
+            --md-elevation-3: 0px 5px 10px rgba(0,0,0,0.3), 0px 1px 4px rgba(0,0,0,0.2);
+            
+            /* MD3 Standard Timings */
+            --duration-short: 150ms;
+            --duration-medium: 300ms;
+            --duration-long: 500ms;
+            --easing-standard: cubic-bezier(0.2, 0, 0, 1);
+            --easing-decelerate: cubic-bezier(0, 0, 0, 1);
+        }
+
+        body {
+            font-family: 'Lexend', sans-serif;
+            background-color: var(--md-sys-color-background);
+            color: var(--md-sys-color-on-background);
+            margin: 0; padding: 0;
+            height: 100vh; overflow: hidden;
+            display: flex;
+        }
+
+        /* Utilities */
+        .hidden { display: none !important; }
+        .material-symbols-outlined { font-size: 24px; vertical-align: middle; }
+        strong, b { font-weight: 600; } 
+
+        /* =========================================
+           ANIMATIONS
+        ========================================= */
+        @keyframes md-ripple {
+            0% { transform: scale(0); opacity: 0.5; }
+            100% { transform: scale(4); opacity: 0; }
+        }
+        @keyframes fadeInSlideUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .view-enter { animation: fadeInSlideUp var(--duration-long) var(--easing-decelerate); }
+
+        /* =========================================
+           COMPONENTS
+        ========================================= */
+        .md-btn {
+            background-color: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+            border: none; padding: 0 24px; height: 40px;
+            border-radius: var(--shape-corner-full);
+            font-size: 14px; font-weight: 600; letter-spacing: 0.5px;
+            cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            transition: background-color var(--duration-short), box-shadow var(--duration-short), transform var(--duration-short);
+            box-shadow: var(--md-elevation-1);
+            position: relative; overflow: hidden;
+            font-family: 'Lexend', sans-serif;
+        }
+        .md-btn:hover { background-color: #A0C9FE; box-shadow: var(--md-elevation-3); }
+        .md-btn:active { transform: scale(0.97); }
+        .md-btn:disabled { background-color: #444; color: #888; cursor: not-allowed; box-shadow: none; transform: none; }
+
+        .md-btn-secondary { background-color: transparent; border: 1px solid var(--md-sys-color-outline); color: var(--md-sys-color-primary); box-shadow: none; }
+        .md-btn-secondary:hover { background-color: rgba(138, 184, 254, 0.1); }
+        .md-btn-error { background-color: var(--md-sys-color-error); color: var(--md-sys-color-on-error); }
+
+        .md-input {
+            font-family: 'Lexend', sans-serif;
+            width: 100%; box-sizing: border-box;
+            background-color: var(--md-sys-color-surface-variant);
+            color: var(--md-sys-color-on-surface);
+            border: 1px solid transparent; border-bottom-color: var(--md-sys-color-outline);
+            padding: 16px; border-radius: var(--shape-corner-small) var(--shape-corner-small) 0 0;
+            margin-bottom: 24px; font-size: 15px; outline: none;
+            transition: border-color var(--duration-short), background-color var(--duration-short);
+        }
+        .md-input:focus { border-bottom-color: var(--md-sys-color-primary); border-bottom-width: 2px; background-color: #31353C; }
+
+        .md-card {
+            background-color: var(--md-sys-color-surface-container);
+            border-radius: var(--shape-corner-medium); padding: 24px;
+            transition: transform var(--duration-medium) var(--easing-standard), box-shadow var(--duration-medium);
+            cursor: pointer; border: 1px solid transparent;
+            animation: fadeInSlideUp var(--duration-medium) var(--easing-decelerate);
+        }
+        .md-card:hover { transform: translateY(-4px); box-shadow: var(--md-elevation-3); background-color: #26292F; border-color: rgba(138, 184, 254, 0.2); }
+        .md-card h3 { margin: 0 0 8px 0; font-size: 18px; font-weight: 600; color: var(--md-sys-color-on-surface); }
+        .md-card p { margin: 0; color: var(--md-sys-color-on-surface-variant); font-size: 14px; line-height: 1.5; font-weight: 300; }
+
+        /* =========================================
+           LOGIN VIEW 
+        ========================================= */
+        #login-view {
+            width: 100%; height: 100%;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            background: linear-gradient(rgba(16, 18, 22, 0.85), rgba(16, 18, 22, 0.95)), url('https://i.imgur.com/RlzMnRQ.png') no-repeat center center;
+            background-size: cover;
+            position: absolute; z-index: 1000;
+            transition: opacity var(--duration-long) var(--easing-standard), transform var(--duration-long) var(--easing-standard);
+        }
+
+        .login-card {
+            background-color: rgba(27, 29, 34, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 48px; border-radius: var(--shape-corner-large);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5); text-align: center;
+            width: 360px; border: 1px solid rgba(255,255,255,0.08);
+            animation: fadeInSlideUp var(--duration-long) var(--easing-decelerate);
+        }
+
+        .police-logo-login { width: 90px; height: auto; margin-bottom: 20px; }
+        .login-card h1 { margin: 0 0 8px 0; font-size: 26px; font-weight: 700; color: #FFF; letter-spacing: -0.5px;}
+        .login-card p.subtitle { color: var(--md-sys-color-on-surface-variant); margin: 0 0 32px 0; font-size: 14px; font-weight: 300; }
+
+        /* =========================================
+           APP LAYOUT
+        ========================================= */
+        #app-view {
+            width: 100%; height: 100%; display: flex;
+            opacity: 0; pointer-events: none;
+            transition: opacity var(--duration-long) var(--easing-standard);
+        }
+        #app-view.active { opacity: 1; pointer-events: all; }
+
+        .sidebar {
+            width: 280px; background-color: var(--md-sys-color-surface);
+            display: flex; flex-direction: column; padding: 24px 16px;
+            border-right: 1px solid rgba(255,255,255,0.05); z-index: 10;
+        }
+
+        .sidebar-header { display: flex; align-items: center; gap: 12px; margin-bottom: 40px; padding: 0 8px; }
+        .police-logo-side { width: 40px; height: auto; }
+        .sidebar-header h2 { margin: 0; font-size: 17px; font-weight: 600; color: #FFF; line-height: 1.2; }
+
+        .user-profile-compact {
+            display: flex; align-items: center; gap: 12px;
+            background-color: var(--md-sys-color-surface-container);
+            padding: 12px; border-radius: var(--shape-corner-medium); margin-bottom: 32px;
+        }
+        .user-profile-compact .avatar { color: var(--md-sys-color-primary); font-size: 32px; }
+        .user-profile-compact div h4 { margin: 0; font-size: 14px; font-weight: 600; color: #FFF; text-transform: uppercase;}
+        .user-profile-compact div p { margin: 0; font-size: 13px; font-weight: 400; font-family: monospace; letter-spacing: 1px; color: var(--md-sys-color-primary); margin-top: 4px; }
+
+        .nav-item {
+            display: flex; align-items: center; gap: 16px; height: 56px;
+            padding: 0 24px; border-radius: var(--shape-corner-full);
+            color: var(--md-sys-color-on-surface-variant); text-decoration: none;
+            cursor: pointer; font-weight: 500; font-size: 15px;
+            transition: background-color var(--duration-short), color var(--duration-short);
+            margin-bottom: 4px; position: relative; overflow: hidden;
+        }
+        .nav-item .active-indicator {
+            position: absolute; left: 0; top: 0; width: 0; height: 100%;
+            background-color: var(--md-sys-color-primary-container);
+            border-radius: var(--shape-corner-full); transition: width var(--duration-medium) var(--easing-standard); z-index: -1;
+        }
+        .nav-item:hover { background-color: rgba(255,255,255,0.03); color: #FFF; }
+        .nav-item.active { color: var(--md-sys-color-on-primary-container); font-weight: 600; }
+        .nav-item.active .active-indicator { width: 100%; }
+
+        .main-content { flex-grow: 1; padding: 48px; overflow-y: auto; background-color: var(--md-sys-color-background); position: relative; }
+        .view-section { display: block; opacity: 1; transform: translateX(0); transition: opacity var(--duration-long) var(--easing-standard), transform var(--duration-long) var(--easing-standard); }
+        .view-section.hidden { display: none; opacity: 0; transform: translateX(30px); }
+
+        .page-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; }
+        .page-header div h1 { margin: 0 0 6px 0; font-weight: 700; font-size: 32px; color: #FFF; letter-spacing: -0.5px;}
+        .page-header div p { margin: 0; color: var(--md-sys-color-on-surface-variant); font-size: 16px; font-weight: 300;}
+
+        /* =========================================
+           DASHBOARD E TABELLA SDI
+        ========================================= */
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-bottom: 40px; }
+        
+        .summary-cards { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap;}
+        .summary-card {
+            background-color: var(--md-sys-color-surface-container); padding: 20px; border-radius: var(--shape-corner-small);
+            border: 1px solid rgba(255,255,255,0.03); min-width: 150px; flex: 1;
+        }
+        .summary-card span { font-size: 11px; text-transform: uppercase; color: var(--md-sys-color-on-surface-variant); font-weight: 600; letter-spacing: 1px;}
+        .summary-card h2 { margin: 8px 0 0 0; font-size: 36px; font-weight: 700; color: var(--md-sys-color-primary); }
+
+        .table-container { background-color: var(--md-sys-color-surface-container); border-radius: var(--shape-corner-medium); overflow: hidden; border: 1px solid rgba(255,255,255,0.03); box-shadow: var(--md-elevation-1); }
+        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;}
+        th, td { padding: 16px 24px; border-bottom: 1px solid rgba(255,255,255,0.03); }
+        th { font-weight: 600; color: var(--md-sys-color-on-surface-variant); background-color: #21252A; }
+        tbody tr { transition: background-color var(--duration-short); cursor: pointer; animation: fadeInSlideUp var(--duration-medium) ease-out; animation-fill-mode: both;}
+        tbody tr:hover { background-color: rgba(255,255,255,0.02); }
+        
+        .badge { padding: 6px 12px; border-radius: var(--shape-corner-full); font-size: 12px; font-weight: 700; background-color: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); }
+        .badge.error { background-color: #690005; color: #FFB4AB; }
+
+        .fab {
+            position: fixed; bottom: 32px; right: 32px; width: 56px; height: 56px; border-radius: var(--shape-corner-medium);
+            background-color: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container);
+            display: flex; justify-content: center; align-items: center;
+            box-shadow: var(--md-elevation-3); cursor: pointer; border: none;
+            transition: transform var(--duration-short), background-color var(--duration-short); z-index: 99;
+        }
+        .fab:hover { background-color: var(--md-sys-color-primary); transform: scale(1.05); }
+
+        /* =========================================
+           DIALOGS (MODALS)
+        ========================================= */
+        .dialog-backdrop {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
+            display: flex; justify-content: center; align-items: center; z-index: 2000; opacity: 0; pointer-events: none;
+            transition: opacity var(--duration-medium) var(--easing-standard);
+        }
+        .dialog-backdrop.active { opacity: 1; pointer-events: all; }
+
+        .dialog-surface {
+            background-color: var(--md-sys-color-surface-container); width: 90%; max-width: 640px; max-height: 90vh; overflow-y: auto;
+            border-radius: var(--shape-corner-large); padding: 32px; box-shadow: var(--md-elevation-3); border: 1px solid rgba(255,255,255,0.05);
+            transform: scale(0.9) translateY(20px); transition: transform var(--duration-medium) var(--easing-standard);
+        }
+        .dialog-backdrop.active .dialog-surface { transform: scale(1) translateY(0); }
+        .dialog-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+        .dialog-header h2 { margin: 0; font-weight: 600; font-size: 24px; color: #FFF; }
+        .close-btn { background: none; border: none; color: var(--md-sys-color-on-surface-variant); cursor: pointer; border-radius: 50%; padding: 8px;}
+
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+        .full-width { grid-column: span 2; }
+        .person-group { background-color: #1A1D22; padding: 20px; border-radius: var(--shape-corner-medium); margin-bottom: 16px; border: 1px solid rgba(255,255,255,0.03); }
+
+        .details-section { background-color: #1A1D22; padding: 20px; border-radius: 12px; margin-bottom: 16px; }
+        .details-section h4 { margin: 0 0 12px 0; color: var(--md-sys-color-primary); font-weight: 600; letter-spacing: 0.5px;}
+        .details-section p { margin: 0 0 8px 0; font-size: 15px; color: var(--md-sys-color-on-surface); line-height: 1.6; font-weight: 300;}
+        .details-section p b { color: var(--md-sys-color-primary); font-weight: 500;} 
+        .evidenziato { background: rgba(0,0,0,0.5); padding: 4px 8px; border-radius: 6px; font-weight: 600; color: #FFF;}
+    </style>
+</head>
+<body>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyA_lcSCqdwm2DeE7KoLmYU5JB0Aiyf9mcs",
+            authDomain: "sdi-sistema.firebaseapp.com",
+            databaseURL: "https://sdi-sistema-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "sdi-sistema",
+            storageBucket: "sdi-sistema.firebasestorage.app",
+            messagingSenderId: "933606651091",
+            appId: "1:933606651091:web:647c202ace7d7e6d14d026",
+            measurementId: "G-Q9QPDXB25E"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        
+        // Specifichiamo il nome esatto del tuo database (che hai impostato su Firebase)
+        const db = getFirestore(app, "sistema-sdi");
+
+        // Esponiamo le funzioni per usarle nel nostro script standard
+        window.db = db;
+        window.collection = collection;
+        window.query = query;
+        window.where = where;
+        window.getDocs = getDocs;
+    </script>
+
+    <div id="login-view">
+        <div class="login-card">
+            <img src="https://i.imgur.com/tkb2tfQ.png" alt="Logo Polizia di Stato" class="police-logo-login">
+            <h1>Sistema S.D.I.</h1>
+            <p class="subtitle">Dipartimento della Pubblica Sicurezza</p>
+            
+            <input type="password" id="login-code" class="md-input" placeholder="Codice Operatore" onkeypress="if(event.key === 'Enter') doLogin()">
+            
+            <button id="btn-login" class="md-btn" style="width: 100%; height: 48px;" onclick="doLogin()">
+                <span class="material-symbols-outlined">login</span> ACCEDI
+            </button>
+            <p id="login-error" style="color: var(--md-sys-color-error); font-size: 14px; font-weight: 500; margin-top: 16px; display: none; animation: fadeInSlideUp 0.3s ease;">⚠️ Codice errato o non autorizzato.</p>
+        </div>
+    </div>
+
+    <div id="app-view">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="https://i.imgur.com/tkb2tfQ.png" alt="Logo PS" class="police-logo-side">
+                <h2>Sistema S.D.I.<br><span style="font-weight:300; font-size:13px; opacity:0.8">Polizia di Stato - v0.3</span></h2>
+            </div>
+
+            <div class="user-profile-compact">
+                <span class="material-symbols-outlined avatar">account_circle</span>
+                <div>
+                    <h4 id="user-name">Caricamento...</h4>
+                    <p id="user-matricola">--</p>
+                </div>
+            </div>
+
+            <nav>
+                <div class="nav-item active" onclick="switchView('dashboard')" id="nav-dashboard">
+                    <div class="active-indicator"></div>
+                    <span class="material-symbols-outlined">dashboard</span> Dashboard
+                </div>
+                <div class="nav-item" onclick="switchView('sdi')" id="nav-sdi">
+                    <div class="active-indicator"></div>
+                    <span class="material-symbols-outlined">policy</span> Archivio SDI
+                </div>
+                
+                <div style="flex-grow: 1;"></div>
+                
+                <div class="nav-item" style="color: var(--md-sys-color-error); opacity: 0.8;" onclick="doLogout()">
+                    <div class="active-indicator" style="background-color: rgba(255, 180, 171, 0.1);"></div>
+                    <span class="material-symbols-outlined">logout</span> Disconnetti
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div id="view-dashboard" class="view-section">
+                <div class="page-header">
+                    <div>
+                        <h1>Benvenuto</h1>
+                        <p>Seleziona un modulo operativo per iniziare le operazioni.</p>
+                    </div>
+                </div>
+                
+                <div class="card-grid">
+                    <div class="md-card ripple" onclick="switchView('sdi')">
+                        <span class="material-symbols-outlined" style="font-size: 36px; color: var(--md-sys-color-primary); margin-bottom: 16px;">edit_document</span>
+                        <h3>Registrazione Controllo SDI</h3>
+                        <p>Inserimento e archiviazione dati relativi a controlli sul territorio, soggetti e veicoli identificati.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-sdi" class="view-section hidden">
+                <div class="page-header">
+                    <div>
+                        <h1>Archivio Controlli S.D.I.</h1>
+                        <p>Registro centrale e ricerca delle attività di controllo del territorio.</p>
+                    </div>
+                    <div style="display: flex; gap: 12px; align-items: center; background: var(--md-sys-color-surface-variant); padding: 4px 16px; border-radius: 50px;">
+                        <span class="material-symbols-outlined" style="color:var(--md-sys-color-outline)">search</span>
+                        <input type="text" id="sdi-search" class="md-input" style="margin: 0; width: 280px; background:transparent; border:none; padding: 12px 0;" placeholder="Cerca Protocollo o Cognome..." onkeyup="filterSDITable()">
+                    </div>
+                </div>
+
+                <div class="summary-cards">
+                    <div class="summary-card"><span>Controlli Totali</span><h2 id="tot-sdi">0</h2></div>
+                    <div class="summary-card"><span>Registrati Oggi</span><h2 id="tot-sdi-oggi">0</h2></div>
+                    <div class="summary-card"><span>Ultimo Protocollo</span><h2 id="last-sdi" style="font-size: 18px; color: #FFF; margin-top: 16px; font-weight:600">Nessuno</h2></div>
+                </div>
+
+                <div class="table-container">
+                    <table id="sdiTable">
+                        <thead>
+                            <tr>
+                                <th>Protocollo SDI</th>
+                                <th>Data / Ora</th>
+                                <th>Soggetto Principale</th>
+                                <th>Località</th>
+                                <th>Soggetti Extra</th>
+                                <th>Azioni</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sdiBody">
+                        </tbody>
+                    </table>
+                </div>
+
+                <button class="fab ripple" onclick="openDialog('dialog-nuovo-sdi')">
+                    <span class="material-symbols-outlined" style="font-size: 30px;">add</span>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <div id="dialog-nuovo-sdi" class="dialog-backdrop">
+        <div class="dialog-surface">
+            <div class="dialog-header">
+                <h2>Nuova Registrazione SDI</h2>
+                <button class="close-btn" onclick="closeDialog('dialog-nuovo-sdi')"><span class="material-symbols-outlined">close</span></button>
+            </div>
+            
+            <div id="sdi-step-1">
+                <div id="persons-container">
+                    <div class="person-group">
+                        <h4 style="margin:0 0 16px 0; color: var(--md-sys-color-primary); font-weight: 600;">Soggetto 1 (Principale)</h4>
+                        <div class="form-grid">
+                            <input type="text" class="md-input full-width nome-input" placeholder="Cognome e Nome *">
+                            <input type="text" class="md-input data-input" placeholder="Data di Nascita (gg/mm/aaaa) *">
+                            <input type="text" class="md-input doc-input" placeholder="N° Documento/Patente *">
+                            <input type="text" id="luogo-input" class="md-input full-width" placeholder="Località Controllo (Via, Città) *">
+                            <input type="text" id="tipo-veicolo-input" class="md-input" placeholder="Tipo Veicolo (Auto, Moto)">
+                            <input type="text" id="targa-input" class="md-input" placeholder="Targa Veicolo">
+                        </div>
+                    </div>
+                </div>
+
+                <button class="md-btn md-btn-secondary" style="width: 100%; margin-bottom: 24px;" onclick="addPersonForm()">
+                    <span class="material-symbols-outlined">person_add</span> AGGIUNGI SOGGETTO AGGIUNTIVO
+                </button>
+
+                <div style="display: flex; justify-content: flex-end;">
+                    <button class="md-btn" onclick="goToSdiStep2()">AVANTI <span class="material-symbols-outlined">arrow_forward</span></button>
+                </div>
+            </div>
+
+            <div id="sdi-step-2" class="hidden">
+                <h4 style="margin:0 0 16px 0; font-weight: 600;">Dettagli Operativi</h4>
+                <select id="volante-select" class="md-input full-width" style="appearance: none; background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%238D9199%22%20d%3D%22M7%2010l5%205%205-5z%22%2F%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right 16px center;">
+                    <option value="" disabled selected>Seleziona Unità procedentel *</option>
+                    <option value="Volante 1">Volante 1</option>
+                    <option value="Volante 2">Volante 2</option>
+                    <option value="Squadra Mobile">Squadra Mobile</option>
+                    <option value="RPC">Reparto Prevenzione Crimine</option>
+                </select>
+                
+                <div style="display: flex; justify-content: space-between; margin-top: 32px;">
+                    <button class="md-btn md-btn-secondary" onclick="backToSdiStep1()"><span class="material-symbols-outlined">arrow_back</span> INDIETRO</button>
+                    <button class="md-btn" onclick="submitSDI()" id="btn-save-sdi">CONFERMA E SALVA</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="dialog-details-sdi" class="dialog-backdrop">
+        <div class="dialog-surface">
+            <div class="dialog-header">
+                <h2 id="detail-title">Scheda Controllo</h2>
+                <button class="close-btn" onclick="closeDialog('dialog-details-sdi')"><span class="material-symbols-outlined">close</span></button>
+            </div>
+            <div id="detail-content"></div>
+        </div>
+    </div>
+
+    <script>
+        let sdiDataList = [];
+        let personCount = 1;
+        let tempPayload = null;
+        let tempExtraPersons = [];
+
+        function initRipples() {
+            const rippleEls = document.querySelectorAll('.ripple, .md-btn, .md-card, .nav-item');
+            rippleEls.forEach(el => {
+                if(el.classList.contains('ripple-inited')) return;
+                el.addEventListener('mousedown', function(e) {
+                    const ripple = document.createElement('span');
+                    ripple.style.position = 'absolute';
+                    ripple.style.background = 'rgba(255, 255, 255, 0.15)';
+                    ripple.style.borderRadius = '50%';
+                    ripple.style.pointerEvents = 'none';
+                    ripple.style.animation = 'md-ripple 0.6s linear';
+                    
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    ripple.style.width = ripple.style.height = size + 'px';
+                    
+                    const x = e.clientX - rect.left - size/2;
+                    const y = e.clientY - rect.top - size/2;
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    
+                    this.appendChild(ripple);
+                    setTimeout(() => ripple.remove(), 600);
+                });
+                el.classList.add('ripple-inited');
+            });
+        }
+
+        // --- GESTIONE LOGIN TRAMITE FIRESTORE ---
+        async function doLogin() {
+            const code = document.getElementById('login-code').value.trim();
+            const btn = document.getElementById('btn-login');
+            const err = document.getElementById('login-error');
+
+            if (!code) {
+                err.innerText = "Inserisci il codice operatore.";
+                err.style.display = 'block';
+                return;
+            }
+
+            // Metti il bottone in caricamento
+            btn.innerHTML = '<span class="material-symbols-outlined">sync</span> VERIFICA...';
+            btn.disabled = true;
+
+            try {
+                // Query a Firestore: cerca nella collection "operatori" dove "codice" == codice inserito
+                const q = window.query(window.collection(window.db, "operatori"), window.where("codice", "==", code));
+                const querySnapshot = await window.getDocs(q);
+
+                if (!querySnapshot.empty) {
+                    // Trovato! Prendiamo i dati del primo documento
+                    const userDoc = querySnapshot.docs[0].data();
+                    
+                    // Salviamo in sessione i dati dal DB
+                    sessionStorage.setItem("ps_auth", "true");
+                    sessionStorage.setItem("ps_user_ident", userDoc.identificativo);
+                    sessionStorage.setItem("ps_user_matr", userDoc.matricola);
+                    
+                    // Animazione Uscita
+                    const loginView = document.getElementById('login-view');
+                    loginView.style.opacity = '0';
+                    loginView.style.transform = 'scale(1.1)';
+                    
+                    setTimeout(() => {
+                        loginView.classList.add('hidden');
+                        document.getElementById('app-view').classList.add('active');
+                        initApp();
+                    }, 400);
+
+                } else {
+                    // Non trovato
+                    throw new Error("Codice non presente nel database.");
+                }
+
+            } catch (error) {
+                console.error("Errore login:", error);
+                err.innerText = "⚠️ Codice errato o errore di connessione.";
+                err.style.display = 'block';
+                document.querySelector('.login-card').style.animation = 'none';
+                setTimeout(()=> document.querySelector('.login-card').style.animation = 'fadeInSlideUp 0.3s', 10);
+            } finally {
+                // Ripristina il bottone
+                btn.innerHTML = '<span class="material-symbols-outlined">login</span> ACCEDI';
+                btn.disabled = false;
+                setTimeout(() => err.style.display = 'none', 4000);
+            }
+        }
+
+        function doLogout() {
+            sessionStorage.clear();
+            location.reload(); 
+        }
+
+        function initApp() {
+            // Recupero Identificativo e Matricola dal salvataggio del Login
+            let nome = sessionStorage.getItem("ps_user_ident") || "Operatore Sconosciuto";
+            let matricola = sessionStorage.getItem("ps_user_matr") || "---";
+            
+            document.getElementById('user-name').innerText = nome;
+            document.getElementById('user-matricola').innerText = matricola;
+            
+            loadDemoData(); 
+            initRipples();
+        }
+
+        // --- GESTIONE INTERFACCIA E MODULI ---
+        function switchView(viewName) {
+            const currentView = document.querySelector('.view-section:not(.hidden)');
+            const nextView = document.getElementById('view-' + viewName);
+            
+            if(currentView === nextView) return;
+
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            document.getElementById('nav-' + viewName).classList.add('active');
+
+            currentView.style.opacity = '0';
+            currentView.style.transform = 'translateX(-20px)';
+            
+            setTimeout(() => {
+                currentView.classList.add('hidden');
+                currentView.style.transform = '';
+                nextView.classList.remove('hidden');
+                nextView.classList.add('view-enter');
+                nextView.style.opacity = '1';
+                nextView.style.transform = 'translateX(0)';
+                setTimeout(() => nextView.classList.remove('view-enter'), 500);
+                initRipples();
+            }, 250);
+        }
+
+        function openDialog(id) { document.getElementById(id).classList.add('active'); initRipples();}
+        function closeDialog(id) { 
+            document.getElementById(id).classList.remove('active'); 
+            if(id === 'dialog-nuovo-sdi') resetSdiForm();
+        }
+
+        function addPersonForm() {
+            personCount++;
+            const container = document.getElementById('persons-container');
+            const newGroup = document.createElement('div');
+            newGroup.className = 'person-group';
+            newGroup.style.animation = 'fadeInSlideUp 0.3s ease-out';
+            newGroup.innerHTML = `
+                <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                    <h4 style="margin:0; font-weight: 600; color:var(--md-sys-color-primary);">Soggetto ${personCount} (Aggiuntivo)</h4>
+                    <button class="md-btn md-btn-error" style="padding: 0 12px; height: 32px; font-size:12px;" onclick="this.parentElement.parentElement.remove(); personCount--;">Rimuovi</button>
+                </div>
+                <div class="form-grid">
+                    <input type="text" class="md-input full-width nome-input" placeholder="Cognome e Nome *">
+                    <input type="text" class="md-input data-input" placeholder="Data di Nascita (gg/mm/aaaa) *">
+                    <input type="text" class="md-input doc-input" placeholder="N° Documento/Patente *">
+                </div>
+            `;
+            container.appendChild(newGroup);
+            initRipples();
+        }
+
+        function resetSdiForm() {
+            document.getElementById('sdi-step-1').classList.remove('hidden');
+            document.getElementById('sdi-step-2').classList.add('hidden');
+            document.getElementById('volante-select').value = "";
+            document.getElementById('persons-container').innerHTML = `
+                <div class="person-group">
+                    <h4 style="margin:0 0 16px 0; color: var(--md-sys-color-primary); font-weight: 600;">Soggetto 1 (Principale)</h4>
+                    <div class="form-grid">
+                        <input type="text" class="md-input full-width nome-input" placeholder="Cognome e Nome *">
+                        <input type="text" class="md-input data-input" placeholder="Data di Nascita (gg/mm/aaaa) *">
+                        <input type="text" class="md-input doc-input" placeholder="N° Documento/Patente *">
+                        <input type="text" id="luogo-input" class="md-input full-width" placeholder="Località Controllo (Via, Città) *">
+                        <input type="text" id="tipo-veicolo-input" class="md-input" placeholder="Tipo Veicolo (Auto, Moto)">
+                        <input type="text" id="targa-input" class="md-input" placeholder="Targa Veicolo">
+                    </div>
+                </div>
+            `;
+            personCount = 1;
+        }
+
+        function goToSdiStep2() {
+            let isValid = true;
+            const groups = document.querySelectorAll('.person-group');
+            let luogo = document.getElementById('luogo-input').value.trim();
+
+            if(!luogo) isValid = false;
+            tempExtraPersons = [];
+            
+            const mainGroup = groups[0];
+            tempPayload = {
+                dataOggi: new Date().toLocaleDateString('it-IT') + " " + new Date().toLocaleTimeString('it-IT').slice(0,5),
+                luogo: luogo,
+                tipoVeicolo: document.getElementById('tipo-veicolo-input').value.trim() || 'N/D',
+                targa: document.getElementById('targa-input').value.trim() || 'N/D',
+                operatore: sessionStorage.getItem("ps_user_ident") || "Operatore",
+                nomePrincipale: mainGroup.querySelector('.nome-input').value.trim(),
+                dataNascitaPrincipale: mainGroup.querySelector('.data-input').value.trim(),
+                docPrincipale: mainGroup.querySelector('.doc-input').value.trim()
+            };
+
+            if(!tempPayload.nomePrincipale || !tempPayload.dataNascitaPrincipale || !tempPayload.docPrincipale) isValid = false;
+
+            if(groups.length > 1) {
+                for(let i=1; i<groups.length; i++) {
+                    let p = {
+                        nome: groups[i].querySelector('.nome-input').value.trim(),
+                        data: groups[i].querySelector('.data-input').value.trim(),
+                        doc: groups[i].querySelector('.doc-input').value.trim()
+                    };
+                    if(!p.nome || !p.data || !p.doc) { isValid = false; break; }
+                    tempExtraPersons.push(p);
+                }
+            }
+
+            if (!isValid) {
+                alert("Compilare tutti i campi obbligatori contrassegnati con *");
+                return;
+            }
+
+            document.getElementById('sdi-step-1').classList.add('hidden');
+            const step2 = document.getElementById('sdi-step-2');
+            step2.classList.remove('hidden');
+            step2.style.animation = 'fadeInSlideUp 0.3s ease-out';
+        }
+
+        function backToSdiStep1() {
+            document.getElementById('sdi-step-2').classList.add('hidden');
+            document.getElementById('sdi-step-1').classList.remove('hidden');
+        }
+
+        function submitSDI() {
+            let volante = document.getElementById('volante-select').value;
+            if(!volante) { alert("Seleziona l'Unità procedentel"); return; }
+            
+            tempPayload.volante = volante;
+            tempPayload.idSdi = "RMS-" + Date.now().toString().slice(-6) + "-" + Math.floor(Math.random()*100);
+            
+            aggiungiRigaTabella(tempPayload, tempExtraPersons);
+            closeDialog('dialog-nuovo-sdi');
+        }
+
+        function aggiungiRigaTabella(data, extra) {
+            sdiDataList.push({ ...data, extraPersons: extra });
+            
+            const tbody = document.getElementById('sdiBody');
+            const row = document.createElement('tr');
+            row.setAttribute('onclick', `openSdiDetails('${data.idSdi}')`);
+            
+            let numExtra = extra.length;
+            let badgeClass = numExtra === 0 ? 'badge error' : 'badge';
+            let badgeText = numExtra === 0 ? 'SOLO' : '+ ' + numExtra;
+
+            row.innerHTML = `
+                <td style="color: var(--md-sys-color-primary); font-weight: 700;">${data.idSdi}</td>
+                <td>${data.dataOggi}</td>
+                <td style="text-transform: uppercase; font-weight:600">${data.nomePrincipale}</td>
+                <td>${data.luogo}</td>
+                <td><span class="${badgeClass}">${badgeText}</span></td>
+                <td><button class="md-btn md-btn-secondary" style="padding: 0 12px; height: 32px; font-size: 12px;">VEDI</button></td>
+            `;
+            tbody.insertBefore(row, tbody.firstChild);
+            updateSummary();
+            initRipples();
+        }
+
+        function updateSummary() {
+            document.getElementById('tot-sdi').innerText = sdiDataList.length;
+            document.getElementById('tot-sdi-oggi').innerText = sdiDataList.filter(d => d.dataOggi.includes(new Date().toLocaleDateString('it-IT'))).length;
+            if(sdiDataList.length > 0) {
+                document.getElementById('last-sdi').innerText = sdiDataList[sdiDataList.length-1].idSdi;
+            }
+        }
+
+        function filterSDITable() {
+            let filter = document.getElementById('sdi-search').value.toLowerCase();
+            let rows = document.querySelectorAll('#sdiBody tr');
+            rows.forEach(row => {
+                let text = row.innerText.toLowerCase();
+                row.style.display = text.includes(filter) ? '' : 'none';
+            });
+        }
+
+        function openSdiDetails(id) {
+            const data = sdiDataList.find(d => d.idSdi === id);
+            if(!data) return;
+
+            document.getElementById('detail-title').innerText = "Scheda Protocollo: " + id;
+            
+            let html = `
+                <div class="details-section" style="border-left: 4px solid var(--md-sys-color-primary);">
+                    <h4>Riferimenti Temporali e Località</h4>
+                    <p><b>Data / Ora:</b> ${data.dataOggi}</p>
+                    <p><b>Località:</b> ${data.luogo}</p>
+                    <p><b>Unità Procede:</b> ${data.volante}</p>
+                    <p><b>Operatore inserente:</b> <span style="font-size:13px; opacity:0.8">${data.operatore}</span></p>
+                </div>
+                <div class="details-section">
+                    <h4>Veicolo Associato</h4>
+                    <p><b>Tipo Veicolo:</b> ${data.tipoVeicolo} | <b>Targa:</b> <span class="evidenziato">${data.targa}</span></p>
+                </div>
+                <div class="details-section">
+                    <h4>Soggetto Principale</h4>
+                    <p style="text-transform: uppercase; font-size:18px; font-weight:700;">${data.nomePrincipale}</p>
+                    <p><b>Nato il:</b> ${data.dataNascitaPrincipale}</p>
+                    <p><b>Documento Identificativo:</b> <span class="evidenziato">${data.docPrincipale}</span></p>
+                </div>
+            `;
+
+            if(data.extraPersons && data.extraPersons.length > 0) {
+                html += `<div class="details-section"><h4>Soggetti Extra Controllati (${data.extraPersons.length})</h4>`;
+                data.extraPersons.forEach((p, index) => {
+                    html += `
+                        <div style="margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,0.05)">
+                            <p style="text-transform: uppercase; font-weight:700;">${index+2}. ${p.nome}</p>
+                            <p style="font-size:14px;"><b>Nato il:</b> ${p.data} | <b>Doc:</b> ${p.doc}</p>
+                        </div>
+                    `;
+                });
+                html += `</div>`;
+            }
+
+            document.getElementById('detail-content').innerHTML = html;
+            openDialog('dialog-details-sdi');
+        }
+
+        function loadDemoData() {
+            if(sdiDataList.length > 0) return;
+            setTimeout(() => {
+                aggiungiRigaTabella({
+                    idSdi: "RMS-881234-01", dataOggi: "03/04/2026 09:15", luogo: "Via del Corso, Roma",
+                    tipoVeicolo: "Auto", targa: "AA123BB", volante: "Volante 1", operatore: "Sost. Comm. Banchi F.",
+                    nomePrincipale: "Neri Paolo", dataNascitaPrincipale: "12/03/1980", docPrincipale: "AX9928374"
+                }, []);
+            }, 400);
+        }
+
+        window.onload = function() {
+            // Se già autenticato, salta il login
+            if(sessionStorage.getItem("ps_auth") === "true") {
+                document.getElementById('login-view').classList.add('hidden');
+                document.getElementById('app-view').classList.add('active');
+                initApp();
+            } else {
+                initRipples();
+            }
+        };
+    </script>
+</body>
+</html>
