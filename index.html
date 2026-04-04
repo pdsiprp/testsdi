@@ -22,7 +22,7 @@
             --md-sys-color-on-surface: #E1E2E7;
             --md-sys-color-on-surface-variant: #C3C6CF;
 
-            --md-sys-color-primary: #3b82f6; /* Blu Polizia / IPRP */
+            --md-sys-color-primary: #3b82f6; 
             --md-sys-color-on-primary: #ffffff;
             --md-sys-color-primary-container: #004493;
             --md-sys-color-on-primary-container: #D6E3FF;
@@ -68,6 +68,7 @@
             font-size: 14px; font-weight: 600; letter-spacing: 0.5px;
             cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
             transition: all var(--duration-short); position: relative; overflow: hidden; font-family: 'Lexend', sans-serif;
+            white-space: nowrap;
         }
         .md-btn:hover { filter: brightness(1.1); box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
         .md-btn:active { transform: scale(0.97); }
@@ -160,29 +161,17 @@
             font-size: 11px; font-weight: bold; padding: 2px 6px; border-radius: 50%; display: none;
         }
 
-        /* SCRITTA FOOTER SIDEBAR COME DA FOTO */
         .sidebar-footer {
-            margin-top: auto;
-            text-align: center;
-            font-size: 12px;
-            line-height: 1.5;
+            margin-top: auto; text-align: center; font-size: 12px; line-height: 1.5;
         }
-        .sidebar-footer .ufficiale {
-            color: var(--md-sys-color-primary);
-            font-weight: 500;
-        }
-        .sidebar-footer .creato {
-            color: var(--md-sys-color-outline);
-            font-size: 11px;
-            margin-top: 8px;
-            display: block;
-        }
+        .sidebar-footer .ufficiale { color: var(--md-sys-color-primary); font-weight: 500; }
+        .sidebar-footer .creato { color: var(--md-sys-color-outline); font-size: 11px; margin-top: 8px; display: block; }
 
         .main-content { flex-grow: 1; padding: 48px; overflow-y: auto; background-color: var(--md-sys-color-background); position: relative; }
         .view-section { display: block; opacity: 1; transform: translateX(0); transition: opacity var(--duration-long) var(--easing-standard), transform var(--duration-long) var(--easing-standard); }
         .view-section.hidden { display: none; opacity: 0; transform: translateX(30px); }
 
-        .page-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; }
+        .page-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; gap: 20px; flex-wrap: wrap;}
         .page-header div h1 { margin: 0 0 6px 0; font-weight: 700; font-size: 32px; color: #FFF; letter-spacing: -0.5px;}
         .page-header div p { margin: 0; color: var(--md-sys-color-on-surface-variant); font-size: 16px; font-weight: 300;}
 
@@ -204,9 +193,6 @@
         .badge { padding: 6px 12px; border-radius: var(--shape-corner-full); font-size: 12px; font-weight: 700; background-color: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); }
         .badge.error { background-color: #690005; color: #FFB4AB; }
 
-        .fab { position: fixed; bottom: 32px; right: 32px; width: 56px; height: 56px; border-radius: var(--shape-corner-medium); background-color: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.4); cursor: pointer; border: none; transition: all var(--duration-short); z-index: 99; }
-        .fab:hover { filter: brightness(1.2); transform: scale(1.05); }
-
         /* =========================================
            BANDI E INTERPELLANZE STYLES
         ========================================= */
@@ -221,15 +207,14 @@
 
         .lock-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(30, 33, 38, 0.85); backdrop-filter: blur(2px); display: flex; justify-content: center; align-items: center; text-align: center; font-weight: 600; color: var(--md-sys-color-on-surface); font-size: 15px; z-index: 10; padding: 20px; box-sizing: border-box; flex-direction: column; gap: 8px;}
         .warning-box { background: rgba(239, 68, 68, 0.1); border: 1px solid var(--md-sys-color-error); color: var(--md-sys-color-error); border-radius: 8px; padding: 12px; font-size: 13px; font-weight: 600; text-align: center; margin-top: 16px; }
-
         .card-logo {position:absolute; top:12px; right:12px; width:45px; height:45px; object-fit:contain; border-radius:8px;}
 
         /* =========================================
            DIALOGS (MODALS)
         ========================================= */
-        .dialog-backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); display: flex; justify-content: center; align-items: center; z-index: 2000; opacity: 0; pointer-events: none; transition: opacity var(--duration-medium) var(--easing-standard); }
+        .dialog-backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); display: flex; justify-content: center; align-items: center; z-index: 2000; opacity: 0; pointer-events: none; transition: opacity var(--duration-medium) var(--easing-standard); padding: 20px; box-sizing: border-box;}
         .dialog-backdrop.active { opacity: 1; pointer-events: all; }
-        .dialog-surface { background-color: var(--md-sys-color-surface-container); width: 90%; max-width: 640px; max-height: 90vh; overflow-y: auto; border-radius: var(--shape-corner-large); padding: 32px; box-shadow: 0 24px 40px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.05); transform: scale(0.9) translateY(20px); transition: transform var(--duration-medium) var(--easing-standard); }
+        .dialog-surface { background-color: var(--md-sys-color-surface-container); width: 90%; max-width: 640px; max-height: 90vh; overflow-y: auto; border-radius: var(--shape-corner-large); padding: 32px; box-shadow: 0 24px 40px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.05); transform: scale(0.9) translateY(20px); transition: transform var(--duration-medium) var(--easing-standard); box-sizing: border-box;}
         .dialog-surface.large { max-width: 800px; }
         .dialog-backdrop.active .dialog-surface { transform: scale(1) translateY(0); }
         .dialog-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
@@ -263,7 +248,6 @@
         .filter-bar { display: flex; gap: 16px; align-items: center; background: var(--md-sys-color-surface-variant); padding: 8px 24px; border-radius: 50px; flex-wrap: wrap; margin-bottom: 24px;}
         .filter-label { display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13px; font-weight: 500; color: var(--md-sys-color-on-surface-variant); }
 
-        /* Gestionale Interpellanze */
         .candidatura-card { background: var(--md-sys-color-surface); border: 1px solid var(--md-sys-color-outline); padding: 16px; border-radius: 12px; margin-bottom: 16px; color: var(--md-sys-color-on-surface); }
         .candidatura-card span { color: var(--md-sys-color-primary); font-weight: 600; font-size: 13px;}
         .candidatura-card p { margin: 4px 0; font-size: 14px; line-height: 1.5; }
@@ -415,9 +399,14 @@
                         <h1>Archivio Controlli S.D.I.</h1>
                         <p>Registro centrale e ricerca delle attività di controllo del territorio.</p>
                     </div>
-                    <div class="filter-bar">
-                        <span class="material-symbols-outlined" style="color:var(--md-sys-color-outline)">search</span>
-                        <input type="text" id="sdi-search" class="md-input" style="margin: 0; padding: 0; width: 220px; background:transparent; border:none;" placeholder="Cerca Protocollo o Nome..." onkeyup="filterSDITable()">
+                    <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+                        <div class="filter-bar" style="margin-bottom: 0;">
+                            <span class="material-symbols-outlined" style="color:var(--md-sys-color-outline)">search</span>
+                            <input type="text" id="sdi-search" class="md-input" style="margin: 0; padding: 0; width: 220px; background:transparent; border:none;" placeholder="Cerca Protocollo o Nome..." onkeyup="filterSDITable()">
+                        </div>
+                        <button class="md-btn" onclick="openDialog('dialog-nuovo-sdi')">
+                            <span class="material-symbols-outlined">add</span> NUOVO SDI
+                        </button>
                     </div>
                 </div>
 
@@ -442,10 +431,6 @@
                         <tbody id="sdiBody"></tbody>
                     </table>
                 </div>
-
-                <button class="fab ripple" onclick="openDialog('dialog-nuovo-sdi')">
-                    <span class="material-symbols-outlined" style="font-size: 30px;">add</span>
-                </button>
             </div>
 
             <div id="view-bandi" class="view-section hidden">
@@ -706,7 +691,9 @@
         const BANDI_POST_URL = "https://script.google.com/macros/s/AKfycbwGXlCpo-9gWspffXHW_vHHakKb2MxOsm7ky4I0KB7sXHyaaIkJqseakd0r5nTGtBqQ/exec";
         const EVENTI_GET_URL = "https://script.google.com/macros/s/AKfycbxwhTRyvI49r_REFMTO5JwDKUNqPd_c01D08KTmNboxEwcdEnMl-LUbLO4mTfdUEOU/exec";
         
-        // NUOVO ENDPOINT INTERPELLANZE REPARTI
+        // ENDPOINT SDI
+        const SDI_URL = "https://script.google.com/macros/s/AKfycbxMLpfl-cpVgjLypuaIJmIP21XxUtfVEOVK76vPI-T5FJLq4fWotA01shrBYAJMeYLs/exec";
+        
         const INTERPELLANZE_API_URL = "https://script.google.com/macros/s/AKfycbwX5DzluEQmdQoOJ9JG1rBOFv1CB0byiJ5k2b_1vVDXGka7FeGOgYmCTL6EYmMEqPqD/exec";
 
         const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1488451866898595920/mD4G-Ps73xWalanAiAGKfn2t_jHi3nAIVHaKZzwjK6_Psqd2LQ-uwpxjyTPKK61SUS9c";
@@ -789,7 +776,7 @@
             initRipples();
             caricaQualifica();
             caricaAvvisi();
-            loadDemoDataSDI(); // Inizializza fake data se necessario
+            loadDataFromSheet(); // Inizializza SDI dal database
         }
 
         function switchView(viewName) {
@@ -888,10 +875,24 @@
 
         function segnaComeLetto(riga, el, giaLetto) {
             if(giaLetto) return;
+            
+            // Aggiorna array in locale
             let avviso = datiAvvisiCorrenti.find(a => a.row === riga);
-            if(avviso) { if(!avviso.lettiDa) avviso.lettiDa = []; avviso.lettiDa.push(userName); }
+            if(avviso) { 
+                if(!avviso.lettiDa) avviso.lettiDa = []; 
+                avviso.lettiDa.push(userName); 
+            }
             applicaFiltriAvvisi(); 
-            fetch(AVVISI_URL, { method: 'POST', body: JSON.stringify({ row: riga, nome: userName }) }).catch(e => console.log(e));
+            
+            // Salva su Database via POST sicuro
+            fetch(AVVISI_URL, { 
+                method: 'POST', 
+                headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify({ row: riga, nome: userName }) 
+            })
+            .then(res => res.json())
+            .then(data => console.log("Presa visione salvata correttamente"))
+            .catch(e => console.error("Errore salvataggio avviso:", e));
         }
 
         // --- 4. SEGNALA / PROPONI ---
@@ -1337,31 +1338,81 @@
             document.getElementById('sdi-step-1').classList.add('hidden'); document.getElementById('sdi-step-2').classList.remove('hidden');
         }
         function backToSdiStep1() { document.getElementById('sdi-step-2').classList.add('hidden'); document.getElementById('sdi-step-1').classList.remove('hidden'); }
+        
         function submitSDI() {
             let volante = document.getElementById('volante-select').value; if(!volante) { alert("Seleziona l'Unità"); return; }
             tempPayload.volante = volante; tempPayload.idSdi = "RMS-" + Date.now().toString().slice(-6) + "-" + Math.floor(Math.random()*100);
-            aggiungiRigaTabella(tempPayload, tempExtraPersons); closeDialog('dialog-nuovo-sdi');
+            
+            let btn = document.getElementById('btn-save-sdi'); btn.innerText = "SALVATAGGIO..."; btn.disabled = true;
+
+            // Salva su Database via POST sicuro
+            fetch(SDI_URL, {
+                method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify(tempPayload)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.success) {
+                    aggiungiRigaTabellaLocally(data.newId || tempPayload.idSdi, tempPayload, tempExtraPersons); 
+                    closeDialog('dialog-nuovo-sdi');
+                } else alert("Errore durante il salvataggio SDI sul database.");
+            }).catch(error => {
+                // Fallback locale in caso di errore di rete momentaneo
+                aggiungiRigaTabellaLocally(tempPayload.idSdi, tempPayload, tempExtraPersons); 
+                closeDialog('dialog-nuovo-sdi');
+            }).finally(() => {
+                btn.innerText = "CONFERMA E SALVA"; btn.disabled = false;
+            });
         }
-        function aggiungiRigaTabella(data, extra) {
-            sdiDataList.push({ ...data, extraPersons: extra }); const tbody = document.getElementById('sdiBody'); const row = document.createElement('tr');
-            row.setAttribute('onclick', `openSdiDetails('${data.idSdi}')`);
+        
+        function aggiungiRigaTabellaLocally(newId, data, extra) {
+            sdiDataList.push({ idSdi: newId, ...data, extraPersons: extra }); 
+            const tbody = document.getElementById('sdiBody'); const row = document.createElement('tr');
+            row.setAttribute('onclick', `openSdiDetails('${newId}')`);
             let numExtra = extra.length; let badgeClass = numExtra === 0 ? 'badge error' : 'badge'; let badgeText = numExtra === 0 ? 'SOLO' : '+ ' + numExtra;
-            row.innerHTML = `<td style="color: var(--md-sys-color-primary); font-weight: 700;">${data.idSdi}</td><td>${data.dataOggi}</td><td style="text-transform: uppercase; font-weight:600">${data.nomePrincipale}</td><td>${data.luogo}</td><td><span class="${badgeClass}">${badgeText}</span></td><td><button class="md-btn md-btn-secondary" style="padding: 0 12px; height: 32px; font-size: 12px;">VEDI</button></td>`;
+            row.innerHTML = `<td style="color: var(--md-sys-color-primary); font-weight: 700;">${newId}</td><td>${data.dataOggi}</td><td style="text-transform: uppercase; font-weight:600">${data.nomePrincipale}</td><td>${data.luogo}</td><td><span class="${badgeClass}">${badgeText}</span></td><td><button class="md-btn md-btn-secondary" style="padding: 0 12px; height: 32px; font-size: 12px;">VEDI</button></td>`;
             tbody.insertBefore(row, tbody.firstChild); updateSummarySDI(); initRipples();
         }
+
+        function loadDataFromSheet() {
+            fetch(SDI_URL)
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('sdiBody').innerHTML = "";
+                sdiDataList = [];
+                data.forEach(item => {
+                    let extraArr = [];
+                    if(item.extraNomi && item.extraDate) {
+                        let n = item.extraNomi.split("\n");
+                        let d = item.extraDate.split("\n");
+                        for(let i=0; i<n.length; i++) if(n[i].trim()) extraArr.push({nome: n[i], data: d[i] || ""});
+                    }
+                    
+                    let dataOggiParsed = item.data;
+                    if(dataOggiParsed && dataOggiParsed.includes(",")) dataOggiParsed = dataOggiParsed.split(",").join("");
+
+                    aggiungiRigaTabellaLocally(item.id, {
+                        dataOggi: dataOggiParsed, nomePrincipale: item.nome, operatore: item.operatore,
+                        luogo: item.luogo, tipoVeicolo: item.tipoVeicolo, targa: item.targa,
+                        volante: item.volante, docPrincipale: item.docPrincipale, dataNascitaPrincipale: item.dataNascitaPrincipale
+                    }, extraArr);
+                });
+            }).catch(e => console.log("SDI fetch vuoto o non inizializzato."));
+        }
+
         function updateSummarySDI() { document.getElementById('tot-sdi').innerText = sdiDataList.length; document.getElementById('tot-sdi-oggi').innerText = sdiDataList.filter(d => d.dataOggi.includes(new Date().toLocaleDateString('it-IT'))).length; if(sdiDataList.length > 0) document.getElementById('last-sdi').innerText = sdiDataList[sdiDataList.length-1].idSdi; }
         function filterSDITable() { let filter = document.getElementById('sdi-search').value.toLowerCase(); document.querySelectorAll('#sdiBody tr').forEach(row => { row.style.display = row.innerText.toLowerCase().includes(filter) ? '' : 'none'; }); }
+        
         function openSdiDetails(id) {
             const data = sdiDataList.find(d => d.idSdi === id); if(!data) return;
             document.getElementById('detail-title').innerText = "Scheda Protocollo: " + id;
             let html = `<div class="details-section" style="border-left: 4px solid var(--md-sys-color-primary);"><h4>Riferimenti Temporali e Località</h4><p><b>Data / Ora:</b> ${data.dataOggi}</p><p><b>Località:</b> ${data.luogo}</p><p><b>Unità Procede:</b> ${data.volante}</p><p><b>Operatore inserente:</b> <span style="font-size:13px; opacity:0.8">${data.operatore}</span></p></div><div class="details-section"><h4>Veicolo Associato</h4><p><b>Tipo Veicolo:</b> ${data.tipoVeicolo} | <b>Targa:</b> <span class="evidenziato">${data.targa}</span></p></div><div class="details-section"><h4>Soggetto Principale</h4><p style="text-transform: uppercase; font-size:18px; font-weight:700;">${data.nomePrincipale}</p><p><b>Nato il:</b> ${data.dataNascitaPrincipale}</p><p><b>Documento Identificativo:</b> <span class="evidenziato">${data.docPrincipale}</span></p></div>`;
             if(data.extraPersons && data.extraPersons.length > 0) {
                 html += `<div class="details-section"><h4>Soggetti Extra Controllati (${data.extraPersons.length})</h4>`;
-                data.extraPersons.forEach((p, index) => { html += `<div style="margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,0.05)"><p style="text-transform: uppercase; font-weight:700;">${index+2}. ${p.nome}</p><p style="font-size:14px;"><b>Nato il:</b> ${p.data} | <b>Doc:</b> ${p.doc}</p></div>`; }); html += `</div>`;
+                data.extraPersons.forEach((p, index) => { html += `<div style="margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,0.05)"><p style="text-transform: uppercase; font-weight:700;">${index+2}. ${p.nome}</p><p style="font-size:14px;"><b>Nato il:</b> ${p.data} | <b>Doc:</b> N/D</p></div>`; }); html += `</div>`;
             }
             document.getElementById('detail-content').innerHTML = html; openDialog('dialog-details-sdi');
         }
-        function loadDemoDataSDI() { if(sdiDataList.length > 0) return; setTimeout(() => { aggiungiRigaTabella({ idSdi: "RMS-881234-01", dataOggi: "03/04/2026 09:15", luogo: "Via del Corso, Roma", tipoVeicolo: "Auto", targa: "AA123BB", volante: "Volante 1", operatore: "Sost. Comm. Banchi F.", nomePrincipale: "Neri Paolo", dataNascitaPrincipale: "12/03/1980", docPrincipale: "AX9928374" }, []); }, 400); }
 
         window.onload = function() {
             if(sessionStorage.getItem("ps_auth") === "true") { document.getElementById('login-view').classList.add('hidden'); document.getElementById('app-view').classList.add('active'); initApp(); } 
