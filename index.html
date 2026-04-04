@@ -22,13 +22,13 @@
             --md-sys-color-on-surface: #E1E2E7;
             --md-sys-color-on-surface-variant: #C3C6CF;
 
-            --md-sys-color-primary: #8AB8FE;
-            --md-sys-color-on-primary: #002F68;
+            --md-sys-color-primary: #3b82f6; /* Blu Polizia / IPRP */
+            --md-sys-color-on-primary: #ffffff;
             --md-sys-color-primary-container: #004493;
             --md-sys-color-on-primary-container: #D6E3FF;
 
-            --md-sys-color-error: #FFB4AB;
-            --md-sys-color-on-error: #690005;
+            --md-sys-color-error: #ef4444;
+            --md-sys-color-on-error: #ffffff;
 
             --md-sys-color-outline: #8D9199;
 
@@ -69,13 +69,14 @@
             cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
             transition: all var(--duration-short); position: relative; overflow: hidden; font-family: 'Lexend', sans-serif;
         }
-        .md-btn:hover { background-color: #A0C9FE; box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
+        .md-btn:hover { filter: brightness(1.1); box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
         .md-btn:active { transform: scale(0.97); }
-        .md-btn:disabled { background-color: #444; color: #888; cursor: not-allowed; box-shadow: none; }
+        .md-btn:disabled { background-color: #334155; color: #94a3b8; cursor: not-allowed; box-shadow: none; }
 
         .md-btn-secondary { background-color: transparent; border: 1px solid var(--md-sys-color-outline); color: var(--md-sys-color-primary); box-shadow: none; }
-        .md-btn-secondary:hover { background-color: rgba(138, 184, 254, 0.1); }
+        .md-btn-secondary:hover { background-color: rgba(59, 130, 246, 0.1); }
         .md-btn-error { background-color: var(--md-sys-color-error); color: var(--md-sys-color-on-error); }
+        .md-btn-success { background-color: #10b981; color: white; }
 
         .md-input {
             font-family: 'Lexend', sans-serif; width: 100%; box-sizing: border-box;
@@ -92,7 +93,7 @@
             cursor: pointer; border: 1px solid transparent; position: relative; overflow: hidden;
             animation: fadeInSlideUp var(--duration-medium) var(--easing-decelerate);
         }
-        .md-card:hover { transform: translateY(-4px); box-shadow: 0 8px 16px rgba(0,0,0,0.4); background-color: #26292F; border-color: rgba(138, 184, 254, 0.2); }
+        .md-card:hover { transform: translateY(-4px); box-shadow: 0 8px 16px rgba(0,0,0,0.4); background-color: #26292F; border-color: rgba(59, 130, 246, 0.2); }
         .md-card h3 { margin: 0 0 8px 0; font-size: 18px; font-weight: 600; color: var(--md-sys-color-on-surface); }
         .md-card p { margin: 0; color: var(--md-sys-color-on-surface-variant); font-size: 14px; line-height: 1.5; font-weight: 300; }
 
@@ -116,20 +117,28 @@
         .login-card h1 { margin: 0 0 8px 0; font-size: 26px; font-weight: 700; color: #FFF; letter-spacing: -0.5px;}
         .login-card p.subtitle { color: var(--md-sys-color-on-surface-variant); margin: 0 0 32px 0; font-size: 14px; font-weight: 300; }
 
+        .login-footer-text {
+            position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+            text-align: center; width: 100%; max-width: 360px; color: var(--md-sys-color-on-surface-variant); font-size: 13px;
+        }
+        .login-footer-text p { margin: 0 0 4px 0; line-height: 1.4; }
+        .login-footer-text p strong { color: var(--md-sys-color-error); }
+        .login-footer-text .ip-logged { font-size: 11px; font-style: italic; color: var(--md-sys-color-outline); }
+
         /* =========================================
            LAYOUT & SIDEBAR
         ========================================= */
         #app-view { width: 100%; height: 100%; display: flex; opacity: 0; pointer-events: none; transition: opacity var(--duration-long) var(--easing-standard); }
         #app-view.active { opacity: 1; pointer-events: all; }
 
-        .sidebar { width: 280px; background-color: var(--md-sys-color-surface); display: flex; flex-direction: column; padding: 24px 16px; border-right: 1px solid rgba(255,255,255,0.05); z-index: 10; }
+        .sidebar { width: 280px; background-color: var(--md-sys-color-surface); display: flex; flex-direction: column; padding: 24px 16px; border-right: 1px solid rgba(255,255,255,0.05); z-index: 10; position: relative;}
         .sidebar-header { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; padding: 0 8px; }
         .police-logo-side { width: 40px; height: auto; }
         .sidebar-header h2 { margin: 0; font-size: 17px; font-weight: 600; color: #FFF; line-height: 1.2; }
 
         .user-profile-compact {
             display: flex; align-items: center; gap: 12px; background-color: var(--md-sys-color-surface-container);
-            padding: 12px; border-radius: var(--shape-corner-medium); margin-bottom: 32px;
+            padding: 12px; border-radius: var(--shape-corner-medium); margin-bottom: 32px; border: 1px solid rgba(255,255,255,0.03);
         }
         .user-profile-compact .avatar { color: var(--md-sys-color-primary); font-size: 32px; }
         .user-profile-compact div h4 { margin: 0; font-size: 14px; font-weight: 600; color: #FFF; text-transform: uppercase;}
@@ -137,18 +146,36 @@
         .user-profile-compact div span { font-size: 11px; color: var(--md-sys-color-on-surface-variant); display: block; margin-top: 2px;}
 
         .nav-item {
-            display: flex; align-items: center; gap: 16px; height: 50px; padding: 0 24px; border-radius: var(--shape-corner-full);
-            color: var(--md-sys-color-on-surface-variant); text-decoration: none; cursor: pointer; font-weight: 500; font-size: 15px;
+            display: flex; align-items: center; gap: 16px; height: 48px; padding: 0 20px; border-radius: var(--shape-corner-full);
+            color: var(--md-sys-color-on-surface-variant); text-decoration: none; cursor: pointer; font-weight: 500; font-size: 14px;
             transition: all var(--duration-short); margin-bottom: 4px; position: relative; overflow: hidden;
         }
-        .nav-item .active-indicator { position: absolute; left: 0; top: 0; width: 0; height: 100%; background-color: var(--md-sys-color-primary-container); border-radius: var(--shape-corner-full); transition: width var(--duration-medium) var(--easing-standard); z-index: -1; }
+        .nav-item .active-indicator { position: absolute; left: 0; top: 0; width: 0; height: 100%; background-color: rgba(59, 130, 246, 0.15); border-radius: var(--shape-corner-full); transition: width var(--duration-medium) var(--easing-standard); z-index: -1; }
         .nav-item:hover { background-color: rgba(255,255,255,0.03); color: #FFF; }
-        .nav-item.active { color: var(--md-sys-color-on-primary-container); font-weight: 600; }
+        .nav-item.active { color: var(--md-sys-color-primary); font-weight: 600; }
         .nav-item.active .active-indicator { width: 100%; }
 
         .badge-notifiche {
             position: absolute; right: 16px; background-color: var(--md-sys-color-error); color: white;
             font-size: 11px; font-weight: bold; padding: 2px 6px; border-radius: 50%; display: none;
+        }
+
+        /* SCRITTA FOOTER SIDEBAR COME DA FOTO */
+        .sidebar-footer {
+            margin-top: auto;
+            text-align: center;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+        .sidebar-footer .ufficiale {
+            color: var(--md-sys-color-primary);
+            font-weight: 500;
+        }
+        .sidebar-footer .creato {
+            color: var(--md-sys-color-outline);
+            font-size: 11px;
+            margin-top: 8px;
+            display: block;
         }
 
         .main-content { flex-grow: 1; padding: 48px; overflow-y: auto; background-color: var(--md-sys-color-background); position: relative; }
@@ -162,7 +189,7 @@
         /* =========================================
            DASHBOARD & TABELLE
         ========================================= */
-        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 40px; }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 40px; }
         .summary-cards { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap;}
         .summary-card { background-color: var(--md-sys-color-surface-container); padding: 20px; border-radius: var(--shape-corner-small); border: 1px solid rgba(255,255,255,0.03); min-width: 150px; flex: 1; }
         .summary-card span { font-size: 11px; text-transform: uppercase; color: var(--md-sys-color-on-surface-variant); font-weight: 600; letter-spacing: 1px;}
@@ -178,22 +205,24 @@
         .badge.error { background-color: #690005; color: #FFB4AB; }
 
         .fab { position: fixed; bottom: 32px; right: 32px; width: 56px; height: 56px; border-radius: var(--shape-corner-medium); background-color: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.4); cursor: pointer; border: none; transition: all var(--duration-short); z-index: 99; }
-        .fab:hover { background-color: var(--md-sys-color-primary); transform: scale(1.05); }
+        .fab:hover { filter: brightness(1.2); transform: scale(1.05); }
 
         /* =========================================
-           BANDI & EVENTI STYLES
+           BANDI E INTERPELLANZE STYLES
         ========================================= */
         .category-title { margin-top: 40px; margin-bottom: 16px; color: #FFF; border-bottom: 2px solid var(--md-sys-color-surface-variant); padding-bottom: 8px; font-weight: 600; font-size: 20px;}
         .card-status { position: absolute; top: 16px; right: 16px; padding: 4px 12px; border-radius: var(--shape-corner-full); font-size: 11px; font-weight: 700; text-transform: uppercase; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-        .status-open { background-color: #064E3B; color: #6EE7B7; } /* Verde MD3 */
-        .status-closed { background-color: #7F1D1D; color: #FCA5A5; } /* Rosso MD3 */
-        .status-prossimamente { background-color: #713F12; color: #FEF08A; } /* Giallo */
-        .status-postodierno { background-color: #7C2D12; color: #FED7AA; } /* Arancione */
-        .status-odierno { background-color: #14532D; color: #BBF7D0; } /* Verde chiaro */
-        .status-terminato { background-color: #7F1D1D; color: #FECACA; } /* Rosso */
+        .status-open { background-color: #064E3B; color: #6EE7B7; } 
+        .status-closed { background-color: #7F1D1D; color: #FCA5A5; } 
+        .status-prossimamente { background-color: #713F12; color: #FEF08A; } 
+        .status-postodierno { background-color: #7C2D12; color: #FED7AA; } 
+        .status-odierno { background-color: #14532D; color: #BBF7D0; } 
+        .status-terminato { background-color: #7F1D1D; color: #FECACA; } 
 
         .lock-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(30, 33, 38, 0.85); backdrop-filter: blur(2px); display: flex; justify-content: center; align-items: center; text-align: center; font-weight: 600; color: var(--md-sys-color-on-surface); font-size: 15px; z-index: 10; padding: 20px; box-sizing: border-box; flex-direction: column; gap: 8px;}
         .warning-box { background: rgba(239, 68, 68, 0.1); border: 1px solid var(--md-sys-color-error); color: var(--md-sys-color-error); border-radius: 8px; padding: 12px; font-size: 13px; font-weight: 600; text-align: center; margin-top: 16px; }
+
+        .card-logo {position:absolute; top:12px; right:12px; width:45px; height:45px; object-fit:contain; border-radius:8px;}
 
         /* =========================================
            DIALOGS (MODALS)
@@ -201,6 +230,7 @@
         .dialog-backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); display: flex; justify-content: center; align-items: center; z-index: 2000; opacity: 0; pointer-events: none; transition: opacity var(--duration-medium) var(--easing-standard); }
         .dialog-backdrop.active { opacity: 1; pointer-events: all; }
         .dialog-surface { background-color: var(--md-sys-color-surface-container); width: 90%; max-width: 640px; max-height: 90vh; overflow-y: auto; border-radius: var(--shape-corner-large); padding: 32px; box-shadow: 0 24px 40px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.05); transform: scale(0.9) translateY(20px); transition: transform var(--duration-medium) var(--easing-standard); }
+        .dialog-surface.large { max-width: 800px; }
         .dialog-backdrop.active .dialog-surface { transform: scale(1) translateY(0); }
         .dialog-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
         .dialog-header h2 { margin: 0; font-weight: 600; font-size: 24px; color: #FFF; }
@@ -229,9 +259,14 @@
         .tab-btn { flex: 1; padding: 12px; background: transparent; border: none; color: var(--md-sys-color-on-surface-variant); font-weight: 600; cursor: pointer; transition: 0.3s; font-family: 'Lexend'; }
         .tab-btn.active { background: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary); }
 
-        /* Filtri & Checkbox */
+        /* Filtri */
         .filter-bar { display: flex; gap: 16px; align-items: center; background: var(--md-sys-color-surface-variant); padding: 8px 24px; border-radius: 50px; flex-wrap: wrap; margin-bottom: 24px;}
         .filter-label { display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13px; font-weight: 500; color: var(--md-sys-color-on-surface-variant); }
+
+        /* Gestionale Interpellanze */
+        .candidatura-card { background: var(--md-sys-color-surface); border: 1px solid var(--md-sys-color-outline); padding: 16px; border-radius: 12px; margin-bottom: 16px; color: var(--md-sys-color-on-surface); }
+        .candidatura-card span { color: var(--md-sys-color-primary); font-weight: 600; font-size: 13px;}
+        .candidatura-card p { margin: 4px 0; font-size: 14px; line-height: 1.5; }
     </style>
 </head>
 <body>
@@ -252,7 +287,7 @@
         };
 
         const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app, "sistema-sdi"); // Usa il database specifico
+        const db = getFirestore(app, "sistema-sdi");
 
         window.db = db;
         window.collection = collection;
@@ -273,6 +308,11 @@
                 <span class="material-symbols-outlined">login</span> ACCEDI
             </button>
             <p id="login-error" style="color: var(--md-sys-color-error); font-size: 14px; font-weight: 500; margin-top: 16px; display: none; animation: fadeInSlideUp 0.3s ease;"></p>
+        </div>
+
+        <div class="login-footer-text">
+            <p><strong>AVVISO IMPORTANTE:</strong> L'accesso è monitorato. Qualsiasi violazione sarà perseguita a norma di legge.</p>
+            <p class="ip-logged">(IP LOGGED)</p>
         </div>
     </div>
 
@@ -305,12 +345,16 @@
                     <div class="active-indicator"></div>
                     <span class="material-symbols-outlined">work</span> Bandi Interni
                 </div>
+                <div class="nav-item ripple" onclick="switchView('interpellanze')" id="nav-interpellanze">
+                    <div class="active-indicator"></div>
+                    <span class="material-symbols-outlined">badge</span> Interpellanze Reparti
+                </div>
                 <div class="nav-item ripple" onclick="switchView('eventi')" id="nav-eventi">
                     <div class="active-indicator"></div>
                     <span class="material-symbols-outlined">event</span> Eventi
                 </div>
                 
-                <div style="margin-top: 32px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 16px;"></div>
+                <div style="margin-top: 24px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 12px;"></div>
                 
                 <div class="nav-item ripple" onclick="openDialog('dialog-notifiche')">
                     <span class="material-symbols-outlined">notifications</span> Avvisi Operativi
@@ -320,13 +364,16 @@
                     <span class="material-symbols-outlined">report</span> Segnala / Proponi
                 </div>
                 
-                <div style="flex-grow: 1;"></div>
-                
-                <div class="nav-item ripple" style="color: var(--md-sys-color-error); opacity: 0.8;" onclick="doLogout()">
-                    <div class="active-indicator" style="background-color: rgba(255, 180, 171, 0.1);"></div>
+                <div class="nav-item ripple" style="color: var(--md-sys-color-error); opacity: 0.8; margin-top:12px;" onclick="doLogout()">
+                    <div class="active-indicator" style="background-color: rgba(239, 68, 68, 0.1);"></div>
                     <span class="material-symbols-outlined">logout</span> Disconnetti
                 </div>
             </nav>
+
+            <div class="sidebar-footer">
+                <span class="ufficiale">Sito Ufficiale della Polizia di Stato - Server IPRP | Solo a scopo Roleplay.</span>
+                <span class="creato">Creato da Ryze - IPRP X</span>
+            </div>
         </aside>
 
         <main class="main-content">
@@ -344,10 +391,15 @@
                         <h3>Registrazione Controllo SDI</h3>
                         <p>Inserimento e archiviazione dati relativi a controlli sul territorio, soggetti e veicoli identificati.</p>
                     </div>
+                    <div class="md-card ripple" onclick="switchView('interpellanze')">
+                        <span class="material-symbols-outlined" style="font-size: 36px; color: #8b5cf6; margin-bottom: 16px;">badge</span>
+                        <h3>Interpellanze Reparti</h3>
+                        <p>Invia la tua candidatura o gestisci i posti disponibili all'interno dei vari Reparti Operativi.</p>
+                    </div>
                     <div class="md-card ripple" onclick="switchView('bandi')">
                         <span class="material-symbols-outlined" style="font-size: 36px; color: #10B981; margin-bottom: 16px;">work</span>
                         <h3>Bandi Interni</h3>
-                        <p>Consulta e candidati ai bandi interni disponibili per la tua qualifica.</p>
+                        <p>Consulta e candidati ai bandi formativi disponibili per la tua qualifica.</p>
                     </div>
                     <div class="md-card ripple" onclick="switchView('eventi')">
                         <span class="material-symbols-outlined" style="font-size: 36px; color: #F59E0B; margin-bottom: 16px;">event</span>
@@ -400,7 +452,7 @@
                 <div class="page-header">
                     <div>
                         <h1>Bandi Interni</h1>
-                        <p>Consultazione e candidature per i reparti della Polizia di Stato.</p>
+                        <p>Consultazione e candidature per corsi di formazione della Polizia di Stato.</p>
                     </div>
                     <div class="filter-bar">
                         <span class="material-symbols-outlined" style="color:var(--md-sys-color-outline)">search</span>
@@ -414,6 +466,29 @@
                 
                 <div id="loading-bandi" style="text-align: center; color: var(--md-sys-color-primary); margin-bottom: 20px; display: none;">⏳ Sincronizzazione bandi in corso...</div>
                 <div id="bandi-container"></div>
+            </div>
+
+            <div id="view-interpellanze" class="view-section hidden">
+                <div class="page-header">
+                    <div>
+                        <h1>Interpellanze Reparti - PDS</h1>
+                        <p>Consulta i posti disponibili e richiedi l'assegnazione ad un Reparto.</p>
+                    </div>
+                    <button class="md-btn md-btn-secondary" onclick="accediGestionale()" id="btn-gestionale-header">
+                        <span class="material-symbols-outlined">admin_panel_settings</span> Gestione Reparto
+                    </button>
+                </div>
+                
+                <div class="filter-bar">
+                    <span class="material-symbols-outlined" style="color:var(--md-sys-color-outline)">search</span>
+                    <input type="text" id="search-interpellanze" class="md-input" style="margin: 0; padding: 0; width: 200px; background:transparent; border:none;" placeholder="Cerca Reparto..." oninput="renderInterpellanze()">
+                    <div style="width: 1px; height: 24px; background: var(--md-sys-color-outline); margin: 0 10px;"></div>
+                    <label class="filter-label"><input type="checkbox" id="filter-open-int" onchange="renderInterpellanze()"> Solo Aperte</label>
+                    <label class="filter-label"><input type="checkbox" id="filter-req-int" onchange="renderInterpellanze()"> Ho i requisiti</label>
+                </div>
+
+                <div id="loading-interpellanze" style="text-align: center; color: var(--md-sys-color-primary); margin-bottom: 20px; display: none;">⏳ Caricamento Interpellanze in corso...</div>
+                <div id="interpellanze-container"></div>
             </div>
 
             <div id="view-eventi" class="view-section hidden">
@@ -433,7 +508,6 @@
                 <div id="loading-eventi" style="text-align: center; color: var(--md-sys-color-primary); margin-bottom: 20px; display: none;">⏳ Sincronizzazione eventi in corso...</div>
                 <div id="eventi-container"></div>
             </div>
-
         </main>
     </div>
 
@@ -532,7 +606,6 @@
             <div id="form-segnala-content">
                 <input type="text" id="segn-tipo" class="md-input" placeholder="Oggetto della segnalazione/proposta *">
                 <textarea id="segn-desc" class="md-input" style="resize: vertical; min-height: 100px;" placeholder="Descrizione dettagliata... *"></textarea>
-                
                 <button class="md-btn" id="btn-invia-segn" style="width: 100%;" onclick="inviaSegnalazione()">INVIA AL SUPPORTO TECNICO</button>
             </div>
         </div>
@@ -541,7 +614,7 @@
     <div id="dialog-bando" class="dialog-backdrop">
         <div class="dialog-surface" style="max-width: 500px;">
             <div class="dialog-header">
-                <h2 id="bando-title-modal">Candidatura</h2>
+                <h2 id="bando-title-modal">Candidatura Formazione</h2>
                 <button class="close-btn" onclick="closeDialog('dialog-bando')"><span class="material-symbols-outlined">close</span></button>
             </div>
             
@@ -552,14 +625,77 @@
                 </div>
                 <textarea id="bando-motivo" class="md-input" style="resize: vertical; min-height: 80px;" placeholder="Motivo della candidatura *"></textarea>
                 <textarea id="bando-perche" class="md-input" style="resize: vertical; min-height: 80px;" placeholder="Perché dovremmo scegliere te? *"></textarea>
-                
                 <label class="filter-label" style="margin-bottom: 24px;"><input type="checkbox" id="bando-confirm"> Confermo l'esattezza dei dati inseriti</label>
-                
                 <p id="bando-error" style="color: var(--md-sys-color-error); font-size: 13px; margin-bottom: 16px; font-weight: 500; display: none;"></p>
                 <button class="md-btn" id="btn-invia-bando" style="width: 100%;" onclick="executeInviaBando()">INVIA CANDIDATURA</button>
             </div>
         </div>
     </div>
+
+    <div id="dialog-interpellanza" class="dialog-backdrop">
+        <div class="dialog-surface" style="max-width: 500px;">
+            <div class="dialog-header">
+                <h2 id="int-title-modal">Candidatura Reparto</h2>
+                <button class="close-btn" onclick="closeDialog('dialog-interpellanza')"><span class="material-symbols-outlined">close</span></button>
+            </div>
+            
+            <div id="int-form-content">
+                <div class="form-grid">
+                    <input type="text" class="md-input" id="int-nome-read" readonly style="opacity: 0.7;">
+                    <input type="text" class="md-input" id="int-qual-read" readonly style="opacity: 0.7;">
+                </div>
+                <label style="font-size:12px; color:var(--md-sys-color-outline); margin-bottom:4px; display:block;">Descrizione di te stesso</label>
+                <textarea id="int-desc-se" class="md-input" style="resize: vertical; min-height: 60px;" placeholder="Parlaci di te..." required></textarea>
+                
+                <label style="font-size:12px; color:var(--md-sys-color-outline); margin-bottom:4px; display:block;">Perché vorresti entrare in questo reparto?</label>
+                <textarea id="int-perche" class="md-input" style="resize: vertical; min-height: 60px;" placeholder="Spiega le tue motivazioni..." required></textarea>
+                
+                <label style="font-size:12px; color:var(--md-sys-color-outline); margin-bottom:4px; display:block;">Di cosa si occupa questo reparto?</label>
+                <textarea id="int-occupa" class="md-input" style="resize: vertical; min-height: 60px;" placeholder="Dimostra la tua conoscenza..." required></textarea>
+                
+                <label class="filter-label" style="margin-bottom: 24px;"><input type="checkbox" id="int-confirm"> Confermo l'esattezza dei dati inseriti</label>
+                <p id="int-error" style="color: var(--md-sys-color-error); font-size: 13px; margin-bottom: 16px; font-weight: 500; display: none;"></p>
+                <button class="md-btn" id="btn-invia-int" style="width: 100%;" onclick="executeInviaInterpellanza()">INVIA CANDIDATURA REPARTO</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="dialog-gestionale" class="dialog-backdrop">
+        <div class="dialog-surface large">
+            <div class="dialog-header">
+                <h2>Gestione Reparto Operativo</h2>
+                <button class="close-btn" onclick="closeDialog('dialog-gestionale')"><span class="material-symbols-outlined">close</span></button>
+            </div>
+            <div id="gestionale-content">
+                <h4 style="color:var(--md-sys-color-primary); font-size:18px; margin: 0 0 20px 0;">Reparto in gestione: <span id="gest-reparto-name" style="color:#FFF;"></span></h4>
+                
+                <div class="form-grid">
+                    <div>
+                        <label style="font-size:12px; color:var(--md-sys-color-outline); margin-bottom:4px; display:block;">Stato Interpellanza</label>
+                        <select id="gest-stato" class="md-input" onchange="togglePostiGestionale()" style="margin-bottom: 0;">
+                            <option value="Chiuso">CHIUSO</option>
+                            <option value="Aperto">APERTO</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="font-size:12px; color:var(--md-sys-color-outline); margin-bottom:4px; display:block;">Posti Disponibili</label>
+                        <input type="number" id="gest-posti" class="md-input" placeholder="Es. 5" disabled style="margin-bottom: 0;">
+                    </div>
+                </div>
+                
+                <p id="gest-msg" style="font-size: 13px; font-weight: 500; margin: 10px 0; min-height: 16px;"></p>
+
+                <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
+                    <button class="md-btn md-btn-success" onclick="salvaBandoInterpellanza()"><span class="material-symbols-outlined">save</span> Salva Modifiche</button>
+                    <button class="md-btn md-btn-secondary" onclick="visualizzaCandidatureInterpellanze()"><span class="material-symbols-outlined">visibility</span> Visualizza Candidature</button>
+                    <button class="md-btn md-btn-error" onclick="cancellaVecchieInterpellanze()"><span class="material-symbols-outlined">delete</span> Cancella Vecchie</button>
+                </div>
+
+                <div id="lista-candidature-gest" style="margin-top: 30px; display: none;"></div>
+            </div>
+        </div>
+    </div>
+
 
     <script>
         // === URL DELLE APPS SCRIPT ===
@@ -569,16 +705,23 @@
         const BANDI_GET_URL = "https://script.google.com/macros/s/AKfycbyTnW-qVIjdTSr-_nvfcPJ7ojW5_d63gGHFZboU-LXHsekv6FKU2Zx1QEJ_kNP2OJ3h/exec";
         const BANDI_POST_URL = "https://script.google.com/macros/s/AKfycbwGXlCpo-9gWspffXHW_vHHakKb2MxOsm7ky4I0KB7sXHyaaIkJqseakd0r5nTGtBqQ/exec";
         const EVENTI_GET_URL = "https://script.google.com/macros/s/AKfycbxwhTRyvI49r_REFMTO5JwDKUNqPd_c01D08KTmNboxEwcdEnMl-LUbLO4mTfdUEOU/exec";
+        
+        // NUOVO ENDPOINT INTERPELLANZE REPARTI
+        const INTERPELLANZE_API_URL = "https://script.google.com/macros/s/AKfycbwX5DzluEQmdQoOJ9JG1rBOFv1CB0byiJ5k2b_1vVDXGka7FeGOgYmCTL6EYmMEqPqD/exec";
+
         const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1488451866898595920/mD4G-Ps73xWalanAiAGKfn2t_jHi3nAIVHaKZzwjK6_Psqd2LQ-uwpxjyTPKK61SUS9c";
+        const THREAD_ID = "1489965248109613260";
 
         // Variabili Globali
         let userName = "Operatore Sconosciuto";
         let userMatricola = "---";
         let userQualifica = "AGENTE"; 
         let currentSegnalaTab = 'segnala';
+        
         let bandoAttuale = "";
+        let intAttuale = "";
+        let userRepartoGestione = "";
 
-        // Gerarchia (dal più alto al più basso) per controlli requisiti Bandi
         const qualifiche_arr = ["DIRIGENTE GENERALE","DIRIGENTE SUPERIORE","PRIMO DIRIGENTE","VICE QUESTORE","VICE QUESTORE AGGIUNTO","COMMISSARIO CAPO","COMMISSARIO","VICE COMMISSARIO","ALLIEVO COMMISSARIO","SOSTITUTO COMMISSARIO COORDINATORE","SOSTITUTO COMMISSARIO","ISPETTORE SUPERIORE","ISPETTORE CAPO","ISPETTORE","VICE ISPETTORE","ALLIEVO ISPETTORE","SOVRINTENDENTE CAPO COORDINATORE","SOVRINTENDENTE CAPO","SOVRINTENDENTE","VICE SOVRINTENDENTE","ALLIEVO SOVRINTENDENTE","ASSISTENTE CAPO COORDINATORE","ASSISTENTE CAPO","ASSISTENTE","AGENTE SCELTO","AGENTE","ALLIEVO AGENTE"];
 
         // Utils
@@ -646,9 +789,7 @@
             initRipples();
             caricaQualifica();
             caricaAvvisi();
-            
-            // Per evitare caricamenti multipli
-            loadDemoDataSDI();
+            loadDemoDataSDI(); // Inizializza fake data se necessario
         }
 
         function switchView(viewName) {
@@ -665,15 +806,15 @@
                 nextView.classList.remove('hidden'); nextView.classList.add('view-enter');
                 nextView.style.opacity = '1'; nextView.style.transform = 'translateX(0)';
                 
-                // Lazy loading dei moduli pesanti quando si entra nella view
+                // Lazy loading
                 if(viewName === 'bandi') loadBandi();
                 if(viewName === 'eventi') loadEventi();
+                if(viewName === 'interpellanze') loadInterpellanze();
                 
                 setTimeout(() => nextView.classList.remove('view-enter'), 500); initRipples();
             }, 250);
         }
 
-        // --- 2. QUALIFICA (Gerarchia) ---
         function caricaQualifica() {
             fetch(GERARCHIA_URL).then(res => res.json()).then(data => {
                 let trovato = data.find(r => r.nome.toLowerCase() === userName.toLowerCase());
@@ -689,14 +830,14 @@
             const idxUtente = qualifiche_arr.indexOf(userQualifica);
             const idxMin = qualifiche_arr.indexOf(min);
             if (idxUtente === -1 || idxMin === -1) return false;
-            return idxUtente <= idxMin; // Indici minori = gradi più alti
+            return idxUtente <= idxMin;
         }
 
         // --- 3. AVVISI OPERATIVI (Centro Comunicazioni) ---
         let datiAvvisiCorrenti = [];
         function caricaAvvisi() {
             fetch(AVVISI_URL).then(res => res.json()).then(data => {
-                datiAvvisiCorrenti = data.sort((a, b) => b.row - a.row); // Ordine decrescente
+                datiAvvisiCorrenti = data.sort((a, b) => b.row - a.row); 
                 applicaFiltriAvvisi();
             }).catch(e => console.error("Errore avvisi:", e));
         }
@@ -749,8 +890,7 @@
             if(giaLetto) return;
             let avviso = datiAvvisiCorrenti.find(a => a.row === riga);
             if(avviso) { if(!avviso.lettiDa) avviso.lettiDa = []; avviso.lettiDa.push(userName); }
-            applicaFiltriAvvisi(); // Ri-renderizza per togliere badge visivo
-
+            applicaFiltriAvvisi(); 
             fetch(AVVISI_URL, { method: 'POST', body: JSON.stringify({ row: riga, nome: userName }) }).catch(e => console.log(e));
         }
 
@@ -783,15 +923,15 @@
 
         // --- 5. BANDI INTERNI ---
         let bandiGlobali = [];
-        let bandiCandidati = [];
+        let applicatiBandi = [];
         let bandiLoaded = false;
 
         function loadBandi() {
             if(bandiLoaded) return;
             document.getElementById('loading-bandi').style.display = 'block';
             fetch(`${BANDI_GET_URL}?user=${encodeURIComponent(userName)}`).then(r => r.json()).then(d => {
-                if (d.bandi) { bandiGlobali = d.bandi; bandiCandidati = d.applicati || []; } 
-                else { bandiGlobali = d; bandiCandidati = []; }
+                if (d.bandi) { bandiGlobali = d.bandi; applicatiBandi = d.applicati || []; } 
+                else { bandiGlobali = d; applicatiBandi = []; }
                 bandiLoaded = true; renderBandi();
             }).catch(e => console.error("Errore bandi:", e)).finally(() => document.getElementById('loading-bandi').style.display = 'none');
         }
@@ -820,7 +960,7 @@
                 
                 grouped[cat].forEach(c => {
                     const hasReq = checkQualifica(c.qualifica);
-                    const isApplied = bandiCandidati.includes(c.nome);
+                    const isApplied = applicatiBandi.includes(c.nome);
                     const isOpen = c.status === 'Aperto';
                     
                     let lockHtml = "";
@@ -848,7 +988,7 @@
 
         function openModalBando(nomeBando) {
             bandoAttuale = nomeBando;
-            document.getElementById('bando-title-modal').innerText = "Candidatura: " + nomeBando;
+            document.getElementById('bando-title-modal').innerText = "Candidatura Formazione: " + nomeBando;
             document.getElementById('bando-nome-read').value = userName;
             document.getElementById('bando-qual-read').value = userQualifica;
             document.getElementById('bando-motivo').value = "";
@@ -870,17 +1010,228 @@
             err.style.display = 'none';
             let btn = document.getElementById('btn-invia-bando'); btn.innerText = "INVIO..."; btn.disabled = true;
 
-            // Invio
             fetch(BANDI_POST_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ titolo: bandoAttuale, nome: userName, qualifica: userQualifica, motivo: m, perche: p }) }).catch(e=>console.log(e));
             
-            // Discord Webhook
-            fetch(`${DISCORD_WEBHOOK}?thread_id=1489965248109613260`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({
-                embeds: [{ title: "📝 Nuova Candidatura: " + bandoAttuale, color: 3447003, fields: [ { name: "👤 Nome", value: userName, inline: true }, { name: "🎖️ Qualifica", value: userQualifica, inline: true }, { name: "❓ Motivo", value: m }, { name: "🎯 Perché", value: p } ] }]
+            fetch(`${DISCORD_WEBHOOK}?thread_id=${THREAD_ID}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({
+                embeds: [{ title: "📝 Nuova Candidatura Formazione: " + bandoAttuale, color: 3447003, fields: [ { name: "👤 Nome", value: userName, inline: true }, { name: "🎖️ Qualifica", value: userQualifica, inline: true }, { name: "❓ Motivo", value: m }, { name: "🎯 Perché", value: p } ] }]
             })});
 
-            // Aggiorna UI locale
-            bandiCandidati.push(bandoAttuale);
+            applicatiBandi.push(bandoAttuale);
             setTimeout(() => { closeDialog('dialog-bando'); renderBandi(); btn.innerText = "INVIA CANDIDATURA"; btn.disabled = false; }, 800);
+        }
+
+        // --- NUOVO: INTERPELLANZE REPARTI ---
+        let interpellanzeGlobali = [];
+        let applicatiInterpellanze = [];
+        let interpellanzeLoaded = false;
+
+        function loadInterpellanze() {
+            if(interpellanzeLoaded) return;
+            document.getElementById('loading-interpellanze').style.display = 'block';
+            fetch(`${INTERPELLANZE_API_URL}?user=${encodeURIComponent(userName)}`).then(r => r.json()).then(d => {
+                if (d.bandi) { interpellanzeGlobali = d.bandi; applicatiInterpellanze = d.applicati || []; } 
+                else { interpellanzeGlobali = d; applicatiInterpellanze = []; }
+                interpellanzeLoaded = true; renderInterpellanze();
+            }).catch(e => console.error("Errore interpellanze:", e)).finally(() => document.getElementById('loading-interpellanze').style.display = 'none');
+        }
+
+        function renderInterpellanze() {
+            const container = document.getElementById("interpellanze-container");
+            container.innerHTML = "";
+            const search = document.getElementById("search-interpellanze").value.toLowerCase();
+            const filterOpen = document.getElementById("filter-open-int").checked;
+            const filterReq = document.getElementById("filter-req-int").checked;
+
+            let grouped = {};
+            interpellanzeGlobali.forEach(c => {
+                const hasReq = checkQualifica(c.qualifica);
+                if(filterOpen && c.status !== "Aperto") return;
+                if(filterReq && !hasReq) return;
+                if(search && !c.nome.toLowerCase().includes(search) && !(c.descrizione||"").toLowerCase().includes(search)) return;
+                
+                if(!grouped[c.categoria]) grouped[c.categoria] = [];
+                grouped[c.categoria].push(c);
+            });
+
+            for(const cat in grouped) {
+                container.innerHTML += `<div class="category-title">${cat}</div>`;
+                let gridHtml = `<div class="card-grid">`;
+                
+                grouped[cat].forEach(c => {
+                    const hasReq = checkQualifica(c.qualifica);
+                    const isApplied = applicatiInterpellanze.includes(c.nome);
+                    const isOpen = c.status === 'Aperto';
+                    
+                    let lockHtml = "";
+                    if (isApplied) lockHtml = `<div class="lock-overlay"><span class="material-symbols-outlined" style="font-size:32px; color:var(--md-sys-color-primary)">check_circle</span> Già Candidato</div>`;
+                    else if (!hasReq) lockHtml = `<div class="lock-overlay"><span class="material-symbols-outlined" style="font-size:32px; color:var(--md-sys-color-error)">lock</span> Requisiti Insufficienti</div>`;
+                    
+                    let bgStyle = c.imgSfondo ? `background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('${c.imgSfondo}'); background-size: cover; background-position: center; border: 1px solid rgba(255,255,255,0.2);` : '';
+                    let btnHtml = (isOpen && hasReq && !isApplied) ? `<button class="md-btn" style="width:100%; margin-top:16px; ${bgStyle}" onclick="openModalInterpellanza('${c.nome}')">CANDIDATI AL REPARTO</button>` : '';
+
+                    gridHtml += `
+                        <div class="md-card">
+                            <div class="card-status ${isOpen ? 'status-open' : 'status-closed'}">${c.status}</div>
+                            ${c.imgLogo ? `<img src="${c.imgLogo}" class="card-logo" alt="Logo">` : ''}
+                            <h3 style="padding-right: 60px; margin-top:10px;">${c.nome}</h3>
+                            <p style="margin-bottom: 12px;">${c.descrizione}</p>
+                            <p><b>Posti liberi:</b> ${c.posti}</p>
+                            <p><b>Qualifica min:</b> ${c.qualifica}</p>
+                            ${lockHtml}
+                            ${btnHtml}
+                        </div>
+                    `;
+                });
+                gridHtml += `</div>`;
+                container.innerHTML += gridHtml;
+            }
+        }
+
+        function openModalInterpellanza(nomeInt) {
+            intAttuale = nomeInt;
+            document.getElementById('int-title-modal').innerText = "Candidatura Reparto: " + nomeInt;
+            document.getElementById('int-nome-read').value = userName;
+            document.getElementById('int-qual-read').value = userQualifica;
+            document.getElementById('int-desc-se').value = "";
+            document.getElementById('int-perche').value = "";
+            document.getElementById('int-occupa').value = "";
+            document.getElementById('int-confirm').checked = false;
+            document.getElementById('int-error').style.display = 'none';
+            openDialog('dialog-interpellanza');
+        }
+
+        function executeInviaInterpellanza() {
+            let d = document.getElementById('int-desc-se').value.trim();
+            let p = document.getElementById('int-perche').value.trim();
+            let o = document.getElementById('int-occupa').value.trim();
+            let c = document.getElementById('int-confirm').checked;
+            let err = document.getElementById('int-error');
+
+            if(!d || !p || !o) { err.innerText = "Compila tutti i campi testuali."; err.style.display = 'block'; return; }
+            if(!c) { err.innerText = "Spunta la casella di conferma."; err.style.display = 'block'; return; }
+            
+            err.style.display = 'none';
+            let btn = document.getElementById('btn-invia-int'); btn.innerText = "INVIO..."; btn.disabled = true;
+
+            const payload = {
+                action: "submit", titolo: intAttuale, nome: userName, qualifica: userQualifica, 
+                descrizione_se: d, perche_entrare: p, cosa_occupa: o 
+            };
+
+            fetch(INTERPELLANZE_API_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) }).catch(e=>console.log(e));
+            
+            fetch(`${DISCORD_WEBHOOK}?thread_id=${THREAD_ID}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({
+                embeds: [{ title: "📝 Nuova Candidatura Reparto: " + intAttuale, color: 9807270, fields: [ { name: "👤 Nome", value: userName, inline: true }, { name: "🎖️ Qualifica", value: userQualifica, inline: true }, { name: "ℹ️ Descrizione", value: d }, { name: "🎯 Motivazione", value: p }, { name: "📖 Reparto", value: o } ] }]
+            })});
+
+            applicatiInterpellanze.push(intAttuale);
+            setTimeout(() => { closeDialog('dialog-interpellanza'); renderInterpellanze(); btn.innerText = "INVIA CANDIDATURA REPARTO"; btn.disabled = false; }, 800);
+        }
+
+        // --- GESTIONALE INTERPELLANZE ---
+        function accediGestionale() {
+            const btn = document.getElementById("btn-gestionale-header");
+            btn.innerHTML = `<span class="material-symbols-outlined">sync</span> Verifica...`; btn.disabled = true;
+            
+            fetch(INTERPELLANZE_API_URL, {
+                method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify({ action: "checkAccess", nome: userName })
+            })
+            .then(r => r.json())
+            .then(data => {
+                btn.innerHTML = `<span class="material-symbols-outlined">admin_panel_settings</span> Gestione Reparto`; btn.disabled = false;
+                if (data.success) {
+                    userRepartoGestione = data.reparto;
+                    apriDashboardGestionale();
+                } else {
+                    alert("Accesso negato. Non risulti come responsabile di alcun reparto nel gestionale.");
+                }
+            }).catch(err => {
+                btn.innerHTML = `<span class="material-symbols-outlined">admin_panel_settings</span> Gestione Reparto`; btn.disabled = false;
+                alert("Errore di connessione.");
+            });
+        }
+
+        function apriDashboardGestionale() {
+            document.getElementById("gest-reparto-name").innerText = userRepartoGestione;
+            document.getElementById("gest-msg").textContent = "";
+            document.getElementById("lista-candidature-gest").style.display = "none";
+            document.getElementById("gest-stato").value = "Chiuso";
+            togglePostiGestionale();
+            openDialog('dialog-gestionale');
+        }
+
+        function togglePostiGestionale() {
+            const stato = document.getElementById("gest-stato").value;
+            const inputPosti = document.getElementById("gest-posti");
+            if(stato === "Aperto") { inputPosti.disabled = false; inputPosti.focus(); } 
+            else { inputPosti.disabled = true; inputPosti.value = ""; }
+        }
+
+        function salvaBandoInterpellanza() {
+            const stato = document.getElementById("gest-stato").value;
+            const posti = document.getElementById("gest-posti").value;
+            const msg = document.getElementById("gest-msg");
+
+            if (stato === "Aperto" && (!posti || posti <= 0)) {
+                msg.style.color = "var(--md-sys-color-error)"; msg.textContent = "Inserisci un numero di posti valido per aprire l'interpellanza."; return;
+            }
+
+            msg.style.color = "var(--md-sys-color-primary)"; msg.textContent = "Salvataggio in corso...";
+
+            fetch(INTERPELLANZE_API_URL, {
+                method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify({ action: "saveBando", reparto: userRepartoGestione, status: stato, posti: (posti||"") })
+            })
+            .then(r => r.text())
+            .then(res => {
+                msg.style.color = "#10b981"; msg.textContent = "Reparto aggiornato con successo!";
+                setTimeout(() => { msg.textContent = ""; }, 2000);
+                interpellanzeLoaded = false; loadInterpellanze(); // Ricarica sfondo
+            });
+        }
+
+        function cancellaVecchieInterpellanze() {
+            if (!confirm("⚠️ Sei sicuro? Verranno eliminate TUTTE le interpellanze precedenti inviate dagli agenti per il tuo reparto (" + userRepartoGestione + "). Questa azione è irreversibile.")) return;
+            const msg = document.getElementById("gest-msg");
+            msg.style.color = "var(--md-sys-color-error)"; msg.textContent = "Eliminazione in corso...";
+
+            fetch(INTERPELLANZE_API_URL, {
+                method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify({ action: "deleteVecchie", reparto: userRepartoGestione })
+            }).then(r => r.json()).then(res => {
+                if(res.success) {
+                    msg.style.color = "#10b981"; msg.textContent = `Eliminate ${res.deleted} candidature vecchie.`;
+                    document.getElementById("lista-candidature-gest").innerHTML = "";
+                } else msg.textContent = "Errore durante l'eliminazione.";
+            });
+        }
+
+        function visualizzaCandidatureInterpellanze() {
+            const container = document.getElementById("lista-candidature-gest");
+            container.style.display = "block";
+            container.innerHTML = "<p style='color:var(--md-sys-color-primary);'>⏳ Caricamento candidature in corso...</p>";
+
+            fetch(INTERPELLANZE_API_URL, {
+                method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify({ action: "getCandidature", reparto: userRepartoGestione })
+            }).then(r => r.json()).then(res => {
+                if(res.success) {
+                    if(res.dati.length === 0) { container.innerHTML = "<p style='color:var(--md-sys-color-outline);'>Nessuna candidatura trovata al momento.</p>"; return; }
+                    let html = `<h4 style="color:var(--md-sys-color-primary); margin-bottom:12px;">Candidature Ricevute (${res.dati.length})</h4>`;
+                    res.dati.forEach(d => {
+                        html += `
+                        <div class="candidatura-card">
+                            <p><span>Nome:</span> <b style="color:#FFF">${d.nome}</b> - <span>Qualifica:</span> <b style="color:#FFF">${d.qualifica}</b></p>
+                            <hr style="border:0; border-top:1px solid rgba(255,255,255,0.05); margin: 12px 0;">
+                            <p><span>Descrizione:</span><br>${d.descrizione}</p>
+                            <p><span>Perché vuole entrare:</span><br>${d.perche}</p>
+                            <p><span>Conoscenza reparto:</span><br>${d.occupa}</p>
+                        </div>`;
+                    });
+                    container.innerHTML = html;
+                } else container.innerHTML = "<p style='color:var(--md-sys-color-error);'>Errore di caricamento.</p>";
+            });
         }
 
         // --- 6. EVENTI PROGRAMMATI ---
@@ -959,7 +1310,7 @@
             container.innerHTML += gridHtml;
         }
 
-        // --- 7. GESTIONE SDI (Mantenuta inalterata, integrata) ---
+        // --- 7. GESTIONE SDI ---
         let sdiDataList = []; let personCount = 1; let tempPayload = null; let tempExtraPersons = [];
         
         function addPersonForm() {
