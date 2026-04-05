@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>S.D.I. - Database Questura | Polizia di Stato</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -44,32 +44,22 @@
             --easing-decelerate: cubic-bezier(0, 0, 0, 1);
         }
 
-        /* =========================================
-           CUSTOM SCROLLBAR (Per Chrome, Edge, Safari)
-        ========================================= */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: transparent; 
-        }
-        ::-webkit-scrollbar-thumb {
-            background-color: rgba(255, 255, 255, 0.15); 
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background-color: rgba(255, 255, 255, 0.3); 
-        }
+        /* CUSTOM SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background-color: rgba(255, 255, 255, 0.15); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background-color: rgba(255, 255, 255, 0.3); }
 
         body {
             font-family: 'Lexend', sans-serif;
             background-color: var(--md-sys-color-background);
             color: var(--md-sys-color-on-background);
-            margin: 0; padding: 0; height: 100vh; overflow: hidden; display: flex;
-            /* Supporto Firefox */
+            margin: 0; padding: 0; 
+            height: 100dvh; /* FIX SCROLL MOBILE */
+            overflow: hidden; display: flex;
             scrollbar-width: thin;
             scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+            touch-action: manipulation; /* Rimuove ritardo 300ms sui tocchi mobile */
         }
 
         .hidden { display: none !important; }
@@ -85,15 +75,16 @@
         ========================================= */
         .md-btn {
             background-color: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary);
-            border: none; padding: 0 24px; height: 40px; border-radius: var(--shape-corner-full);
+            border: none; padding: 0 24px; height: 48px; /* Altezza maggiorata per tocco ottimale */
+            border-radius: var(--shape-corner-full);
             font-size: 14px; font-weight: 600; letter-spacing: 0.5px;
             cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
             transition: all var(--duration-short); position: relative; overflow: hidden; font-family: 'Lexend', sans-serif;
             white-space: nowrap;
         }
         .md-btn:hover { filter: brightness(1.1); box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
-        .md-btn:active { transform: scale(0.97); }
-        .md-btn:disabled { background-color: #334155; color: #94a3b8; cursor: not-allowed; box-shadow: none; }
+        .md-btn:active { transform: scale(0.96); }
+        .md-btn:disabled { background-color: #334155; color: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
 
         .md-btn-secondary { background-color: transparent; border: 1px solid var(--md-sys-color-outline); color: var(--md-sys-color-primary); box-shadow: none; }
         .md-btn-secondary:hover { background-color: rgba(59, 130, 246, 0.1); }
@@ -123,7 +114,7 @@
            LOGIN VIEW 
         ========================================= */
         #login-view {
-            width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            width: 100%; height: 100dvh; display: flex; flex-direction: column; justify-content: center; align-items: center;
             background: linear-gradient(rgba(16, 18, 22, 0.85), rgba(16, 18, 22, 0.95)), url('https://i.imgur.com/RlzMnRQ.png') no-repeat center center;
             background-size: cover; position: absolute; z-index: 1000;
             transition: opacity var(--duration-long) var(--easing-standard), transform var(--duration-long) var(--easing-standard);
@@ -132,8 +123,9 @@
             background-color: rgba(27, 29, 34, 0.95); backdrop-filter: blur(10px);
             padding: 48px; border-radius: var(--shape-corner-large);
             box-shadow: 0 20px 40px rgba(0,0,0,0.5); text-align: center;
-            width: 360px; border: 1px solid rgba(255,255,255,0.08);
+            width: 90%; max-width: 360px; border: 1px solid rgba(255,255,255,0.08);
             animation: fadeInSlideUp var(--duration-long) var(--easing-decelerate);
+            box-sizing: border-box;
         }
         .police-logo-login { width: 90px; height: auto; margin-bottom: 20px; }
         .login-card h1 { margin: 0 0 8px 0; font-size: 26px; font-weight: 700; color: #FFF; letter-spacing: -0.5px;}
@@ -141,19 +133,25 @@
 
         .login-footer-text {
             position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
-            text-align: center; width: 100%; max-width: 360px; color: var(--md-sys-color-on-surface-variant); font-size: 13px;
+            text-align: center; width: 90%; max-width: 360px; color: var(--md-sys-color-on-surface-variant); font-size: 12px;
         }
         .login-footer-text p { margin: 0 0 4px 0; line-height: 1.4; }
         .login-footer-text p strong { color: var(--md-sys-color-error); }
-        .login-footer-text .ip-logged { font-size: 11px; font-style: italic; color: var(--md-sys-color-outline); }
+        .login-footer-text .ip-logged { font-size: 10px; font-style: italic; color: var(--md-sys-color-outline); }
 
         /* =========================================
-           LAYOUT & SIDEBAR
+           LAYOUT & SIDEBAR 
         ========================================= */
-        #app-view { width: 100%; height: 100%; display: flex; opacity: 0; pointer-events: none; transition: opacity var(--duration-long) var(--easing-standard); }
+        #app-view { width: 100%; height: 100dvh; display: flex; opacity: 0; pointer-events: none; transition: opacity var(--duration-long) var(--easing-standard); position: relative; overflow: hidden; }
         #app-view.active { opacity: 1; pointer-events: all; }
 
-        .sidebar { width: 280px; background-color: var(--md-sys-color-surface); display: flex; flex-direction: column; padding: 24px 16px; border-right: 1px solid rgba(255,255,255,0.05); z-index: 10; position: relative;}
+        #sidebar-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100dvh; background: rgba(0,0,0,0.6);
+            z-index: 100; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+        }
+        #sidebar-overlay.active { opacity: 1; pointer-events: all; }
+
+        .sidebar { width: 280px; background-color: var(--md-sys-color-surface); display: flex; flex-direction: column; padding: 24px 16px; border-right: 1px solid rgba(255,255,255,0.05); z-index: 101; position: relative; height: 100dvh; box-sizing: border-box; flex-shrink: 0;}
         .sidebar-header { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; padding: 0 8px; }
         .police-logo-side { width: 40px; height: auto; }
         .sidebar-header h2 { margin: 0; font-size: 17px; font-weight: 600; color: #FFF; line-height: 1.2; }
@@ -162,13 +160,15 @@
             display: flex; align-items: center; gap: 12px; background-color: var(--md-sys-color-surface-container);
             padding: 12px; border-radius: var(--shape-corner-medium); margin-bottom: 32px; border: 1px solid rgba(255,255,255,0.03);
         }
-        .user-profile-compact .avatar { color: var(--md-sys-color-primary); font-size: 32px; }
+        .user-profile-compact .avatar { color: var(--md-sys-color-primary); font-size: 36px; }
         .user-profile-compact div h4 { margin: 0; font-size: 14px; font-weight: 600; color: #FFF; text-transform: uppercase;}
         .user-profile-compact div p { margin: 0; font-size: 12px; font-weight: 400; font-family: monospace; letter-spacing: 0.5px; color: var(--md-sys-color-primary); margin-top: 4px; }
         .user-profile-compact div span { font-size: 11px; color: var(--md-sys-color-on-surface-variant); display: block; margin-top: 2px;}
 
+        .sidebar-nav-container { overflow-y: auto; flex-grow: 1; padding-bottom: 20px;}
+
         .nav-item {
-            display: flex; align-items: center; gap: 16px; height: 48px; padding: 0 20px; border-radius: var(--shape-corner-full);
+            display: flex; align-items: center; gap: 16px; height: 50px; padding: 0 20px; border-radius: var(--shape-corner-full);
             color: var(--md-sys-color-on-surface-variant); text-decoration: none; cursor: pointer; font-weight: 500; font-size: 14px;
             transition: all var(--duration-short); margin-bottom: 4px; position: relative; overflow: hidden;
         }
@@ -183,41 +183,56 @@
         }
 
         .sidebar-footer {
-            margin-top: auto; text-align: center; font-size: 12px; line-height: 1.5;
+            margin-top: 20px; text-align: center; font-size: 12px; line-height: 1.5; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05);
         }
         .sidebar-footer .ufficiale { color: var(--md-sys-color-primary); font-weight: 500; }
         .sidebar-footer .creato { color: var(--md-sys-color-outline); font-size: 11px; margin-top: 8px; display: block; }
 
-        .main-content { flex-grow: 1; padding: 48px; overflow-y: auto; background-color: var(--md-sys-color-background); position: relative; }
-        .view-section { display: block; opacity: 1; transform: translateX(0); transition: opacity var(--duration-long) var(--easing-standard), transform var(--duration-long) var(--easing-standard); }
+        .main-content { 
+            flex-grow: 1; padding: 40px; background-color: var(--md-sys-color-background); 
+            position: relative; height: 100dvh; overflow-y: auto; box-sizing: border-box; 
+        }
+
+        /* HEADER MOBILE (Hamburger) */
+        .mobile-topbar {
+            display: none; align-items: center; justify-content: space-between;
+            background-color: var(--md-sys-color-surface); padding: 12px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.05); position: sticky; top: 0; z-index: 50;
+            margin: -40px -40px 24px -40px; 
+        }
+        .btn-menu { background: none; border: none; color: #FFF; padding: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 8px; }
+        .btn-menu:active { background: rgba(255,255,255,0.1); }
+        .mobile-topbar h2 { margin: 0; font-size: 16px; font-weight: 600; color: #FFF; }
+
+        .view-section { display: block; opacity: 1; transform: translateX(0); transition: opacity var(--duration-long) var(--easing-standard), transform var(--duration-long) var(--easing-standard); padding-bottom: 60px;}
         .view-section.hidden { display: none; opacity: 0; transform: translateX(30px); }
 
-        .page-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; gap: 20px; flex-wrap: wrap;}
+        .page-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 30px; gap: 20px; flex-wrap: wrap;}
         .page-header div h1 { margin: 0 0 6px 0; font-weight: 700; font-size: 32px; color: #FFF; letter-spacing: -0.5px;}
         .page-header div p { margin: 0; color: var(--md-sys-color-on-surface-variant); font-size: 16px; font-weight: 300;}
 
         /* =========================================
            DASHBOARD & TABELLE
         ========================================= */
-        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 40px; }
-        .summary-cards { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap;}
-        .summary-card { background-color: var(--md-sys-color-surface-container); padding: 20px; border-radius: var(--shape-corner-small); border: 1px solid rgba(255,255,255,0.03); min-width: 150px; flex: 1; }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .summary-cards { display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap;}
+        .summary-card { background-color: var(--md-sys-color-surface-container); padding: 16px 20px; border-radius: var(--shape-corner-small); border: 1px solid rgba(255,255,255,0.03); flex: 1; min-width: 140px;}
         .summary-card span { font-size: 11px; text-transform: uppercase; color: var(--md-sys-color-on-surface-variant); font-weight: 600; letter-spacing: 1px;}
-        .summary-card h2 { margin: 8px 0 0 0; font-size: 36px; font-weight: 700; color: var(--md-sys-color-primary); }
+        .summary-card h2 { margin: 8px 0 0 0; font-size: 32px; font-weight: 700; color: var(--md-sys-color-primary); }
 
-        .table-container { background-color: var(--md-sys-color-surface-container); border-radius: var(--shape-corner-medium); overflow: hidden; border: 1px solid rgba(255,255,255,0.03); box-shadow: var(--md-elevation-1); }
-        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;}
-        th, td { padding: 16px 24px; border-bottom: 1px solid rgba(255,255,255,0.03); }
-        th { font-weight: 600; color: var(--md-sys-color-on-surface-variant); background-color: #21252A; }
+        .table-container { background-color: var(--md-sys-color-surface-container); border-radius: var(--shape-corner-medium); overflow-x: auto; border: 1px solid rgba(255,255,255,0.03); box-shadow: var(--md-elevation-1); }
+        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; min-width: 700px; /* Forza scroll orizzontale su mobile */ }
+        th, td { padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.03); }
+        th { font-weight: 600; color: var(--md-sys-color-on-surface-variant); background-color: #21252A; white-space: nowrap; }
         tbody tr { transition: background-color var(--duration-short); cursor: pointer; animation: fadeInSlideUp var(--duration-medium) ease-out; animation-fill-mode: both;}
         tbody tr:hover { background-color: rgba(255,255,255,0.02); }
-        .badge { padding: 6px 12px; border-radius: var(--shape-corner-full); font-size: 12px; font-weight: 700; background-color: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); }
+        .badge { padding: 4px 10px; border-radius: var(--shape-corner-full); font-size: 11px; font-weight: 700; background-color: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); white-space: nowrap; }
         .badge.error { background-color: #690005; color: #FFB4AB; }
 
         /* =========================================
            BANDI E INTERPELLANZE STYLES
         ========================================= */
-        .category-title { margin-top: 40px; margin-bottom: 16px; color: #FFF; border-bottom: 2px solid var(--md-sys-color-surface-variant); padding-bottom: 8px; font-weight: 600; font-size: 20px;}
+        .category-title { margin-top: 32px; margin-bottom: 16px; color: #FFF; border-bottom: 2px solid var(--md-sys-color-surface-variant); padding-bottom: 8px; font-weight: 600; font-size: 20px;}
         .card-status { position: absolute; top: 16px; right: 16px; padding: 4px 12px; border-radius: var(--shape-corner-full); font-size: 11px; font-weight: 700; text-transform: uppercase; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
         .status-open { background-color: #064E3B; color: #6EE7B7; } 
         .status-closed { background-color: #7F1D1D; color: #FCA5A5; } 
@@ -231,18 +246,18 @@
         .card-logo {position:absolute; top:12px; right:12px; width:45px; height:45px; object-fit:contain; border-radius:8px;}
 
         /* =========================================
-           DIALOGS (MODALS)
+           DIALOGS (MODALS) E FORMS
         ========================================= */
-        .dialog-backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); display: flex; justify-content: center; align-items: center; z-index: 2000; opacity: 0; pointer-events: none; transition: opacity var(--duration-medium) var(--easing-standard); padding: 20px; box-sizing: border-box;}
+        .dialog-backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); display: flex; justify-content: center; align-items: center; z-index: 2000; opacity: 0; pointer-events: none; transition: opacity var(--duration-medium) var(--easing-standard); padding: 16px; box-sizing: border-box;}
         .dialog-backdrop.active { opacity: 1; pointer-events: all; }
         
-        .dialog-surface { background-color: var(--md-sys-color-surface-container); width: 90%; max-width: 640px; max-height: 90vh; overflow-y: auto; border-radius: var(--shape-corner-large); padding: 32px; box-shadow: 0 24px 40px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.05); transform: scale(0.9) translateY(20px); transition: transform var(--duration-medium) var(--easing-standard); box-sizing: border-box;}
+        .dialog-surface { background-color: var(--md-sys-color-surface-container); width: 100%; max-width: 640px; max-height: 90vh; overflow-y: auto; border-radius: var(--shape-corner-large); padding: 32px; box-shadow: 0 24px 40px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.05); transform: scale(0.95) translateY(10px); transition: transform var(--duration-medium) var(--easing-standard); box-sizing: border-box;}
         .dialog-surface.large { max-width: 800px; }
         .dialog-backdrop.active .dialog-surface { transform: scale(1) translateY(0); }
-        .dialog-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
-        .dialog-header h2 { margin: 0; font-weight: 600; font-size: 24px; color: #FFF; }
-        .close-btn { background: none; border: none; color: var(--md-sys-color-on-surface-variant); cursor: pointer; border-radius: 50%; padding: 8px; transition: background 0.2s;}
-        .close-btn:hover { background: rgba(255,255,255,0.05); color: #FFF;}
+        .dialog-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; position: sticky; top: -32px; background: var(--md-sys-color-surface-container); padding: 20px 0; z-index: 10;}
+        .dialog-header h2 { margin: 0; font-weight: 600; font-size: 20px; color: #FFF; }
+        .close-btn { background: rgba(255,255,255,0.05); border: none; color: #FFF; cursor: pointer; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; transition: background 0.2s;}
+        .close-btn:hover { background: rgba(255,255,255,0.15); }
 
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
         .full-width { grid-column: span 2; }
@@ -254,25 +269,48 @@
         .details-section p b { color: var(--md-sys-color-primary); font-weight: 500;} 
         .evidenziato { background: rgba(0,0,0,0.5); padding: 4px 8px; border-radius: 6px; font-weight: 600; color: #FFF;}
 
-        /* AVVISI & SEGNALAZIONI SPECIFICS */
         .avviso-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; border-left: 4px solid var(--md-sys-color-primary); background: var(--md-sys-color-surface); cursor: pointer; transition: transform 0.2s, background 0.2s; position: relative;}
-        .avviso-item:hover { transform: scale(1.01); background: var(--md-sys-color-surface-variant); }
-        .avviso-item.letto { opacity: 0.5; border-left-color: var(--md-sys-color-outline); cursor: default;}
-        .avviso-item.letto:hover { transform: none; background: var(--md-sys-color-surface); }
+        .avviso-item.letto { opacity: 0.6; border-left-color: var(--md-sys-color-outline); cursor: default;}
         .avviso-item h5 { margin: 0 0 8px 0; font-size: 16px; color: #FFF; }
         .avviso-item p { margin: 0; font-size: 14px; line-height: 1.5; color: var(--md-sys-color-on-surface-variant); white-space: pre-wrap; word-wrap: break-word;}
         
         .tab-buttons { display: flex; background: var(--md-sys-color-surface); border-radius: 8px; overflow: hidden; margin-bottom: 24px; }
-        .tab-btn { flex: 1; padding: 12px; background: transparent; border: none; color: var(--md-sys-color-on-surface-variant); font-weight: 600; cursor: pointer; transition: 0.3s; font-family: 'Lexend'; }
+        .tab-btn { flex: 1; padding: 14px; background: transparent; border: none; color: var(--md-sys-color-on-surface-variant); font-weight: 600; cursor: pointer; transition: 0.3s; font-family: 'Lexend'; }
         .tab-btn.active { background: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary); }
 
-        /* Filtri */
-        .filter-bar { display: flex; gap: 16px; align-items: center; background: var(--md-sys-color-surface-variant); padding: 8px 24px; border-radius: 50px; flex-wrap: wrap; margin-bottom: 24px;}
-        .filter-label { display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13px; font-weight: 500; color: var(--md-sys-color-on-surface-variant); }
+        .filter-bar { display: flex; gap: 12px; align-items: center; background: var(--md-sys-color-surface-variant); padding: 8px 20px; border-radius: 50px; flex-wrap: wrap; margin-bottom: 24px;}
+        .filter-label { display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 13px; font-weight: 500; color: var(--md-sys-color-on-surface-variant); padding: 4px; }
 
         .candidatura-card { background: var(--md-sys-color-surface); border: 1px solid var(--md-sys-color-outline); padding: 16px; border-radius: 12px; margin-bottom: 16px; color: var(--md-sys-color-on-surface); }
         .candidatura-card span { color: var(--md-sys-color-primary); font-weight: 600; font-size: 13px;}
         .candidatura-card p { margin: 4px 0; font-size: 14px; line-height: 1.5; }
+
+        /* =========================================
+           RESPONSIVE - OTTIMIZZAZIONE PER SMARTPHONE
+        ========================================= */
+        @media (max-width: 768px) {
+            .sidebar { 
+                position: fixed; left: -320px; top: 0; width: 280px; 
+                transition: left 0.3s cubic-bezier(0.2, 0, 0, 1);
+                box-shadow: 4px 0 24px rgba(0,0,0,0.6);
+            }
+            .sidebar.open { left: 0; }
+            .sidebar-header { margin-bottom: 24px; }
+            .sidebar-header h2 { font-size: 15px; } /* Fix per sovrapposizione testo */
+            
+            .mobile-topbar { display: flex; }
+            .main-content { padding: 20px; padding-top: 40px; } 
+            .page-header div h1 { font-size: 24px; }
+            
+            .filter-bar { border-radius: 12px; padding: 12px; }
+            .filter-bar input[type="text"] { width: 100% !important; }
+            .filter-bar .md-input { margin-bottom: 8px; }
+            
+            .dialog-surface { padding: 20px; width: 100%; border-radius: var(--shape-corner-medium); }
+            .form-grid { grid-template-columns: 1fr; }
+            .full-width { grid-column: span 1; }
+            .dialog-header { top: -20px; }
+        }
     </style>
 </head>
 <body>
@@ -323,10 +361,16 @@
     </div>
 
     <div id="app-view">
-        <aside class="sidebar">
+        
+        <div id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+        <aside class="sidebar" id="main-sidebar">
             <div class="sidebar-header">
                 <img src="https://i.imgur.com/tkb2tfQ.png" alt="Logo PS" class="police-logo-side">
-                <h2>Database Questura<br><span style="font-weight:300; font-size:13px; opacity:0.8">S.D.I. Centralizzato</span></h2>
+                <div>
+                    <h2>Database Questura</h2>
+                    <span style="font-weight:300; font-size:13px; opacity:0.8; color:#FFF;">S.D.I. Centralizzato</span>
+                </div>
             </div>
 
             <div class="user-profile-compact">
@@ -334,60 +378,69 @@
                 <div>
                     <h4 id="user-name">Caricamento...</h4>
                     <p id="user-matricola">--</p>
-                    <span id="user-qualifica">Sincronizzazione qualifica...</span>
+                    <span id="user-qualifica">Caricamento...</span>
                 </div>
             </div>
 
-            <nav>
-                <div class="nav-item active ripple" onclick="switchView('dashboard')" id="nav-dashboard">
-                    <div class="active-indicator"></div>
-                    <span class="material-symbols-outlined">dashboard</span> Dashboard
-                </div>
-                <div class="nav-item ripple" onclick="switchView('sdi')" id="nav-sdi">
-                    <div class="active-indicator"></div>
-                    <span class="material-symbols-outlined">policy</span> Archivio SDI
-                </div>
-                <div class="nav-item ripple" onclick="switchView('bandi')" id="nav-bandi">
-                    <div class="active-indicator"></div>
-                    <span class="material-symbols-outlined">work</span> Bandi Interni
-                </div>
-                <div class="nav-item ripple" onclick="switchView('interpellanze')" id="nav-interpellanze">
-                    <div class="active-indicator"></div>
-                    <span class="material-symbols-outlined">badge</span> Interpellanze Reparti
-                </div>
-                <div class="nav-item ripple" onclick="switchView('eventi')" id="nav-eventi">
-                    <div class="active-indicator"></div>
-                    <span class="material-symbols-outlined">event</span> Eventi
-                </div>
-                
-                <div style="margin-top: 24px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 12px;"></div>
-                
-                <div class="nav-item ripple" onclick="openDialog('dialog-notifiche')">
-                    <span class="material-symbols-outlined">notifications</span> Avvisi Operativi
-                    <div class="badge-notifiche" id="badge-conteggio">0</div>
-                </div>
-                <div class="nav-item ripple" onclick="openSegnalazioni()">
-                    <span class="material-symbols-outlined">report</span> Segnala / Proponi
-                </div>
-                
-                <div class="nav-item ripple" style="color: var(--md-sys-color-error); opacity: 0.8; margin-top:12px;" onclick="doLogout()">
-                    <div class="active-indicator" style="background-color: rgba(239, 68, 68, 0.1);"></div>
-                    <span class="material-symbols-outlined">logout</span> Disconnetti
-                </div>
-            </nav>
+            <div class="sidebar-nav-container">
+                <nav>
+                    <div class="nav-item active ripple" onclick="switchView('dashboard')" id="nav-dashboard">
+                        <div class="active-indicator"></div>
+                        <span class="material-symbols-outlined">dashboard</span> Dashboard
+                    </div>
+                    <div class="nav-item ripple" onclick="switchView('sdi')" id="nav-sdi">
+                        <div class="active-indicator"></div>
+                        <span class="material-symbols-outlined">policy</span> Archivio SDI
+                    </div>
+                    <div class="nav-item ripple" onclick="switchView('bandi')" id="nav-bandi">
+                        <div class="active-indicator"></div>
+                        <span class="material-symbols-outlined">work</span> Bandi Interni
+                    </div>
+                    <div class="nav-item ripple" onclick="switchView('interpellanze')" id="nav-interpellanze">
+                        <div class="active-indicator"></div>
+                        <span class="material-symbols-outlined">badge</span> Interpellanze Reparti
+                    </div>
+                    <div class="nav-item ripple" onclick="switchView('eventi')" id="nav-eventi">
+                        <div class="active-indicator"></div>
+                        <span class="material-symbols-outlined">event</span> Eventi Programmati
+                    </div>
+                    
+                    <div style="margin-top: 16px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 12px;"></div>
+                    
+                    <div class="nav-item ripple" onclick="openDialog('dialog-notifiche')">
+                        <span class="material-symbols-outlined">notifications</span> Avvisi Operativi
+                        <div class="badge-notifiche" id="badge-conteggio">0</div>
+                    </div>
+                    <div class="nav-item ripple" onclick="openSegnalazioni()">
+                        <span class="material-symbols-outlined">report</span> Segnala / Proponi
+                    </div>
+                    
+                    <div class="nav-item ripple" style="color: var(--md-sys-color-error); opacity: 0.8; margin-top:12px;" onclick="doLogout()">
+                        <div class="active-indicator" style="background-color: rgba(239, 68, 68, 0.1);"></div>
+                        <span class="material-symbols-outlined">logout</span> Disconnetti
+                    </div>
+                </nav>
 
-            <div class="sidebar-footer">
-                <span class="ufficiale">Sito Ufficiale della Polizia di Stato - Server IPRP | Solo a scopo Roleplay.</span>
-                <span class="creato">Creato da Ryze - IPRP X</span>
+                <div class="sidebar-footer">
+                    <span class="ufficiale">Sito Ufficiale della Polizia di Stato<br>Server IPRP | Solo a scopo Roleplay.</span>
+                    <span class="creato">Creato da Ryze - IPRP X</span>
+                </div>
             </div>
         </aside>
 
         <main class="main-content">
+            
+            <div class="mobile-topbar">
+                <button class="btn-menu" onclick="toggleSidebar()"><span class="material-symbols-outlined">menu</span></button>
+                <h2>S.D.I. Mobile</h2>
+                <img src="https://i.imgur.com/tkb2tfQ.png" style="width: 28px; height: 28px;">
+            </div>
+
             <div id="view-dashboard" class="view-section">
                 <div class="page-header">
                     <div>
                         <h1>Benvenuto</h1>
-                        <p>Seleziona un modulo operativo per iniziare le operazioni.</p>
+                        <p>Seleziona un modulo operativo per iniziare.</p>
                     </div>
                 </div>
                 
@@ -421,13 +474,13 @@
                         <h1>Archivio Controlli S.D.I.</h1>
                         <p>Registro centrale e ricerca delle attività di controllo del territorio.</p>
                     </div>
-                    <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+                    <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
                         <div class="filter-bar" style="margin-bottom: 0;">
                             <span class="material-symbols-outlined" style="color:var(--md-sys-color-outline)">search</span>
-                            <input type="text" id="sdi-search" class="md-input" style="margin: 0; padding: 0; width: 220px; background:transparent; border:none;" placeholder="Cerca Protocollo o Nome..." onkeyup="filterSDITable()">
+                            <input type="text" id="sdi-search" class="md-input" style="margin: 0; padding: 0; width: 200px; background:transparent; border:none;" placeholder="Cerca SDI o Nome..." onkeyup="filterSDITable()">
                         </div>
-                        <button class="md-btn" onclick="openDialog('dialog-nuovo-sdi')">
-                            <span class="material-symbols-outlined">add</span> NUOVO SDI
+                        <button class="md-btn" onclick="openDialog('dialog-nuovo-sdi')" style="padding: 0 16px; border-radius: 12px;">
+                            <span class="material-symbols-outlined">add</span> COMPILA SDI
                         </button>
                     </div>
                 </div>
@@ -435,7 +488,7 @@
                 <div class="summary-cards">
                     <div class="summary-card"><span>Controlli Totali</span><h2 id="tot-sdi">0</h2></div>
                     <div class="summary-card"><span>Registrati Oggi</span><h2 id="tot-sdi-oggi">0</h2></div>
-                    <div class="summary-card"><span>Ultimo Protocollo</span><h2 id="last-sdi" style="font-size: 18px; color: #FFF; margin-top: 16px; font-weight:600">Nessuno</h2></div>
+                    <div class="summary-card"><span>Ultimo Protocollo</span><h2 id="last-sdi" style="font-size: 16px; color: #FFF; margin-top: 16px; font-family: monospace;">Nessuno</h2></div>
                 </div>
 
                 <div class="table-container">
@@ -481,8 +534,8 @@
                         <h1>Interpellanze Reparti - PDS</h1>
                         <p>Consulta i posti disponibili e richiedi l'assegnazione ad un Reparto.</p>
                     </div>
-                    <button class="md-btn md-btn-secondary" onclick="accediGestionale()" id="btn-gestionale-header">
-                        <span class="material-symbols-outlined">admin_panel_settings</span> Gestione Reparto
+                    <button class="md-btn md-btn-secondary" onclick="accediGestionale()" id="btn-gestionale-header" style="border-radius: 12px;">
+                        <span class="material-symbols-outlined">admin_panel_settings</span> Area Dirigenti
                     </button>
                 </div>
                 
@@ -712,12 +765,8 @@
         const BANDI_GET_URL = "https://script.google.com/macros/s/AKfycbyTnW-qVIjdTSr-_nvfcPJ7ojW5_d63gGHFZboU-LXHsekv6FKU2Zx1QEJ_kNP2OJ3h/exec";
         const BANDI_POST_URL = "https://script.google.com/macros/s/AKfycbwGXlCpo-9gWspffXHW_vHHakKb2MxOsm7ky4I0KB7sXHyaaIkJqseakd0r5nTGtBqQ/exec";
         const EVENTI_GET_URL = "https://script.google.com/macros/s/AKfycbxwhTRyvI49r_REFMTO5JwDKUNqPd_c01D08KTmNboxEwcdEnMl-LUbLO4mTfdUEOU/exec";
-        
-        // ENDPOINT SDI
         const SDI_URL = "https://script.google.com/macros/s/AKfycbxMLpfl-cpVgjLypuaIJmIP21XxUtfVEOVK76vPI-T5FJLq4fWotA01shrBYAJMeYLs/exec";
-        
         const INTERPELLANZE_API_URL = "https://script.google.com/macros/s/AKfycbwX5DzluEQmdQoOJ9JG1rBOFv1CB0byiJ5k2b_1vVDXGka7FeGOgYmCTL6EYmMEqPqD/exec";
-
         const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1488451866898595920/mD4G-Ps73xWalanAiAGKfn2t_jHi3nAIVHaKZzwjK6_Psqd2LQ-uwpxjyTPKK61SUS9c";
         const THREAD_ID = "1489965248109613260";
 
@@ -726,7 +775,6 @@
         let userMatricola = "---";
         let userQualifica = "AGENTE"; 
         let currentSegnalaTab = 'segnala';
-        
         let bandoAttuale = "";
         let intAttuale = "";
         let userRepartoGestione = "";
@@ -751,8 +799,14 @@
         }
         function openDialog(id) { document.getElementById(id).classList.add('active'); initRipples();}
         function closeDialog(id) { document.getElementById(id).classList.remove('active'); }
+        
+        // Gestione Sidebar Mobile
+        function toggleSidebar() {
+            document.getElementById('main-sidebar').classList.toggle('open');
+            document.getElementById('sidebar-overlay').classList.toggle('active');
+        }
 
-        // --- 1. LOGIN FIREBASE E INIZIALIZZAZIONE ---
+        // --- 1. LOGIN FIREBASE E INIZIALIZZAZIONE CON CACHE ---
         async function doLogin() {
             const code = document.getElementById('login-code').value.trim();
             const btn = document.getElementById('btn-login');
@@ -771,6 +825,13 @@
                     sessionStorage.setItem("ps_auth", "true");
                     sessionStorage.setItem("ps_user_ident", userDoc.identificativo);
                     sessionStorage.setItem("ps_user_matr", userDoc.matricola);
+                    
+                    // OTTIMIZZAZIONE: Pre-fetch qualifica in background al momento del login
+                    fetch(GERARCHIA_URL).then(res => res.json()).then(data => {
+                        let trovato = data.find(r => r.nome.toLowerCase() === userDoc.identificativo.toLowerCase());
+                        if(trovato) sessionStorage.setItem("ps_user_qualifica", trovato.qualifica);
+                        else sessionStorage.setItem("ps_user_qualifica", "AGENTE");
+                    });
                     
                     const loginView = document.getElementById('login-view');
                     loginView.style.opacity = '0'; loginView.style.transform = 'scale(1.1)';
@@ -796,9 +857,28 @@
             document.getElementById('user-matricola').innerText = userMatricola;
             
             initRipples();
-            caricaQualifica();
+            caricaQualificaFast(); // Funzione OTTIMIZZATA
             caricaAvvisi();
-            loadDataFromSheet(); // Inizializza SDI dal database
+            loadDataFromSheet(); 
+        }
+
+        // SISTEMA DI CACHING PER LA QUALIFICA (MOLTO PIÙ VELOCE)
+        function caricaQualificaFast() {
+            let cachedQualifica = sessionStorage.getItem("ps_user_qualifica");
+            if (cachedQualifica) {
+                userQualifica = cachedQualifica;
+                document.getElementById("user-qualifica").innerText = userQualifica;
+            } else {
+                document.getElementById("user-qualifica").innerText = "Sincronizzazione...";
+                fetch(GERARCHIA_URL).then(res => res.json()).then(data => {
+                    let trovato = data.find(r => r.nome.toLowerCase() === userName.toLowerCase());
+                    userQualifica = trovato ? trovato.qualifica : "AGENTE";
+                    sessionStorage.setItem("ps_user_qualifica", userQualifica); // Salva in cache
+                    document.getElementById("user-qualifica").innerText = userQualifica;
+                }).catch(e => {
+                    document.getElementById("user-qualifica").innerText = "Qualifica non trovata";
+                });
+            }
         }
 
         function switchView(viewName) {
@@ -810,6 +890,13 @@
             document.getElementById('nav-' + viewName).classList.add('active');
 
             currentView.style.opacity = '0'; currentView.style.transform = 'translateX(-20px)';
+            
+            // Chiudi sidebar su mobile se aperta
+            if (window.innerWidth <= 768) {
+                document.getElementById('main-sidebar').classList.remove('open');
+                document.getElementById('sidebar-overlay').classList.remove('active');
+            }
+
             setTimeout(() => {
                 currentView.classList.add('hidden'); currentView.style.transform = '';
                 nextView.classList.remove('hidden'); nextView.classList.add('view-enter');
@@ -824,16 +911,6 @@
             }, 250);
         }
 
-        function caricaQualifica() {
-            fetch(GERARCHIA_URL).then(res => res.json()).then(data => {
-                let trovato = data.find(r => r.nome.toLowerCase() === userName.toLowerCase());
-                userQualifica = trovato ? trovato.qualifica : "AGENTE";
-                document.getElementById("user-qualifica").innerText = userQualifica;
-            }).catch(e => {
-                console.error("Errore fetch qualifica:", e);
-                document.getElementById("user-qualifica").innerText = "Qualifica non trovata";
-            });
-        }
         function checkQualifica(min) {
             if (!min) return true;
             const idxUtente = qualifiche_arr.indexOf(userQualifica);
@@ -842,7 +919,7 @@
             return idxUtente <= idxMin;
         }
 
-        // --- 3. AVVISI OPERATIVI (Centro Comunicazioni) ---
+        // --- 3. AVVISI OPERATIVI ---
         let datiAvvisiCorrenti = [];
         function caricaAvvisi() {
             fetch(AVVISI_URL).then(res => res.json()).then(data => {
@@ -897,24 +974,10 @@
 
         function segnaComeLetto(riga, el, giaLetto) {
             if(giaLetto) return;
-            
-            // Aggiorna array in locale
             let avviso = datiAvvisiCorrenti.find(a => a.row === riga);
-            if(avviso) { 
-                if(!avviso.lettiDa) avviso.lettiDa = []; 
-                avviso.lettiDa.push(userName); 
-            }
+            if(avviso) { if(!avviso.lettiDa) avviso.lettiDa = []; avviso.lettiDa.push(userName); }
             applicaFiltriAvvisi(); 
-            
-            // Salva su Database via POST sicuro
-            fetch(AVVISI_URL, { 
-                method: 'POST', 
-                headers: { "Content-Type": "text/plain;charset=utf-8" },
-                body: JSON.stringify({ row: riga, nome: userName }) 
-            })
-            .then(res => res.json())
-            .then(data => console.log("Presa visione salvata correttamente"))
-            .catch(e => console.error("Errore salvataggio avviso:", e));
+            fetch(AVVISI_URL, { method: 'POST', headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ row: riga, nome: userName }) }).catch(e => console.error("Errore salvataggio avviso:", e));
         }
 
         // --- 4. SEGNALA / PROPONI ---
@@ -1162,7 +1225,7 @@
             })
             .then(r => r.json())
             .then(data => {
-                btn.innerHTML = `<span class="material-symbols-outlined">admin_panel_settings</span> Gestione Reparto`; btn.disabled = false;
+                btn.innerHTML = `<span class="material-symbols-outlined">admin_panel_settings</span> Area Dirigenti`; btn.disabled = false;
                 if (data.success) {
                     userRepartoGestione = data.reparto;
                     apriDashboardGestionale();
@@ -1170,7 +1233,7 @@
                     alert("Accesso negato. Non risulti come responsabile di alcun reparto nel GESTIONALE.");
                 }
             }).catch(err => {
-                btn.innerHTML = `<span class="material-symbols-outlined">admin_panel_settings</span> Gestione Reparto`; btn.disabled = false;
+                btn.innerHTML = `<span class="material-symbols-outlined">admin_panel_settings</span> Area Dirigenti`; btn.disabled = false;
                 alert("Errore di connessione.");
             });
         }
@@ -1367,7 +1430,6 @@
             
             let btn = document.getElementById('btn-save-sdi'); btn.innerText = "SALVATAGGIO..."; btn.disabled = true;
 
-            // Salva su Database via POST sicuro
             fetch(SDI_URL, {
                 method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                 body: JSON.stringify(tempPayload)
@@ -1379,7 +1441,6 @@
                     closeDialog('dialog-nuovo-sdi');
                 } else alert("Errore durante il salvataggio SDI sul database.");
             }).catch(error => {
-                // Fallback locale in caso di errore di rete momentaneo
                 aggiungiRigaTabellaLocally(tempPayload.idSdi, tempPayload, tempExtraPersons); 
                 closeDialog('dialog-nuovo-sdi');
             }).finally(() => {
@@ -1419,7 +1480,7 @@
                         volante: item.volante, docPrincipale: item.docPrincipale, dataNascitaPrincipale: item.dataNascitaPrincipale
                     }, extraArr);
                 });
-            }).catch(e => console.log("SDI fetch vuoto o non inizializzato."));
+            }).catch(e => console.log("SDI fetch non inizializzato."));
         }
 
         function updateSummarySDI() { document.getElementById('tot-sdi').innerText = sdiDataList.length; document.getElementById('tot-sdi-oggi').innerText = sdiDataList.filter(d => d.dataOggi.includes(new Date().toLocaleDateString('it-IT'))).length; if(sdiDataList.length > 0) document.getElementById('last-sdi').innerText = sdiDataList[sdiDataList.length-1].idSdi; }
