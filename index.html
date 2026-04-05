@@ -151,21 +151,28 @@
         }
         #sidebar-overlay.active { opacity: 1; pointer-events: all; }
 
-        .sidebar { width: 280px; background-color: var(--md-sys-color-surface); display: flex; flex-direction: column; padding: 24px 16px; border-right: 1px solid rgba(255,255,255,0.05); z-index: 101; position: relative; height: 100dvh; box-sizing: border-box; flex-shrink: 0;}
-        .sidebar-header { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; padding: 0 8px; }
+        .sidebar { 
+            width: 280px; background-color: var(--md-sys-color-surface); display: flex; flex-direction: column; 
+            padding: 24px 16px; border-right: 1px solid rgba(255,255,255,0.05); z-index: 101; 
+            position: relative; height: 100dvh; box-sizing: border-box; flex-shrink: 0;
+        }
+        
+        .sidebar-header { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; padding: 0 8px; flex-shrink: 0; }
         .police-logo-side { width: 40px; height: auto; }
         .sidebar-header h2 { margin: 0; font-size: 17px; font-weight: 600; color: #FFF; line-height: 1.2; }
 
         .user-profile-compact {
             display: flex; align-items: center; gap: 12px; background-color: var(--md-sys-color-surface-container);
             padding: 12px; border-radius: var(--shape-corner-medium); margin-bottom: 32px; border: 1px solid rgba(255,255,255,0.03);
+            flex-shrink: 0;
         }
         .user-profile-compact .avatar { color: var(--md-sys-color-primary); font-size: 36px; }
         .user-profile-compact div h4 { margin: 0; font-size: 14px; font-weight: 600; color: #FFF; text-transform: uppercase;}
         .user-profile-compact div p { margin: 0; font-size: 12px; font-weight: 400; font-family: monospace; letter-spacing: 0.5px; color: var(--md-sys-color-primary); margin-top: 4px; }
         .user-profile-compact div span { font-size: 11px; color: var(--md-sys-color-on-surface-variant); display: block; margin-top: 2px;}
 
-        .sidebar-nav-container { overflow-y: auto; flex-grow: 1; padding-bottom: 20px;}
+        /* Area Navigazione scrollabile centralmente */
+        .sidebar-nav-container { overflow-y: auto; flex-grow: 1; padding-bottom: 10px; }
 
         .nav-item {
             display: flex; align-items: center; gap: 16px; height: 50px; padding: 0 20px; border-radius: var(--shape-corner-full);
@@ -182,10 +189,14 @@
             font-size: 11px; font-weight: bold; padding: 2px 6px; border-radius: 50%; display: none;
         }
 
+        /* FOOTER SIDEBAR FISSATO IN FONDO */
         .sidebar-footer {
-            margin-top: 20px; text-align: center; font-size: 12px; line-height: 1.5; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: auto; /* Lo spinge giù */
+            text-align: center; font-size: 12px; line-height: 1.5; 
+            padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05);
+            flex-shrink: 0; /* Impedisce che si rimpicciolisca */
         }
-        .sidebar-footer .ufficiale { color: var(--md-sys-color-primary); font-weight: 500; }
+        .sidebar-footer .ufficiale { color: var(--md-sys-color-primary); font-weight: 500; display: block; }
         .sidebar-footer .creato { color: var(--md-sys-color-outline); font-size: 11px; margin-top: 8px; display: block; }
 
         .main-content { 
@@ -243,7 +254,7 @@
 
         .lock-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(30, 33, 38, 0.85); backdrop-filter: blur(2px); display: flex; justify-content: center; align-items: center; text-align: center; font-weight: 600; color: var(--md-sys-color-on-surface); font-size: 15px; z-index: 10; padding: 20px; box-sizing: border-box; flex-direction: column; gap: 8px;}
         .warning-box { background: rgba(239, 68, 68, 0.1); border: 1px solid var(--md-sys-color-error); color: var(--md-sys-color-error); border-radius: 8px; padding: 12px; font-size: 13px; font-weight: 600; text-align: center; margin-top: 16px; }
-        .card-logo {position:absolute; top:12px; right:12px; width:45px; height:45px; object-fit:contain; border-radius:8px;}
+        .card-logo {position:absolute; top:16px; right:16px; width:45px; height:45px; object-fit:contain; border-radius:8px; background-color:rgba(0,0,0,0.2); padding: 4px;}
 
         /* =========================================
            DIALOGS (MODALS) E FORMS
@@ -296,7 +307,7 @@
             }
             .sidebar.open { left: 0; }
             .sidebar-header { margin-bottom: 24px; }
-            .sidebar-header h2 { font-size: 15px; } /* Fix per sovrapposizione testo */
+            .sidebar-header h2 { font-size: 15px; } 
             
             .mobile-topbar { display: flex; }
             .main-content { padding: 20px; padding-top: 40px; } 
@@ -348,7 +359,7 @@
             
             <input type="password" id="login-code" class="md-input" placeholder="Codice Operatore (es. 061087)" onkeypress="if(event.key === 'Enter') doLogin()">
             
-            <button id="btn-login" class="md-btn" style="width: 100%; height: 48px;" onclick="doLogin()">
+            <button id="btn-login" class="md-btn" style="width: 100%;" onclick="doLogin()">
                 <span class="material-symbols-outlined">login</span> ACCEDI
             </button>
             <p id="login-error" style="color: var(--md-sys-color-error); font-size: 14px; font-weight: 500; margin-top: 16px; display: none; animation: fadeInSlideUp 0.3s ease;"></p>
@@ -378,7 +389,7 @@
                 <div>
                     <h4 id="user-name">Caricamento...</h4>
                     <p id="user-matricola">--</p>
-                    <span id="user-qualifica">Caricamento...</span>
+                    <span id="user-qualifica">Sincronizzazione qualifica...</span>
                 </div>
             </div>
 
@@ -420,11 +431,11 @@
                         <span class="material-symbols-outlined">logout</span> Disconnetti
                     </div>
                 </nav>
+            </div>
 
-                <div class="sidebar-footer">
-                    <span class="ufficiale">Sito Ufficiale della Polizia di Stato<br>Server IPRP | Solo a scopo Roleplay.</span>
-                    <span class="creato">Creato da Ryze - IPRP X</span>
-                </div>
+            <div class="sidebar-footer">
+                <span class="ufficiale">Sito Ufficiale della Polizia di Stato<br>Server IPRP | Solo a scopo Roleplay.</span>
+                <span class="creato">Creato da Ryze - IPRP X</span>
             </div>
         </aside>
 
@@ -862,7 +873,7 @@
             loadDataFromSheet(); 
         }
 
-        // SISTEMA DI CACHING PER LA QUALIFICA (MOLTO PIÙ VELOCE)
+        // SISTEMA DI CACHING PER LA QUALIFICA
         function caricaQualificaFast() {
             let cachedQualifica = sessionStorage.getItem("ps_user_qualifica");
             if (cachedQualifica) {
@@ -873,7 +884,7 @@
                 fetch(GERARCHIA_URL).then(res => res.json()).then(data => {
                     let trovato = data.find(r => r.nome.toLowerCase() === userName.toLowerCase());
                     userQualifica = trovato ? trovato.qualifica : "AGENTE";
-                    sessionStorage.setItem("ps_user_qualifica", userQualifica); // Salva in cache
+                    sessionStorage.setItem("ps_user_qualifica", userQualifica);
                     document.getElementById("user-qualifica").innerText = userQualifica;
                 }).catch(e => {
                     document.getElementById("user-qualifica").innerText = "Qualifica non trovata";
@@ -891,7 +902,6 @@
 
             currentView.style.opacity = '0'; currentView.style.transform = 'translateX(-20px)';
             
-            // Chiudi sidebar su mobile se aperta
             if (window.innerWidth <= 768) {
                 document.getElementById('main-sidebar').classList.remove('open');
                 document.getElementById('sidebar-overlay').classList.remove('active');
@@ -902,7 +912,6 @@
                 nextView.classList.remove('hidden'); nextView.classList.add('view-enter');
                 nextView.style.opacity = '1'; nextView.style.transform = 'translateX(0)';
                 
-                // Lazy loading
                 if(viewName === 'bandi') loadBandi();
                 if(viewName === 'eventi') loadEventi();
                 if(viewName === 'interpellanze') loadInterpellanze();
@@ -1106,7 +1115,7 @@
             setTimeout(() => { closeDialog('dialog-bando'); renderBandi(); btn.innerText = "INVIA CANDIDATURA"; btn.disabled = false; }, 800);
         }
 
-        // --- NUOVO: INTERPELLANZE REPARTI ---
+        // --- NUOVO: INTERPELLANZE REPARTI CON STATUS A SINISTRA ---
         let interpellanzeGlobali = [];
         let applicatiInterpellanze = [];
         let interpellanzeLoaded = false;
@@ -1155,11 +1164,13 @@
                     let bgStyle = c.imgSfondo ? `background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('${c.imgSfondo}'); background-size: cover; background-position: center; border: 1px solid rgba(255,255,255,0.2);` : '';
                     let btnHtml = (isOpen && hasReq && !isApplied) ? `<button class="md-btn" style="width:100%; margin-top:16px; ${bgStyle}" onclick="openModalInterpellanza('${c.nome}')">CANDIDATI AL REPARTO</button>` : '';
 
+                    // MODIFICA RICHIESTA: badge Aperto/Chiuso spostato a sinistra (style="left: 16px; right: auto;")
+                    // Aggiunto margin-top: 24px al tag h3 per evitare sovrapposizioni
                     gridHtml += `
                         <div class="md-card">
-                            <div class="card-status ${isOpen ? 'status-open' : 'status-closed'}">${c.status}</div>
+                            <div class="card-status ${isOpen ? 'status-open' : 'status-closed'}" style="left: 16px; right: auto;">${c.status}</div>
                             ${c.imgLogo ? `<img src="${c.imgLogo}" class="card-logo" alt="Logo">` : ''}
-                            <h3 style="padding-right: 60px; margin-top:10px;">${c.nome}</h3>
+                            <h3 style="padding-right: 50px; margin-top:24px;">${c.nome}</h3>
                             <p style="margin-bottom: 12px;">${c.descrizione}</p>
                             <p><b>Posti liberi:</b> ${c.posti}</p>
                             <p><b>Qualifica min:</b> ${c.qualifica}</p>
