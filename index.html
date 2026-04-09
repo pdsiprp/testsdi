@@ -55,11 +55,11 @@
             background-color: var(--md-sys-color-background);
             color: var(--md-sys-color-on-background);
             margin: 0; padding: 0; 
-            height: 100dvh; /* FIX SCROLL MOBILE */
+            height: 100dvh; 
             overflow: hidden; display: flex;
             scrollbar-width: thin;
             scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
-            touch-action: manipulation; /* Rimuove ritardo 300ms sui tocchi mobile */
+            touch-action: manipulation; 
         }
 
         .hidden { display: none !important; }
@@ -75,19 +75,19 @@
         ========================================= */
         .md-btn {
             background-color: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary);
-            border: none; padding: 0 24px; height: 48px; /* Altezza maggiorata per tocco ottimale */
+            border: none; padding: 0 24px; height: 48px; 
             border-radius: var(--shape-corner-full);
             font-size: 14px; font-weight: 600; letter-spacing: 0.5px;
             cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
             transition: all var(--duration-short); position: relative; overflow: hidden; font-family: 'Lexend', sans-serif;
             white-space: nowrap;
         }
-        .md-btn:hover { filter: brightness(1.1); box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
-        .md-btn:active { transform: scale(0.96); }
+        .md-btn:hover:not(:disabled) { filter: brightness(1.1); box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
+        .md-btn:active:not(:disabled) { transform: scale(0.96); }
         .md-btn:disabled { background-color: #334155; color: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
 
         .md-btn-secondary { background-color: transparent; border: 1px solid var(--md-sys-color-outline); color: var(--md-sys-color-primary); box-shadow: none; }
-        .md-btn-secondary:hover { background-color: rgba(59, 130, 246, 0.1); }
+        .md-btn-secondary:hover:not(:disabled) { background-color: rgba(59, 130, 246, 0.1); }
         .md-btn-error { background-color: var(--md-sys-color-error); color: var(--md-sys-color-on-error); }
         .md-btn-success { background-color: #10b981; color: white; }
 
@@ -99,6 +99,7 @@
             margin-bottom: 24px; font-size: 15px; outline: none; transition: all var(--duration-short);
         }
         .md-input:focus { border-bottom-color: var(--md-sys-color-primary); border-bottom-width: 2px; background-color: #31353C; }
+        .md-input[readonly], .md-input:disabled { opacity: 0.6; cursor: not-allowed; border-bottom-color: transparent; }
 
         .md-card {
             background-color: var(--md-sys-color-surface-container); border-radius: var(--shape-corner-medium); padding: 24px;
@@ -106,7 +107,8 @@
             cursor: pointer; border: 1px solid transparent; position: relative; overflow: hidden;
             animation: fadeInSlideUp var(--duration-medium) var(--easing-decelerate);
         }
-        .md-card:hover { transform: translateY(-4px); box-shadow: 0 8px 16px rgba(0,0,0,0.4); background-color: #26292F; border-color: rgba(59, 130, 246, 0.2); }
+        .md-card.no-hover { cursor: default; }
+        .md-card:not(.no-hover):hover { transform: translateY(-4px); box-shadow: 0 8px 16px rgba(0,0,0,0.4); background-color: #26292F; border-color: rgba(59, 130, 246, 0.2); }
         .md-card h3 { margin: 0 0 8px 0; font-size: 18px; font-weight: 600; color: var(--md-sys-color-on-surface); }
         .md-card p { margin: 0; color: var(--md-sys-color-on-surface-variant); font-size: 14px; line-height: 1.5; font-weight: 300; }
 
@@ -163,11 +165,10 @@
         .user-profile-compact div p { margin: 0; font-size: 12px; font-weight: 400; font-family: monospace; letter-spacing: 0.5px; color: var(--md-sys-color-primary); margin-top: 4px; }
         .user-profile-compact div span { font-size: 11px; color: var(--md-sys-color-on-surface-variant); display: block; margin-top: 2px;}
 
-        /* Area Navigazione scrollabile centralmente */
         .sidebar-nav-container { overflow-y: auto; flex-grow: 1; padding-bottom: 10px; }
 
         .nav-item {
-            display: flex; align-items: center; gap: 16px; height: 50px; padding: 0 20px; border-radius: var(--shape-corner-full);
+            display: flex; align-items: center; gap: 16px; height: 48px; padding: 0 20px; border-radius: var(--shape-corner-full);
             color: var(--md-sys-color-on-surface-variant); text-decoration: none; cursor: pointer; font-weight: 500; font-size: 14px;
             transition: all var(--duration-short); margin-bottom: 4px; position: relative; overflow: hidden;
         }
@@ -181,12 +182,9 @@
             font-size: 11px; font-weight: bold; padding: 2px 6px; border-radius: 50%; display: none;
         }
 
-        /* FOOTER SIDEBAR FISSATO IN FONDO */
         .sidebar-footer {
-            margin-top: auto; /* Lo spinge giù */
-            text-align: center; font-size: 12px; line-height: 1.5; 
-            padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05);
-            flex-shrink: 0; /* Impedisce che si rimpicciolisca */
+            margin-top: auto; text-align: center; font-size: 12px; line-height: 1.5; 
+            padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); flex-shrink: 0; 
         }
         .sidebar-footer .ufficiale { color: var(--md-sys-color-primary); font-weight: 500; display: block; }
         .sidebar-footer .creato { color: var(--md-sys-color-outline); font-size: 11px; margin-top: 8px; display: block; }
@@ -224,7 +222,7 @@
         .summary-card h2 { margin: 8px 0 0 0; font-size: 32px; font-weight: 700; color: var(--md-sys-color-primary); }
 
         .table-container { background-color: var(--md-sys-color-surface-container); border-radius: var(--shape-corner-medium); overflow-x: auto; border: 1px solid rgba(255,255,255,0.03); box-shadow: var(--md-elevation-1); }
-        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; min-width: 700px; /* Forza scroll orizzontale su mobile */ }
+        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; min-width: 700px; }
         th, td { padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.03); }
         th { font-weight: 600; color: var(--md-sys-color-on-surface-variant); background-color: #21252A; white-space: nowrap; }
         tbody tr { transition: background-color var(--duration-short); cursor: pointer; animation: fadeInSlideUp var(--duration-medium) ease-out; animation-fill-mode: both;}
@@ -236,7 +234,7 @@
            BANDI E INTERPELLANZE STYLES
         ========================================= */
         .category-title { margin-top: 32px; margin-bottom: 16px; color: #FFF; border-bottom: 2px solid var(--md-sys-color-surface-variant); padding-bottom: 8px; font-weight: 600; font-size: 20px;}
-        .card-status { position: absolute; top: 16px; right: 16px; padding: 4px 12px; border-radius: var(--shape-corner-full); font-size: 11px; font-weight: 700; text-transform: uppercase; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        .card-status { position: absolute; top: 16px; left: 16px; padding: 4px 12px; border-radius: var(--shape-corner-full); font-size: 11px; font-weight: 700; text-transform: uppercase; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
         .status-open { background-color: #064E3B; color: #6EE7B7; } 
         .status-closed { background-color: #7F1D1D; color: #FCA5A5; } 
         .status-prossimamente { background-color: #713F12; color: #FEF08A; } 
@@ -247,6 +245,12 @@
         .lock-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(30, 33, 38, 0.85); backdrop-filter: blur(2px); display: flex; justify-content: center; align-items: center; text-align: center; font-weight: 600; color: var(--md-sys-color-on-surface); font-size: 15px; z-index: 10; padding: 20px; box-sizing: border-box; flex-direction: column; gap: 8px;}
         .warning-box { background: rgba(239, 68, 68, 0.1); border: 1px solid var(--md-sys-color-error); color: var(--md-sys-color-error); border-radius: 8px; padding: 12px; font-size: 13px; font-weight: 600; text-align: center; margin-top: 16px; }
         .card-logo {position:absolute; top:16px; right:16px; width:45px; height:45px; object-fit:contain; border-radius:8px; background-color:rgba(0,0,0,0.2); padding: 4px;}
+
+        /* FUORI SERVIZIO STYLES */
+        .fs-status-badge { padding:6px 12px; border-radius:6px; font-size:12px; font-weight:bold; }
+        .fs-status-valutazione { background:rgba(59, 130, 246, 0.15); color:#60a5fa; border:1px solid rgba(59, 130, 246, 0.3); }
+        .fs-status-accettata { background:rgba(16, 185, 129, 0.15); color:#34d399; border:1px solid rgba(16, 185, 129, 0.3); }
+        .fs-status-rifiutata { background:rgba(239, 68, 68, 0.15); color:#f87171; border:1px solid rgba(239, 68, 68, 0.3); }
 
         /* =========================================
            DIALOGS (MODALS) E FORMS
@@ -284,10 +288,6 @@
         .filter-bar { display: flex; gap: 12px; align-items: center; background: var(--md-sys-color-surface-variant); padding: 8px 20px; border-radius: 50px; flex-wrap: wrap; margin-bottom: 24px;}
         .filter-label { display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 13px; font-weight: 500; color: var(--md-sys-color-on-surface-variant); padding: 4px; }
 
-        .candidatura-card { background: var(--md-sys-color-surface); border: 1px solid var(--md-sys-color-outline); padding: 16px; border-radius: 12px; margin-bottom: 16px; color: var(--md-sys-color-on-surface); }
-        .candidatura-card span { color: var(--md-sys-color-primary); font-weight: 600; font-size: 13px;}
-        .candidatura-card p { margin: 4px 0; font-size: 14px; line-height: 1.5; }
-
         /* =========================================
            RESPONSIVE - OTTIMIZZAZIONE PER SMARTPHONE
         ========================================= */
@@ -313,6 +313,7 @@
             .form-grid { grid-template-columns: 1fr; }
             .full-width { grid-column: span 1; }
             .dialog-header { top: -20px; }
+            .card-status { left: auto; right: 16px; } /* Torna a destra su mobile per spazio */
         }
     </style>
 </head>
@@ -351,12 +352,12 @@
             
             <input type="password" id="login-code" class="md-input" placeholder="Codice Operatore (es. 061087)" onkeypress="if(event.key === 'Enter') doLogin()">
             
-            <button id="btn-login" class="md-btn" style="width: 100%; height: 48px;" onclick="doLogin()">
+            <button id="btn-login" class="md-btn" style="width: 100%;" onclick="doLogin()">
                 <span class="material-symbols-outlined">login</span> ACCEDI
             </button>
             <p id="login-error" style="color: var(--md-sys-color-error); font-size: 14px; font-weight: 500; margin-top: 16px; display: none; animation: fadeInSlideUp 0.3s ease;"></p>
         </div>
-    </div>
+        </div>
 
     <div id="app-view">
         
@@ -376,7 +377,7 @@
                 <div>
                     <h4 id="user-name">Caricamento...</h4>
                     <p id="user-matricola">--</p>
-                    <span id="user-qualifica">Sincronizzazione qualifica...</span>
+                    <span id="user-qualifica">Sincronizzazione...</span>
                 </div>
             </div>
 
@@ -389,6 +390,10 @@
                     <div class="nav-item ripple" onclick="switchView('sdi')" id="nav-sdi">
                         <div class="active-indicator"></div>
                         <span class="material-symbols-outlined">policy</span> Archivio SDI
+                    </div>
+                    <div class="nav-item ripple" onclick="switchView('fuoriservizio')" id="nav-fuoriservizio">
+                        <div class="active-indicator"></div>
+                        <span class="material-symbols-outlined">directions_walk</span> Fuori Servizio
                     </div>
                     <div class="nav-item ripple" onclick="switchView('bandi')" id="nav-bandi">
                         <div class="active-indicator"></div>
@@ -448,6 +453,11 @@
                         <h3>Registrazione Controllo SDI</h3>
                         <p>Inserimento e archiviazione dati relativi a controlli sul territorio, soggetti e veicoli identificati.</p>
                     </div>
+                    <div class="md-card ripple" onclick="switchView('fuoriservizio')">
+                        <span class="material-symbols-outlined" style="font-size: 36px; color: #f43f5e; margin-bottom: 16px;">directions_walk</span>
+                        <h3>Fuori Servizio / Permessi</h3>
+                        <p>Modulo per richiedere e gestire i propri permessi temporanei o di fuori servizio autorizzato.</p>
+                    </div>
                     <div class="md-card ripple" onclick="switchView('interpellanze')">
                         <span class="material-symbols-outlined" style="font-size: 36px; color: #8b5cf6; margin-bottom: 16px;">badge</span>
                         <h3>Interpellanze Reparti</h3>
@@ -457,11 +467,6 @@
                         <span class="material-symbols-outlined" style="font-size: 36px; color: #10B981; margin-bottom: 16px;">work</span>
                         <h3>Bandi Interni</h3>
                         <p>Consulta e candidati ai bandi formativi disponibili per la tua qualifica.</p>
-                    </div>
-                    <div class="md-card ripple" onclick="switchView('eventi')">
-                        <span class="material-symbols-outlined" style="font-size: 36px; color: #F59E0B; margin-bottom: 16px;">event</span>
-                        <h3>Eventi Programmati</h3>
-                        <p>Visualizza gli eventi sul territorio, divisi per stato temporale e necessità di supervisione.</p>
                     </div>
                 </div>
             </div>
@@ -503,6 +508,89 @@
                         </thead>
                         <tbody id="sdiBody"></tbody>
                     </table>
+                </div>
+            </div>
+
+            <div id="view-fuoriservizio" class="view-section hidden">
+                <div class="page-header">
+                    <div>
+                        <h1>Richieste Fuori Servizio / Permessi</h1>
+                        <p>Modulo per l'autorizzazione al fuori servizio e gestione orari.</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 24px;">
+                    <div class="md-card no-hover" style="flex: 1; min-width: 250px; display: flex; align-items: center; gap: 16px; padding: 20px;">
+                        <span class="material-symbols-outlined" style="font-size: 40px; color: var(--md-sys-color-primary);">account_circle</span>
+                        <div>
+                            <span style="font-size: 12px; color: var(--md-sys-color-outline); text-transform: uppercase; font-weight: bold;">Operatore Richiedente</span><br>
+                            <b id="fs-nome-display" style="font-size: 18px; color: #FFF;">Caricamento...</b>
+                        </div>
+                    </div>
+                    <div class="md-card no-hover" style="flex: 1; min-width: 250px; display: flex; align-items: center; gap: 16px; padding: 20px;">
+                        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" style="width:40px; height:40px;">
+                        <div>
+                            <span style="font-size: 12px; color: var(--md-sys-color-outline); text-transform: uppercase; font-weight: bold;">Discord ID</span><br>
+                            <b id="fs-discord-display" style="font-size: 18px; color: #FFF;">Caricamento...</b>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    ⚠ ATTENZIONE: consentito 1 solo fuori servizio al giorno (max 2 ore).<br>
+                    Il mancato rispetto del regolamento comporta gravi sanzioni disciplinari.
+                </div>
+
+                <div id="fs-timer-container" style="display:none; background:rgba(59,130,246,0.1); border:1px solid var(--md-sys-color-primary); color:var(--md-sys-color-primary); padding:16px; border-radius:12px; text-align:center; font-weight:600; margin-bottom:24px;"></div>
+
+                <div class="md-card no-hover" style="margin-bottom: 32px;">
+                    <div id="fs-lock-screen" class="lock-overlay" style="display:none; border-radius: var(--shape-corner-medium);">
+                        <span class="material-symbols-outlined" style="font-size: 48px; margin-bottom: 16px; color: var(--md-sys-color-error);">lock</span>
+                        <div id="fs-lock-text" style="font-size: 18px; color: #FFF;">Caricamento stato...</div>
+                    </div>
+
+                    <h3 style="color: var(--md-sys-color-primary); margin-bottom: 20px;">Compila Modulo di Richiesta</h3>
+                    <div class="form-grid">
+                        <div class="full-width">
+                            <label style="font-size:12px; color:var(--md-sys-color-outline); margin-bottom:4px; display:block;">Nome Operatore</label>
+                            <input type="text" id="fs-form-nome" class="md-input" readonly>
+                        </div>
+                        <div>
+                            <label style="font-size:12px; color:var(--md-sys-color-outline); margin-bottom:4px; display:block;">Inizio (hh:mm)</label>
+                            <input type="time" id="fs-form-inizio" class="md-input" required>
+                        </div>
+                        <div>
+                            <label style="font-size:12px; color:var(--md-sys-color-outline); margin-bottom:4px; display:block;">Fine (hh:mm)</label>
+                            <input type="time" id="fs-form-fine" class="md-input" required>
+                        </div>
+                        <div class="full-width">
+                            <label style="font-size:12px; color:var(--md-sys-color-outline); margin-bottom:4px; display:block;">Motivazione dettagliata</label>
+                            <textarea id="fs-form-motivazione" class="md-input" style="resize:vertical; min-height:80px;" placeholder="Specifica la motivazione della richiesta..." required></textarea>
+                        </div>
+                    </div>
+                    <p id="fs-form-error" style="color: var(--md-sys-color-error); font-size: 14px; font-weight: 600; margin-bottom: 16px; text-align:center; min-height: 20px;"></p>
+                    <button class="md-btn" id="btn-richiedi-fs" style="width: 100%;" onclick="inviaRichiestaFS()">INVIA RICHIESTA FUORI SERVIZIO</button>
+                </div>
+
+                <h3 style="margin-bottom: 16px; font-size: 20px; color: #FFF; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px;">Storico Richieste Odierne</h3>
+                <div id="fs-requests-container" style="display:flex; flex-direction:column; gap:16px; margin-bottom: 32px;">
+                    <p style="color: var(--md-sys-color-outline); text-align:center;">Caricamento richieste in corso...</p>
+                </div>
+
+                <div class="md-card no-hover" id="fs-admin-container" style="background: rgba(245, 158, 11, 0.05); border: 1px solid rgba(245, 158, 11, 0.3);">
+                    <h3 style="color: #f59e0b; text-align: center; margin-bottom: 8px;">Accesso Valutazione (Ufficiali Superiori)</h3>
+                    
+                    <div id="fs-admin-login" style="display: flex; gap: 12px; justify-content: center; align-items: center; margin-top: 16px;">
+                        <span style="font-weight: bold; color: #FFF;">PDS-A-</span>
+                        <input type="password" id="fs-admin-code" class="md-input" placeholder="****" style="margin: 0; width: 120px; text-align: center;" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                        <button class="md-btn" style="background: #f59e0b; color: #000;" onclick="sbloccaAdminFS()">SBLOCCA</button>
+                    </div>
+                    <p id="fs-admin-error" style="color: var(--md-sys-color-error); text-align: center; margin-top: 12px; font-size: 13px; font-weight: bold;"></p>
+                    
+                    <div id="fs-admin-panel" style="display: none; text-align: center; padding-top: 10px;">
+                        <span style="color: #10b981; font-weight: bold; font-size: 16px;">✅ Accesso Admin Effettuato</span>
+                        <p style="font-size: 13px; color: var(--md-sys-color-outline); margin-top: 8px;">I bottoni per la valutazione sono ora visibili nelle richieste in sospeso.</p>
+                    </div>
                 </div>
             </div>
 
@@ -678,8 +766,8 @@
             
             <div id="bando-form-content">
                 <div class="form-grid">
-                    <input type="text" class="md-input" id="bando-nome-read" readonly style="opacity: 0.7;">
-                    <input type="text" class="md-input" id="bando-qual-read" readonly style="opacity: 0.7;">
+                    <input type="text" class="md-input" id="bando-nome-read" readonly>
+                    <input type="text" class="md-input" id="bando-qual-read" readonly>
                 </div>
                 <textarea id="bando-motivo" class="md-input" style="resize: vertical; min-height: 80px;" placeholder="Motivo della candidatura *"></textarea>
                 <textarea id="bando-perche" class="md-input" style="resize: vertical; min-height: 80px;" placeholder="Perché dovremmo scegliere te? *"></textarea>
@@ -699,8 +787,8 @@
             
             <div id="int-form-content">
                 <div class="form-grid">
-                    <input type="text" class="md-input" id="int-nome-read" readonly style="opacity: 0.7;">
-                    <input type="text" class="md-input" id="int-qual-read" readonly style="opacity: 0.7;">
+                    <input type="text" class="md-input" id="int-nome-read" readonly>
+                    <input type="text" class="md-input" id="int-qual-read" readonly>
                 </div>
                 <label style="font-size:12px; color:var(--md-sys-color-outline); margin-bottom:4px; display:block;">Descrizione di te stesso</label>
                 <textarea id="int-desc-se" class="md-input" style="resize: vertical; min-height: 60px;" placeholder="Parlaci di te..." required></textarea>
@@ -754,6 +842,27 @@
         </div>
     </div>
 
+    <div id="dialog-valuta-fs" class="dialog-backdrop">
+        <div class="dialog-surface" style="max-width: 400px;">
+            <div class="dialog-header">
+                <h2>Valuta Richiesta F.S.</h2>
+                <button class="close-btn" onclick="closeDialog('dialog-valuta-fs')"><span class="material-symbols-outlined">close</span></button>
+            </div>
+            <p style="color:var(--md-sys-color-outline); font-size:14px; margin-bottom:20px;">Stai valutando la richiesta di <b id="fs-valuta-nome" style="color:#FFF;"></b>.</p>
+            
+            <label style="font-size:12px; color:var(--md-sys-color-outline); margin-bottom:4px; display:block;">Modifica Fine (Opzionale se accetti)</label>
+            <input type="time" id="fs-valuta-fine" class="md-input" style="margin-top:8px;">
+            
+            <input type="hidden" id="fs-valuta-row">
+            <input type="hidden" id="fs-valuta-msgid">
+            <input type="hidden" id="fs-valuta-inizio">
+
+            <div style="display:flex; gap:12px; margin-top:16px;">
+                <button class="md-btn md-btn-success" style="flex:1;" onclick="eseguiValutazioneFS('Accettata')">ACCETTA</button>
+                <button class="md-btn md-btn-error" style="flex:1;" onclick="eseguiValutazioneFS('Rifiutata')">RIFIUTA</button>
+            </div>
+        </div>
+    </div>
 
     <script>
         // === URL DELLE APPS SCRIPT ===
@@ -765,6 +874,10 @@
         const EVENTI_GET_URL = "https://script.google.com/macros/s/AKfycbxwhTRyvI49r_REFMTO5JwDKUNqPd_c01D08KTmNboxEwcdEnMl-LUbLO4mTfdUEOU/exec";
         const SDI_URL = "https://script.google.com/macros/s/AKfycbxMLpfl-cpVgjLypuaIJmIP21XxUtfVEOVK76vPI-T5FJLq4fWotA01shrBYAJMeYLs/exec";
         const INTERPELLANZE_API_URL = "https://script.google.com/macros/s/AKfycbwX5DzluEQmdQoOJ9JG1rBOFv1CB0byiJ5k2b_1vVDXGka7FeGOgYmCTL6EYmMEqPqD/exec";
+        
+        // FUORI SERVIZIO URLS
+        const FS_API_URL = "https://script.google.com/macros/s/AKfycbxKXS4hHH0dywVzCfo2AWEH-tgIYhMXtyDGbVGLcgt_N9Yshjuigz6a9g43bqVgRsQ/exec";
+        const FS_WEBHOOK_URL = "https://discord.com/api/webhooks/1491825656248664104/NpyAJp8Qy_hhfydd9IJv4Rso-IXPVFyBxaxEAeo2Er11dTQK8bAtHPJxY6lXhjQweLm3";
         const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1488451866898595920/mD4G-Ps73xWalanAiAGKfn2t_jHi3nAIVHaKZzwjK6_Psqd2LQ-uwpxjyTPKK61SUS9c";
         const THREAD_ID = "1489965248109613260";
 
@@ -776,6 +889,14 @@
         let bandoAttuale = "";
         let intAttuale = "";
         let userRepartoGestione = "";
+
+        // Variabili Fuori Servizio
+        let fsDiscordId = "";
+        let fsIsAdmin = false;
+        let fsHaRichiestoOggi = false;
+        let fsRichiesteGlobali = [];
+        let fsDataOggiFormattata = new Date().toLocaleDateString('it-IT');
+        let fsLoaded = false;
 
         const qualifiche_arr = ["DIRIGENTE GENERALE","DIRIGENTE SUPERIORE","PRIMO DIRIGENTE","VICE QUESTORE","VICE QUESTORE AGGIUNTO","COMMISSARIO CAPO","COMMISSARIO","VICE COMMISSARIO","ALLIEVO COMMISSARIO","SOSTITUTO COMMISSARIO COORDINATORE","SOSTITUTO COMMISSARIO","ISPETTORE SUPERIORE","ISPETTORE CAPO","ISPETTORE","VICE ISPETTORE","ALLIEVO ISPETTORE","SOVRINTENDENTE CAPO COORDINATORE","SOVRINTENDENTE CAPO","SOVRINTENDENTE","VICE SOVRINTENDENTE","ALLIEVO SOVRINTENDENTE","ASSISTENTE CAPO COORDINATORE","ASSISTENTE CAPO","ASSISTENTE","AGENTE SCELTO","AGENTE","ALLIEVO AGENTE"];
 
@@ -824,7 +945,6 @@
                     sessionStorage.setItem("ps_user_ident", userDoc.identificativo);
                     sessionStorage.setItem("ps_user_matr", userDoc.matricola);
                     
-                    // OTTIMIZZAZIONE: Pre-fetch qualifica in background al momento del login
                     fetch(GERARCHIA_URL).then(res => res.json()).then(data => {
                         let trovato = data.find(r => r.nome.toLowerCase() === userDoc.identificativo.toLowerCase());
                         if(trovato) sessionStorage.setItem("ps_user_qualifica", trovato.qualifica);
@@ -855,12 +975,19 @@
             document.getElementById('user-matricola').innerText = userMatricola;
             
             initRipples();
-            caricaQualificaFast(); // Funzione OTTIMIZZATA
+            caricaQualificaFast(); 
             caricaAvvisi();
             loadDataFromSheet(); 
+            
+            // Loop globale per timers
+            setInterval(() => {
+                if(document.getElementById('view-fuoriservizio').classList.contains('hidden') === false) {
+                    aggiornaTimerFS();
+                }
+            }, 1000);
+            setInterval(controllaScadenzeAutomaticheFS, 60000);
         }
 
-        // SISTEMA DI CACHING PER LA QUALIFICA
         function caricaQualificaFast() {
             let cachedQualifica = sessionStorage.getItem("ps_user_qualifica");
             if (cachedQualifica) {
@@ -899,9 +1026,11 @@
                 nextView.classList.remove('hidden'); nextView.classList.add('view-enter');
                 nextView.style.opacity = '1'; nextView.style.transform = 'translateX(0)';
                 
+                // Lazy loading dei vari moduli
                 if(viewName === 'bandi') loadBandi();
                 if(viewName === 'eventi') loadEventi();
                 if(viewName === 'interpellanze') loadInterpellanze();
+                if(viewName === 'fuoriservizio') loadFuoriServizio();
                 
                 setTimeout(() => nextView.classList.remove('view-enter'), 500); initRipples();
             }, 250);
@@ -915,8 +1044,294 @@
             return idxUtente <= idxMin;
         }
 
-        // --- 3. AVVISI OPERATIVI ---
-        let datiAvvisiCorrenti = [];
+        // --- NUOVO: GESTIONE FUORI SERVIZIO / PERMESSI ---
+        async function loadFuoriServizio() {
+            if(fsLoaded) return;
+            document.getElementById("fs-nome-display").innerText = userName;
+            document.getElementById("fs-form-nome").value = userName;
+            
+            await controllaBloccoOdiernoFS();
+            caricaRichiesteFS();
+            fsLoaded = true;
+        }
+
+        async function controllaBloccoOdiernoFS() {
+            try {
+                document.getElementById("fs-lock-screen").style.display = "flex";
+                document.getElementById("fs-lock-text").innerText = "Verifica permessi in corso...";
+                
+                const res = await fetch(FS_API_URL, {
+                    method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" },
+                    body: JSON.stringify({ action: "checkBlocco", nome: userName, dataOggi: fsDataOggiFormattata })
+                });
+                const data = await res.json();
+
+                fsDiscordId = (data.discordId && data.discordId !== "") ? data.discordId : "Non trovato";
+                document.getElementById("fs-discord-display").innerText = fsDiscordId;
+
+                const lockScreen = document.getElementById("fs-lock-screen");
+                const btn = document.getElementById("btn-richiedi-fs");
+
+                lockScreen.style.display = "none";
+                btn.disabled = false;
+
+                if (data.bloccato) {
+                    fsHaRichiestoOggi = true;
+                    lockScreen.style.display = "flex";
+                    document.getElementById("fs-lock-text").innerHTML = "Hai già richiesto un fuori servizio oggi.";
+                    btn.disabled = true;
+                }
+            } catch (err) {
+                console.error("Errore verifica blocco FS:", err);
+            }
+        }
+
+        function aggiornaTimerFS() {
+            const ora = new Date();
+            const ore = ora.getHours();
+            
+            const lockScreen = document.getElementById("fs-lock-screen");
+            const lockText = document.getElementById("fs-lock-text");
+            const timerContainer = document.getElementById("fs-timer-container");
+            
+            let inBloccoOrario = (ore >= 3 && ore < 10);
+            
+            if (inBloccoOrario) {
+                lockScreen.style.display = "flex";
+                lockText.innerHTML = "Dalle ore 03:00 alle ore 10:00, è autorizzato il fuori servizio a tutti gli operatori.";
+            } else if (fsHaRichiestoOggi) {
+                lockScreen.style.display = "flex";
+                lockText.innerHTML = "Hai già richiesto un fuori servizio oggi.";
+            } else {
+                lockScreen.style.display = "none";
+            }
+            
+            if (ore === 2) { 
+                let target = new Date(); target.setHours(3,0,0,0);
+                let diff = target - ora;
+                let m = Math.floor((diff / 1000 / 60) % 60);
+                let s = Math.floor((diff / 1000) % 60);
+                timerContainer.style.display = "block";
+                timerContainer.innerHTML = `Tra <b>${m}m ${s}s</b> non sarà più necessaria la richiesta di fuori servizio.`;
+            } else if (ore === 9) { 
+                let target = new Date(); target.setHours(10,0,0,0);
+                let diff = target - ora;
+                let m = Math.floor((diff / 1000 / 60) % 60);
+                let s = Math.floor((diff / 1000) % 60);
+                timerContainer.style.display = "block";
+                timerContainer.innerHTML = `Tra <b>${m}m ${s}s</b> sarà necessaria la richiesta per effettuare il fuori servizio.`;
+            } else {
+                timerContainer.style.display = "none";
+            }
+        }
+
+        function inviaRichiestaFS() {
+            const errorBox = document.getElementById("fs-form-error");
+            const inizio = document.getElementById("fs-form-inizio").value;
+            const fine = document.getElementById("fs-form-fine").value;
+            const motivazione = document.getElementById("fs-form-motivazione").value.trim();
+            
+            if (!inizio || !fine || !motivazione) return errorBox.textContent = "Errore: Compila tutti i campi.";
+
+            const oraAttuale = new Date();
+            const dInizio = new Date(); const [oreI, minI] = inizio.split(":"); dInizio.setHours(parseInt(oreI), parseInt(minI), 0);
+            const dFine = new Date(); const [oreF, minF] = fine.split(":"); dFine.setHours(parseInt(oreF), parseInt(minF), 0);
+
+            if (dFine < dInizio) dFine.setDate(dFine.getDate() + 1);
+
+            const diffAttualeInizio = (dInizio - oraAttuale) / 60000;
+            const diffInizioFine = (dFine - dInizio) / 60000;
+
+            if (diffAttualeInizio > 10 || diffAttualeInizio < -10) return errorBox.textContent = "L'orario di inizio non deve superare i 10 min dall'orario attuale.";
+            if (diffInizioFine > 120) return errorBox.textContent = "Il fuori servizio non può superare le 2 ore.";
+            if (diffInizioFine <= 0) return errorBox.textContent = "L'orario di fine deve essere successivo all'inizio.";
+
+            errorBox.style.color = "var(--md-sys-color-primary)"; errorBox.textContent = "Invio richiesta in corso...";
+            const btn = document.getElementById("btn-richiedi-fs");
+            btn.disabled = true; btn.innerText = "INVIO...";
+
+            fetch(FS_WEBHOOK_URL + "?wait=true", {
+                method: "POST", headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    content: "<@& 992000985381740544>", 
+                    embeds: [{
+                        title: "🛡️ Nuova Richiesta di Fuori Servizio", color: 3447003,
+                        fields: [
+                            { name: "👤 Operatore", value: `**${userName}** (<@${fsDiscordId}>)`, inline: true },
+                            { name: "⏱️ Durata", value: `**${diffInizioFine} minuti**`, inline: true },
+                            { name: "🕒 Orario", value: `Dalle **${inizio}** alle **${fine}**`, inline: false },
+                            { name: "📝 Motivazione", value: `\`\`\`${motivazione}\`\`\``, inline: false },
+                            { name: "📊 Stato", value: "⏳ *In fase di valutazione*", inline: false }
+                        ],
+                        footer: { text: "Attenzione: se la richiesta non viene valutata entro l'inizio, sarà annullata." },
+                        timestamp: new Date().toISOString()
+                    }]
+                })
+            }).then(res => res.json()).then(data => {
+                return fetch(FS_API_URL, {
+                    method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" },
+                    body: JSON.stringify({
+                        action: "nuovaRichiesta", nome: userName, inizio: inizio, fine: fine, 
+                        motivazione: motivazione, data: fsDataOggiFormattata, messageId: data.id, Id: fsDiscordId 
+                    })
+                });
+            }).then(() => {
+                errorBox.style.color = "#10b981"; errorBox.textContent = "Richiesta inviata con successo!";
+                fsHaRichiestoOggi = true;
+                setTimeout(() => {
+                    document.getElementById("fs-form-motivazione").value = "";
+                    btn.innerText = "RICHIEDI FUORI SERVIZIO";
+                    caricaRichiesteFS();
+                    controllaBloccoOdiernoFS();
+                }, 1500);
+            }).catch(err => {
+                errorBox.style.color = "var(--md-sys-color-error)"; errorBox.textContent = "Errore di connessione.";
+                btn.disabled = false; btn.innerText = "RICHIEDI FUORI SERVIZIO";
+            });
+        }
+
+        function caricaRichiesteFS() {
+            fetch(FS_API_URL, {
+                method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify({ action: "getRichieste", dataOggi: fsDataOggiFormattata })
+            }).then(r => r.json()).then(data => {
+                const container = document.getElementById("fs-requests-container");
+                container.innerHTML = "";
+                
+                if (!data.richieste || data.richieste.length === 0) {
+                    container.innerHTML = "<p style='color:var(--md-sys-color-outline); text-align:center;'>Nessuna richiesta presente oggi.</p>";
+                    fsRichiesteGlobali = [];
+                    return;
+                }
+
+                fsRichiesteGlobali = data.richieste;
+                controllaScadenzeAutomaticheFS();
+
+                data.richieste.forEach(req => {
+                    let badgeClass = "fs-status-valutazione";
+                    if(req.stato === "Accettata") badgeClass = "fs-status-accettata";
+                    if(req.stato === "Rifiutata") badgeClass = "fs-status-rifiutata";
+
+                    let btnHTML = (fsIsAdmin && req.stato === "In valutazione" && req.nome !== userName) ? 
+                        `<button class="md-btn" style="background:#f59e0b; color:#000; height:32px; padding:0 12px;" onclick="apriValutazioneFS('${req.idRiga}', '${req.nome.replace(/'/g, "\\'")}', '${req.inizio}', '${req.fine}', '${req.msgId}')">Valuta</button>` : '';
+
+                    container.innerHTML += `
+                        <div class="md-card no-hover" style="display:flex; justify-content:space-between; align-items:center; padding:16px;">
+                            <div>
+                                <p style="margin:0 0 4px 0; color:#FFF; font-weight:600;">${req.nome}</p>
+                                <p style="margin:0 0 4px 0; font-size:13px;"><b>Orario:</b> ${req.inizio} - ${req.fine}</p>
+                                <p style="margin:0; font-size:13px; color:var(--md-sys-color-outline);"><b>Motivazione:</b> ${req.motivazione}</p>
+                            </div>
+                            <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-end;">
+                                <div class="fs-status-badge ${badgeClass}">${req.stato}</div>
+                                ${btnHTML}
+                            </div>
+                        </div>`;
+                });
+            });
+        }
+
+        function controllaScadenzeAutomaticheFS() {
+            if(fsRichiesteGlobali.length === 0) return;
+            const oraAttuale = new Date();
+            fsRichiesteGlobali.forEach(req => {
+                if (req.stato === "In valutazione") {
+                    const [oreI, minI] = req.inizio.split(":");
+                    let dInizio = new Date();
+                    dInizio.setHours(parseInt(oreI), parseInt(minI), 0, 0);
+
+                    if (oraAttuale >= dInizio) {
+                        req.stato = "Rifiutata"; 
+                        autoRifiutaRichiestaFS(req);
+                    }
+                }
+            });
+        }
+
+        function autoRifiutaRichiestaFS(req) {
+            if (req.msgId) {
+                fetch(`${FS_WEBHOOK_URL}/messages/${req.msgId}`, { method: "DELETE" }).catch(e => console.log(e));
+            }
+            fetch(FS_API_URL, {
+                method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify({ action: "valutaRichiesta", idRiga: req.idRiga, esito: "Rifiutata", nuovaFine: "", valutatore: "Sistema Automatico" })
+            }).then(() => caricaRichiesteFS()).catch(e => console.log(e));
+        }
+
+        function sbloccaAdminFS() {
+            const codeInput = document.getElementById("fs-admin-code").value;
+            const errBox = document.getElementById("fs-admin-error");
+            if(!codeInput) return errBox.textContent = "Inserisci un codice.";
+            
+            const finalCode = "PDS-A-" + codeInput;
+            errBox.textContent = "Verifica in corso...";
+
+            fetch(FS_API_URL, {
+                method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify({ action: "checkAdmin", codice: finalCode })
+            }).then(res => res.json()).then(data => {
+                if(data.success) {
+                    fsIsAdmin = true;
+                    document.getElementById("fs-admin-login").style.display = "none";
+                    document.getElementById("fs-admin-error").style.display = "none";
+                    document.getElementById("fs-admin-panel").style.display = "block";
+                    caricaRichiesteFS(); 
+                } else { errBox.textContent = "Codice errato o non trovato."; }
+            }).catch(() => errBox.textContent = "Errore di rete.");
+        }
+
+        function apriValutazioneFS(idRiga, nome, inizio, fine, msgId) {
+            document.getElementById("fs-valuta-row").value = idRiga;
+            document.getElementById("fs-valuta-nome").textContent = nome;
+            document.getElementById("fs-valuta-inizio").value = inizio;
+            document.getElementById("fs-valuta-fine").value = fine;
+            document.getElementById("fs-valuta-fine").defaultValue = fine;
+            document.getElementById("fs-valuta-msgid").value = msgId;
+            openDialog('dialog-valuta-fs');
+        }
+
+        function eseguiValutazioneFS(esito) {
+            const idRiga = document.getElementById("fs-valuta-row").value;
+            const msgId = document.getElementById("fs-valuta-msgid").value;
+            const inizio = document.getElementById("fs-valuta-inizio").value;
+            const fineOriginale = document.getElementById("fs-valuta-fine").defaultValue;
+            const fineNuova = document.getElementById("fs-valuta-fine").value;
+
+            let colore = esito === 'Accettata' ? 5763719 : 15548997; 
+            let titolo = `Richiesta ${esito}`;
+            let endTxt = esito === 'Accettata' ? fineOriginale : "";
+            let desc = `La richiesta di fuori servizio ti è stata **${esito.toUpperCase()}**.\n`;
+
+            if (esito === 'Accettata' && fineNuova !== fineOriginale && fineNuova !== "") {
+                titolo = "Richiesta Accettata con modifica";
+                desc += `Potrai andare in fuori servizio dalle ore:\n**${inizio}** alle **${fineNuova}**`;
+                endTxt = fineNuova;
+            } else if (esito === 'Accettata') {
+                desc += `Potrai andare in fuori servizio dalle ore:\n**${inizio}** alle **${endTxt}**`;
+            } else {
+                desc += `Potrai richiedere un nuovo fuori servizio più tardi.`;
+            }
+
+            desc += `\n\nValutazione della richiesta:\n- Valutata da: **${userName}**`;
+
+            const footerTxt = esito === 'Accettata' ? 
+                "Attenzione, si raccomanda di seguire il regolamento del Fuori Servizio e di terminare entro l'orario." : 
+                "Attenzione, andare in fuori servizio SENZA autorizzazione comporta gravi sanzioni.";
+
+            fetch(`${FS_WEBHOOK_URL}/messages/${msgId}`, {
+                method: "PATCH", headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ embeds: [{ title: titolo, description: desc, color: colore, footer: { text: footerTxt } }] })
+            }).then(() => {
+                return fetch(FS_API_URL, {
+                    method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" },
+                    body: JSON.stringify({ action: "valutaRichiesta", idRiga: idRiga, esito: esito, nuovaFine: endTxt, valutatore: userName })
+                });
+            }).then(() => {
+                closeDialog('dialog-valuta-fs'); caricaRichiesteFS(); 
+            }).catch(e => alert("Errore durante l'aggiornamento."));
+        }
+
+        // --- 3. AVVISI OPERATIVI (Centro Comunicazioni) ---
         function caricaAvvisi() {
             fetch(AVVISI_URL).then(res => res.json()).then(data => {
                 datiAvvisiCorrenti = data.sort((a, b) => b.row - a.row); 
@@ -970,10 +1385,24 @@
 
         function segnaComeLetto(riga, el, giaLetto) {
             if(giaLetto) return;
+            
+            // Aggiorna array in locale
             let avviso = datiAvvisiCorrenti.find(a => a.row === riga);
-            if(avviso) { if(!avviso.lettiDa) avviso.lettiDa = []; avviso.lettiDa.push(userName); }
+            if(avviso) { 
+                if(!avviso.lettiDa) avviso.lettiDa = []; 
+                avviso.lettiDa.push(userName); 
+            }
             applicaFiltriAvvisi(); 
-            fetch(AVVISI_URL, { method: 'POST', headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ row: riga, nome: userName }) }).catch(e => console.error("Errore salvataggio avviso:", e));
+            
+            // Salva su Database via POST sicuro
+            fetch(AVVISI_URL, { 
+                method: 'POST', 
+                headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify({ row: riga, nome: userName }) 
+            })
+            .then(res => res.json())
+            .then(data => console.log("Presa visione salvata"))
+            .catch(e => console.error("Errore salvataggio avviso:", e));
         }
 
         // --- 4. SEGNALA / PROPONI ---
@@ -1102,7 +1531,7 @@
             setTimeout(() => { closeDialog('dialog-bando'); renderBandi(); btn.innerText = "INVIA CANDIDATURA"; btn.disabled = false; }, 800);
         }
 
-        // --- NUOVO: INTERPELLANZE REPARTI ---
+        // --- NUOVO: INTERPELLANZE REPARTI CON STATUS A SINISTRA ---
         let interpellanzeGlobali = [];
         let applicatiInterpellanze = [];
         let interpellanzeLoaded = false;
@@ -1151,6 +1580,7 @@
                     let bgStyle = c.imgSfondo ? `background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('${c.imgSfondo}'); background-size: cover; background-position: center; border: 1px solid rgba(255,255,255,0.2);` : '';
                     let btnHtml = (isOpen && hasReq && !isApplied) ? `<button class="md-btn" style="width:100%; margin-top:16px; ${bgStyle}" onclick="openModalInterpellanza('${c.nome}')">CANDIDATI AL REPARTO</button>` : '';
 
+                    // MODIFICA RICHIESTA: badge Aperto/Chiuso spostato a sinistra
                     gridHtml += `
                         <div class="md-card">
                             <div class="card-status ${isOpen ? 'status-open' : 'status-closed'}" style="left: 16px; right: auto;">${c.status}</div>
@@ -1269,7 +1699,7 @@
             .then(res => {
                 msg.style.color = "#10b981"; msg.textContent = "Reparto aggiornato con successo!";
                 setTimeout(() => { msg.textContent = ""; }, 2000);
-                interpellanzeLoaded = false; loadInterpellanze(); 
+                interpellanzeLoaded = false; loadInterpellanze(); // Ricarica sfondo
             });
         }
 
