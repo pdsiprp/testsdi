@@ -131,14 +131,6 @@
         .login-card h1 { margin: 0 0 8px 0; font-size: 26px; font-weight: 700; color: #FFF; letter-spacing: -0.5px;}
         .login-card p.subtitle { color: var(--md-sys-color-on-surface-variant); margin: 0 0 32px 0; font-size: 14px; font-weight: 300; }
 
-        .login-footer-text {
-            position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
-            text-align: center; width: 90%; max-width: 360px; color: var(--md-sys-color-on-surface-variant); font-size: 12px;
-        }
-        .login-footer-text p { margin: 0 0 4px 0; line-height: 1.4; }
-        .login-footer-text p strong { color: var(--md-sys-color-error); }
-        .login-footer-text .ip-logged { font-size: 10px; font-style: italic; color: var(--md-sys-color-outline); }
-
         /* =========================================
            LAYOUT & SIDEBAR 
         ========================================= */
@@ -359,15 +351,10 @@
             
             <input type="password" id="login-code" class="md-input" placeholder="Codice Operatore (es. 061087)" onkeypress="if(event.key === 'Enter') doLogin()">
             
-            <button id="btn-login" class="md-btn" style="width: 100%;" onclick="doLogin()">
+            <button id="btn-login" class="md-btn" style="width: 100%; height: 48px;" onclick="doLogin()">
                 <span class="material-symbols-outlined">login</span> ACCEDI
             </button>
             <p id="login-error" style="color: var(--md-sys-color-error); font-size: 14px; font-weight: 500; margin-top: 16px; display: none; animation: fadeInSlideUp 0.3s ease;"></p>
-        </div>
-
-        <div class="login-footer-text">
-            <p><strong>AVVISO IMPORTANTE:</strong> L'accesso è monitorato. Qualsiasi violazione sarà perseguita a norma di legge.</p>
-            <p class="ip-logged">(IP LOGGED)</p>
         </div>
     </div>
 
@@ -1115,7 +1102,7 @@
             setTimeout(() => { closeDialog('dialog-bando'); renderBandi(); btn.innerText = "INVIA CANDIDATURA"; btn.disabled = false; }, 800);
         }
 
-        // --- NUOVO: INTERPELLANZE REPARTI CON STATUS A SINISTRA ---
+        // --- NUOVO: INTERPELLANZE REPARTI ---
         let interpellanzeGlobali = [];
         let applicatiInterpellanze = [];
         let interpellanzeLoaded = false;
@@ -1164,8 +1151,6 @@
                     let bgStyle = c.imgSfondo ? `background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('${c.imgSfondo}'); background-size: cover; background-position: center; border: 1px solid rgba(255,255,255,0.2);` : '';
                     let btnHtml = (isOpen && hasReq && !isApplied) ? `<button class="md-btn" style="width:100%; margin-top:16px; ${bgStyle}" onclick="openModalInterpellanza('${c.nome}')">CANDIDATI AL REPARTO</button>` : '';
 
-                    // MODIFICA RICHIESTA: badge Aperto/Chiuso spostato a sinistra (style="left: 16px; right: auto;")
-                    // Aggiunto margin-top: 24px al tag h3 per evitare sovrapposizioni
                     gridHtml += `
                         <div class="md-card">
                             <div class="card-status ${isOpen ? 'status-open' : 'status-closed'}" style="left: 16px; right: auto;">${c.status}</div>
@@ -1284,7 +1269,7 @@
             .then(res => {
                 msg.style.color = "#10b981"; msg.textContent = "Reparto aggiornato con successo!";
                 setTimeout(() => { msg.textContent = ""; }, 2000);
-                interpellanzeLoaded = false; loadInterpellanze(); // Ricarica sfondo
+                interpellanzeLoaded = false; loadInterpellanze(); 
             });
         }
 
