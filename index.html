@@ -10,55 +10,73 @@
 
     <style>
         /* =========================================
-           MATERIAL YOU (MD3) - THEME (DARK)
+           PURE MATERIAL DESIGN 3 - THEME (DARK)
+           (Token Ufficiali Google)
         ========================================= */
         :root {
-            --md-sys-color-background: #0f172a; 
-            --md-sys-color-surface: #1e293b;
-            --md-sys-color-surface-variant: #334155;
-            --md-sys-color-surface-container: #1e293b;
+            /* Superfici e Sfondi */
+            --md-sys-color-background: #111318; 
+            --md-sys-color-surface: #111318;
+            --md-sys-color-surface-container-lowest: #0C0E13;
+            --md-sys-color-surface-container-low: #191B20;
+            --md-sys-color-surface-container: #1D2024;
+            --md-sys-color-surface-container-high: #282B2F;
+            --md-sys-color-surface-container-highest: #33353A;
             
-            --md-sys-color-on-background: #f8fafc;
-            --md-sys-color-on-surface: #f8fafc;
-            --md-sys-color-on-surface-variant: #cbd5e1;
+            /* Testi */
+            --md-sys-color-on-background: #E2E2E9;
+            --md-sys-color-on-surface: #E2E2E9;
+            --md-sys-color-surface-variant: #44474E;
+            --md-sys-color-on-surface-variant: #C4C6D0;
 
-            --md-sys-color-primary: #3b82f6; 
-            --md-sys-color-on-primary: #ffffff;
-            --md-sys-color-primary-container: rgba(59, 130, 246, 0.15);
-            --md-sys-color-on-primary-container: #60a5fa;
+            /* Colori Primari (Blue) */
+            --md-sys-color-primary: #A8C7FA; 
+            --md-sys-color-on-primary: #062E6F;
+            --md-sys-color-primary-container: #0842A0;
+            --md-sys-color-on-primary-container: #D3E3FD;
 
-            --md-sys-color-error: #ef4444;
-            --md-sys-color-on-error: #ffffff;
+            /* Errori e Segnalazioni */
+            --md-sys-color-error: #FFB4AB;
+            --md-sys-color-on-error: #690005;
+            --md-sys-color-error-container: #93000A;
+            --md-sys-color-on-error-container: #FFDAD6;
 
-            --md-sys-color-outline: #64748b;
+            /* Utility */
+            --md-sys-color-outline: #8E9099;
+            --md-sys-color-outline-variant: #44474E;
 
+            /* Forme (Shapes) */
+            --shape-corner-extra-small: 4px;
             --shape-corner-small: 8px;
-            --shape-corner-medium: 16px;
-            --shape-corner-large: 24px;
-            --shape-corner-full: 999px;
+            --shape-corner-medium: 12px;
+            --shape-corner-large: 16px;
+            --shape-corner-extra-large: 28px;
+            --shape-corner-full: 9999px;
 
+            /* Animazioni */
             --duration-short: 150ms;
             --duration-medium: 300ms;
             --duration-long: 500ms;
             --easing-standard: cubic-bezier(0.2, 0, 0, 1);
-            --easing-decelerate: cubic-bezier(0, 0, 0, 1);
+            
+            /* Ombre (Elevation) */
+            --md-elevation-1: 0px 1px 3px 1px rgba(0,0,0,0.15), 0px 1px 2px 0px rgba(0,0,0,0.3);
+            --md-elevation-3: 0px 4px 8px 3px rgba(0,0,0,0.15), 0px 1px 3px 0px rgba(0,0,0,0.3);
         }
 
-        /* CUSTOM SCROLLBAR */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background-color: #475569; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background-color: #64748b; }
+        /* CUSTOM SCROLLBAR INTEGRATA MD3 */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: var(--md-sys-color-background); }
+        ::-webkit-scrollbar-thumb { background-color: var(--md-sys-color-outline-variant); border-radius: 10px; border: 2px solid var(--md-sys-color-background); }
+        ::-webkit-scrollbar-thumb:hover { background-color: var(--md-sys-color-outline); }
 
         body {
             font-family: 'Lexend', sans-serif;
             background-color: var(--md-sys-color-background);
             color: var(--md-sys-color-on-background);
             margin: 0; padding: 0; 
-            height: 100dvh; 
-            overflow: hidden; display: flex;
-            scrollbar-width: thin;
-            scrollbar-color: #475569 transparent;
+            height: 100dvh; overflow: hidden; display: flex;
+            scrollbar-width: thin; scrollbar-color: var(--md-sys-color-outline-variant) var(--md-sys-color-background);
             touch-action: manipulation; 
         }
 
@@ -66,248 +84,249 @@
         .material-symbols-outlined { font-size: 24px; vertical-align: middle; }
         strong, b { font-weight: 600; } 
 
-        @keyframes md-ripple { 0% { transform: scale(0); opacity: 0.5; } 100% { transform: scale(4); opacity: 0; } }
+        @keyframes md-ripple { 0% { transform: scale(0); opacity: 0.4; } 100% { transform: scale(3); opacity: 0; } }
         @keyframes fadeInSlideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        
-        .view-enter { animation: fadeInSlideUp var(--duration-long) var(--easing-decelerate); }
-        .loader { width: 16px; height: 16px; border: 2px solid rgba(255, 255, 255, 0.2); border-top: 2px solid #60a5fa; border-radius: 50%; animation: spin 0.8s linear infinite; display: inline-block; vertical-align: middle; margin-left: 8px; }
+        .view-enter { animation: fadeInSlideUp var(--duration-medium) var(--easing-standard); }
 
         /* =========================================
-           COMPONENTS (MD3)
+           COMPONENTI MD3 (Bottoni, Input, Card)
         ========================================= */
         .md-btn {
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-            color: var(--md-sys-color-on-primary);
-            border: none; padding: 0 24px; height: 48px; 
-            border-radius: var(--shape-corner-medium);
-            font-size: 14px; font-weight: 600; letter-spacing: 0.5px;
+            background-color: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary);
+            border: none; padding: 0 24px; height: 40px; 
+            border-radius: var(--shape-corner-full);
+            font-size: 14px; font-weight: 500; letter-spacing: 0.1px;
             cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            transition: all var(--duration-short); position: relative; overflow: hidden; font-family: 'Lexend', sans-serif;
-            white-space: nowrap; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+            transition: background-color var(--duration-short), box-shadow var(--duration-short), transform 0.1s;
+            font-family: 'Lexend', sans-serif; white-space: nowrap; box-shadow: var(--md-elevation-1);
         }
-        .md-btn:hover:not(:disabled) { filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4); }
+        .md-btn:hover:not(:disabled) { box-shadow: var(--md-elevation-3); filter: brightness(1.05); }
         .md-btn:active:not(:disabled) { transform: scale(0.97); }
-        .md-btn:disabled { background: #475569; color: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
+        .md-btn:disabled { background-color: var(--md-sys-color-surface-container-highest); color: var(--md-sys-color-outline); box-shadow: none; cursor: not-allowed; }
 
-        .md-btn-secondary { background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); color: #60a5fa; box-shadow: none; }
-        .md-btn-secondary:hover:not(:disabled) { background: #3b82f6; color: white; border-color: #3b82f6; }
-        .md-btn-error { background: var(--md-sys-color-error); color: var(--md-sys-color-on-error); }
-        .md-btn-success { background: #10b981; color: white; }
-        .md-btn-warning { background: #facc15; color: #0f172a; }
-
+        .md-btn-secondary { background-color: transparent; border: 1px solid var(--md-sys-color-outline); color: var(--md-sys-color-primary); box-shadow: none; }
+        .md-btn-secondary:hover:not(:disabled) { background-color: rgba(168, 199, 250, 0.08); border-color: var(--md-sys-color-primary); }
+        .md-btn-error { background-color: var(--md-sys-color-error-container); color: var(--md-sys-color-on-error-container); }
+        
+        /* Input Testuali MD3 (Stile Filled) */
         .md-input {
             font-family: 'Lexend', sans-serif; width: 100%; box-sizing: border-box;
-            background-color: rgba(15, 23, 42, 0.5); color: var(--md-sys-color-on-surface);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 14px 16px; border-radius: var(--shape-corner-small);
+            background-color: var(--md-sys-color-surface-container-highest); 
+            color: var(--md-sys-color-on-surface);
+            border: none; border-bottom: 1px solid var(--md-sys-color-on-surface-variant);
+            padding: 16px 16px 12px 16px; border-radius: var(--shape-corner-extra-small) var(--shape-corner-extra-small) 0 0;
             margin-bottom: 20px; font-size: 15px; outline: none; transition: all var(--duration-short);
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
         }
-        .md-input:focus { border-color: var(--md-sys-color-primary); background-color: rgba(15, 23, 42, 0.8); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3), inset 0 2px 4px rgba(0,0,0,0.2); }
-        .md-input[readonly], .md-input:disabled { opacity: 0.6; cursor: not-allowed; border-color: var(--md-sys-color-surface-variant); }
+        .md-input:focus { border-bottom: 2px solid var(--md-sys-color-primary); padding-bottom: 11px; background-color: var(--md-sys-color-surface-variant); }
+        .md-input[readonly], .md-input:disabled { opacity: 0.6; cursor: not-allowed; border-bottom-style: dashed; }
+        .md-input::placeholder { color: var(--md-sys-color-outline); font-weight: 300; }
 
         .md-card {
-            background-color: rgba(30, 41, 59, 0.6); border-radius: var(--shape-corner-medium); padding: 24px;
-            transition: all var(--duration-medium); backdrop-filter: blur(8px);
-            cursor: pointer; border: 1px solid rgba(255,255,255,0.08); position: relative; overflow: hidden;
-            animation: fadeInSlideUp var(--duration-medium) var(--easing-decelerate);
+            background-color: var(--md-sys-color-surface-container); 
+            border-radius: var(--shape-corner-large); padding: 24px;
+            transition: transform var(--duration-medium), box-shadow var(--duration-medium);
+            cursor: pointer; position: relative; overflow: hidden;
+            box-shadow: var(--md-elevation-1);
+            animation: fadeInSlideUp var(--duration-medium) var(--easing-standard);
         }
         .md-card.no-hover { cursor: default; }
-        .md-card:not(.no-hover):hover { transform: translateY(-4px); background-color: rgba(59, 130, 246, 0.15); border-color: rgba(59, 130, 246, 0.5); }
-        .md-card h3 { margin: 0 0 8px 0; font-size: 18px; font-weight: 700; color: var(--md-sys-color-on-surface); }
-        .md-card p { margin: 0; color: var(--md-sys-color-on-surface-variant); font-size: 13px; line-height: 1.5; font-weight: 300; }
+        .md-card:not(.no-hover):hover { transform: translateY(-4px); box-shadow: var(--md-elevation-3); }
+        .md-card h3 { margin: 0 0 8px 0; font-size: 18px; font-weight: 600; color: var(--md-sys-color-on-surface); }
+        .md-card p { margin: 0; color: var(--md-sys-color-on-surface-variant); font-size: 14px; line-height: 1.5; font-weight: 300; }
 
         /* =========================================
            LOGIN VIEW 
         ========================================= */
         #login-view {
             width: 100%; height: 100dvh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.85)), url('iprpp.png') no-repeat center center;
-            background-size: cover; position: absolute; z-index: 1000;
+            background: var(--md-sys-color-background);
+            position: absolute; z-index: 1000;
             transition: opacity var(--duration-long) var(--easing-standard), transform var(--duration-long) var(--easing-standard);
         }
         .login-card {
-            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-            background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 40px 35px; border-radius: 20px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            text-align: center; width: 90%; max-width: 380px;
-            animation: fadeInSlideUp var(--duration-long) var(--easing-decelerate); box-sizing: border-box;
+            background-color: var(--md-sys-color-surface-container-high); 
+            padding: 48px; border-radius: var(--shape-corner-extra-large);
+            box-shadow: var(--md-elevation-3); text-align: center;
+            width: 90%; max-width: 380px; box-sizing: border-box;
         }
-        .login-card h3 { margin-bottom: 25px; font-weight: 600; font-size: 1.25rem; color: #ffffff; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .login-card input { text-align: center; letter-spacing: 2px; }
-        
-        #status-msg { margin-top: 20px; font-size: 0.9rem; min-height: 20px; color: #94a3b8; font-weight: 300; display: flex; align-items: center; justify-content: center; }
+        .police-logo-login { width: 90px; height: auto; margin-bottom: 24px; }
+        .login-card h1 { margin: 0 0 8px 0; font-size: 24px; font-weight: 600; color: var(--md-sys-color-primary);}
+        .login-card p.subtitle { color: var(--md-sys-color-on-surface-variant); margin: 0 0 32px 0; font-size: 14px; }
 
         /* =========================================
-           LAYOUT & SIDEBAR 
+           LAYOUT & SIDEBAR (MD3 Navigation Drawer)
         ========================================= */
-        #app-view { width: 100%; height: 100dvh; display: flex; opacity: 0; pointer-events: none; transition: opacity var(--duration-long) var(--easing-standard); position: relative; overflow: hidden; }
+        #app-view { width: 100%; height: 100dvh; display: flex; opacity: 0; pointer-events: none; transition: opacity var(--duration-long); position: relative; overflow: hidden; }
         #app-view.active { opacity: 1; pointer-events: all; }
 
-        #sidebar-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100dvh; background: rgba(0,0,0,0.6); z-index: 100; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+        #sidebar-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100dvh; background: rgba(0,0,0,0.6); z-index: 100; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
         #sidebar-overlay.active { opacity: 1; pointer-events: all; }
 
         .sidebar { 
-            width: 320px; background-color: var(--md-sys-color-surface); display: flex; flex-direction: column; 
-            padding: 30px; border-right: 1px solid var(--md-sys-color-surface-variant); z-index: 101; 
-            position: relative; height: 100dvh; box-sizing: border-box; flex-shrink: 0; box-shadow: 4px 0 15px rgba(0,0,0,0.3);
+            width: 320px; background-color: var(--md-sys-color-surface-container-low); display: flex; flex-direction: column; 
+            padding: 24px 16px; border-right: 1px solid var(--md-sys-color-surface-container-highest); z-index: 101; 
+            position: relative; height: 100dvh; box-sizing: border-box; flex-shrink: 0;
         }
-        .sidebar::before { content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('pdss.png'); background-repeat: no-repeat; background-position: center 15%; background-size: 180px; opacity: 0.05; z-index: 0; pointer-events: none; }
         
-        .beta-tag { position: absolute; top: 15px; left: 15px; background: rgba(255,255,255,0.1); padding: 4px 10px; border: 1px solid rgba(255,255,255,0.2); font-size: 11px; font-weight: bold; color: #94a3b8; border-radius: 6px; z-index: 20; letter-spacing: 1px; }
+        .sidebar-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding: 0 8px; flex-shrink: 0; }
+        .police-logo-side { width: 40px; height: auto; }
+        .sidebar-header h2 { margin: 0; font-size: 16px; font-weight: 600; color: var(--md-sys-color-on-surface); line-height: 1.2; }
 
-        .profile-container { margin-top: 25px; margin-bottom: 20px; position: relative; z-index: 1; }
-        .profile-header { display: flex; align-items: center; gap: 15px; padding: 10px 0; }
-        .profile-avatar { width: 55px; height: 55px; background: #334155; border-radius: 14px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2); border: 2px solid rgba(255,255,255,0.05); color: #94a3b8; font-size: 24px; }
-        .profile-info h4 { font-size: 17px; color: #f1f5f9; font-weight: 700; margin: 0; line-height: 1.2; text-transform: uppercase;}
-        .profile-info span { font-size: 11px; color: #60a5fa; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; display: block; margin-top: 2px;}
+        .user-profile-compact {
+            background-color: var(--md-sys-color-surface-container-high);
+            padding: 16px; border-radius: var(--shape-corner-large); margin-bottom: 24px;
+        }
+        .user-profile-top { display: flex; align-items: center; gap: 12px; }
+        .user-profile-top .avatar { color: var(--md-sys-color-primary); font-size: 36px; }
+        .user-profile-top div h4 { margin: 0; font-size: 15px; font-weight: 600; color: var(--md-sys-color-on-surface); }
+        .user-profile-top div p { margin: 0; font-size: 12px; color: var(--md-sys-color-primary); margin-top: 4px; font-weight: 500;}
 
-        .session-info { margin-top: 15px; background: rgba(15, 23, 42, 0.4); padding: 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); }
-        .session-info small { display: block; color: #64748b; font-size: 10px; text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
-
-        .sidebar-nav-container { overflow-y: auto; flex-grow: 1; padding-bottom: 10px; position: relative; z-index: 1;}
+        .sidebar-nav-container { overflow-y: auto; flex-grow: 1; padding-bottom: 10px; }
 
         .nav-item {
-            display: flex; align-items: center; gap: 16px; height: 48px; padding: 0 16px; border-radius: var(--shape-corner-small);
-            color: var(--md-sys-color-on-surface-variant); text-decoration: none; cursor: pointer; font-weight: 600; font-size: 14px;
-            transition: all var(--duration-short); margin-bottom: 8px; position: relative; overflow: hidden; border: 1px solid transparent;
+            display: flex; align-items: center; gap: 16px; height: 56px; padding: 0 20px; 
+            border-radius: var(--shape-corner-full);
+            color: var(--md-sys-color-on-surface-variant); text-decoration: none; cursor: pointer; font-weight: 500; font-size: 14px;
+            transition: background-color var(--duration-short), color var(--duration-short); margin-bottom: 4px; position: relative; overflow: hidden;
         }
-        .nav-item:hover { background-color: rgba(255,255,255,0.05); color: #FFF; border-color: rgba(255,255,255,0.1); }
-        .nav-item.active { background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); border-color: rgba(59, 130, 246, 0.3); }
+        .nav-item .active-indicator { position: absolute; left: 0; top: 0; width: 0; height: 100%; background-color: var(--md-sys-color-primary-container); border-radius: var(--shape-corner-full); transition: width var(--duration-medium) var(--easing-standard); z-index: -1; }
+        .nav-item:hover { background-color: var(--md-sys-color-surface-container-highest); color: var(--md-sys-color-on-surface); }
+        .nav-item.active { color: var(--md-sys-color-on-primary-container); font-weight: 600; }
+        .nav-item.active .active-indicator { width: 100%; }
 
-        .badge-notifiche { position: absolute; right: 16px; background-color: var(--md-sys-color-error); color: white; font-size: 11px; font-weight: bold; padding: 2px 6px; border-radius: 50%; display: none; }
+        .badge-notifiche { position: absolute; right: 16px; background-color: var(--md-sys-color-error); color: var(--md-sys-color-on-error); font-size: 11px; font-weight: bold; padding: 2px 6px; border-radius: 50%; display: none; }
 
+        .sidebar-footer {
+            margin-top: auto; text-align: center; font-size: 12px; line-height: 1.5; 
+            padding-top: 20px; border-top: 1px solid var(--md-sys-color-surface-container-highest); flex-shrink: 0; 
+        }
+        .sidebar-footer .ufficiale { color: var(--md-sys-color-primary); font-weight: 500; display: block; }
+        .sidebar-footer .creato { color: var(--md-sys-color-outline); font-size: 11px; margin-top: 8px; display: block; }
+
+        /* MAIN CONTENT */
         .main-content { 
-            flex-grow: 1; padding: 60px; background-image: linear-gradient(rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.92)), url('iprpp.png'); 
-            background-repeat: no-repeat; background-position: center; background-size: 50%;
+            flex-grow: 1; padding: 40px; background-color: var(--md-sys-color-background); 
             position: relative; height: 100dvh; overflow-y: auto; box-sizing: border-box; 
         }
 
-        /* HEADER MOBILE (Hamburger) */
         .mobile-topbar {
             display: none; align-items: center; justify-content: space-between;
-            background-color: var(--md-sys-color-surface); padding: 12px 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.05); position: sticky; top: 0; z-index: 50;
-            margin: -60px -60px 24px -60px; 
+            background-color: var(--md-sys-color-surface-container-low); padding: 12px 20px;
+            border-bottom: 1px solid var(--md-sys-color-surface-container-highest); position: sticky; top: 0; z-index: 50;
+            margin: -40px -40px 24px -40px; 
         }
-        .btn-menu { background: none; border: none; color: #FFF; padding: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 8px; }
-        .btn-menu:active { background: rgba(255,255,255,0.1); }
-        .mobile-topbar h2 { margin: 0; font-size: 16px; font-weight: 600; color: #FFF; }
+        .btn-menu { background: none; border: none; color: var(--md-sys-color-on-surface); padding: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 8px; }
+        .mobile-topbar h2 { margin: 0; font-size: 18px; font-weight: 500; color: var(--md-sys-color-on-surface); }
 
-        .view-section { display: block; opacity: 1; transform: translateX(0); transition: opacity var(--duration-long) var(--easing-standard), transform var(--duration-long) var(--easing-standard); padding-bottom: 60px;}
+        .view-section { display: block; opacity: 1; transform: translateX(0); transition: opacity var(--duration-long), transform var(--duration-long); padding-bottom: 60px;}
         .view-section.hidden { display: none; opacity: 0; transform: translateX(30px); }
 
         .page-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; gap: 20px; flex-wrap: wrap;}
-        .page-header div h1 { margin: 0 0 6px 0; font-weight: 300; font-size: 32px; color: #FFF; letter-spacing: -0.5px;}
-        .page-header div h1 strong { font-weight: 700; color: var(--md-sys-color-primary); }
-        .page-header div p { margin: 0; color: var(--md-sys-color-on-surface-variant); font-size: 16px; font-weight: 300;}
+        .page-header div h1 { margin: 0 0 8px 0; font-weight: 400; font-size: 32px; color: var(--md-sys-color-on-surface); letter-spacing: -0.5px;}
+        .page-header div p { margin: 0; color: var(--md-sys-color-on-surface-variant); font-size: 16px;}
 
         /* =========================================
-           DASHBOARD & TABELLE
+           DASHBOARD E TABELLE MD3
         ========================================= */
-        .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; margin-bottom: 30px; }
         .summary-cards { display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap;}
-        .summary-card { background-color: rgba(30, 41, 59, 0.6); padding: 16px 20px; border-radius: var(--shape-corner-medium); border: 1px solid rgba(255,255,255,0.08); flex: 1; min-width: 140px; backdrop-filter: blur(8px);}
-        .summary-card span { font-size: 11px; text-transform: uppercase; color: var(--md-sys-color-on-surface-variant); font-weight: 600; letter-spacing: 1px;}
-        .summary-card h2 { margin: 8px 0 0 0; font-size: 32px; font-weight: 700; color: var(--md-sys-color-primary); }
+        .summary-card { background-color: var(--md-sys-color-surface-container-high); padding: 20px; border-radius: var(--shape-corner-large); flex: 1; min-width: 140px;}
+        .summary-card span { font-size: 12px; text-transform: uppercase; color: var(--md-sys-color-on-surface-variant); font-weight: 600; letter-spacing: 1px;}
+        .summary-card h2 { margin: 8px 0 0 0; font-size: 32px; font-weight: 400; color: var(--md-sys-color-primary); }
 
-        .table-container { background-color: rgba(30, 41, 59, 0.6); border-radius: var(--shape-corner-medium); overflow-x: auto; border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(8px); }
+        .table-container { background-color: var(--md-sys-color-surface-container); border-radius: var(--shape-corner-large); overflow-x: auto; }
         table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; min-width: 700px; }
-        th, td { padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.03); }
-        th { font-weight: 600; color: var(--md-sys-color-on-surface-variant); background-color: rgba(15, 23, 42, 0.5); white-space: nowrap; }
-        tbody tr { transition: background-color var(--duration-short); cursor: pointer; animation: fadeInSlideUp var(--duration-medium) ease-out; animation-fill-mode: both;}
-        tbody tr:hover { background-color: rgba(255,255,255,0.05); }
+        th, td { padding: 16px 24px; border-bottom: 1px solid var(--md-sys-color-surface-container-highest); }
+        th { font-weight: 500; color: var(--md-sys-color-on-surface-variant); background-color: var(--md-sys-color-surface-container-low); white-space: nowrap; }
+        tbody tr { transition: background-color var(--duration-short); cursor: pointer; }
+        tbody tr:hover { background-color: var(--md-sys-color-surface-container-high); }
+        
         .badge { padding: 4px 10px; border-radius: var(--shape-corner-full); font-size: 11px; font-weight: 700; background-color: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); white-space: nowrap; }
-        .badge.error { background-color: rgba(239, 68, 68, 0.15); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.3);}
+        .badge.error { background-color: var(--md-sys-color-error-container); color: var(--md-sys-color-on-error-container);}
 
         /* =========================================
-           BANDI, INTERPELLANZE E FUORI SERVIZIO STYLES
+           BANDI, INTERPELLANZE E FUORI SERVIZIO
         ========================================= */
-        .category-title { margin-top: 32px; margin-bottom: 16px; color: #FFF; border-bottom: 2px solid var(--md-sys-color-surface-variant); padding-bottom: 8px; font-weight: 600; font-size: 20px;}
-        .card-status { position: absolute; top: 16px; left: 16px; padding: 4px 12px; border-radius: var(--shape-corner-full); font-size: 11px; font-weight: 700; text-transform: uppercase; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-        .status-open { background-color: #064E3B; color: #6EE7B7; } 
-        .status-closed { background-color: #7F1D1D; color: #FCA5A5; } 
+        .category-title { margin-top: 32px; margin-bottom: 16px; color: var(--md-sys-color-on-surface); border-bottom: 1px solid var(--md-sys-color-surface-container-highest); padding-bottom: 8px; font-weight: 500; font-size: 20px;}
+        .card-status { position: absolute; top: 16px; left: 16px; padding: 4px 12px; border-radius: var(--shape-corner-full); font-size: 11px; font-weight: 600; text-transform: uppercase; }
+        .status-open { background-color: #0F5223; color: #AFF0B4; } 
+        .status-closed { background-color: var(--md-sys-color-error-container); color: var(--md-sys-color-on-error-container); } 
         
-        .lock-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(4px); display: flex; justify-content: center; align-items: center; text-align: center; font-weight: bold; color: #f87171; font-size: 18px; z-index: 10; padding: 20px; box-sizing: border-box; flex-direction: column; gap: 8px;}
-        .warning-box { background-color: rgba(239, 68, 68, 0.1); color: #fca5a5; padding: 20px; border-radius: 12px; margin-bottom: 20px; text-align: center; font-weight: bold; border: 1px solid rgba(239, 68, 68, 0.3); font-size: 15px; backdrop-filter: blur(5px); }
+        .lock-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(27, 29, 34, 0.9); display: flex; justify-content: center; align-items: center; text-align: center; font-weight: 500; color: var(--md-sys-color-error); font-size: 16px; z-index: 10; padding: 20px; box-sizing: border-box; flex-direction: column; gap: 8px;}
+        .warning-box { background-color: var(--md-sys-color-error-container); color: var(--md-sys-color-on-error-container); padding: 16px; border-radius: var(--shape-corner-medium); margin-bottom: 20px; text-align: center; font-weight: 500; font-size: 14px; }
 
-        .fs-status-badge { padding:6px 12px; border-radius:6px; font-size:12px; font-weight:bold; text-transform: uppercase;}
-        .fs-status-valutazione { background:rgba(59, 130, 246, 0.15); color:#60a5fa; border:1px solid rgba(59, 130, 246, 0.3); }
-        .fs-status-accettata { background:rgba(16, 185, 129, 0.15); color:#34d399; border:1px solid rgba(16, 185, 129, 0.3); }
-        .fs-status-rifiutata { background:rgba(239, 68, 68, 0.15); color:#f87171; border:1px solid rgba(239, 68, 68, 0.3); }
+        .fs-status-badge { padding:6px 12px; border-radius: var(--shape-corner-full); font-size:12px; font-weight:500; text-transform: uppercase;}
+        .fs-status-valutazione { background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); }
+        .fs-status-accettata { background: #0F5223; color: #AFF0B4; }
+        .fs-status-rifiutata { background: var(--md-sys-color-error-container); color: var(--md-sys-color-on-error-container); }
 
-        .admin-section { background:#1e293b; border:1px solid #eab308; padding:25px; border-radius:12px; text-align:center; margin-bottom: 40px; }
-
-        /* GRID LAYOUT PER FUORI SERVIZIO */
+        .admin-section { background: var(--md-sys-color-surface-container-high); border: 1px solid var(--md-sys-color-outline-variant); padding: 24px; border-radius: var(--shape-corner-large); text-align: center; margin-bottom: 40px; }
         .fs-layout { display: grid; grid-template-columns: 350px 1fr; gap: 24px; align-items: start; }
 
         /* =========================================
-           DIALOGS (MODALS) E FORMS
+           DIALOGS PURE MD3 E FASCICOLO
         ========================================= */
-        .dialog-backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); display: flex; justify-content: center; align-items: center; z-index: 2000; opacity: 0; pointer-events: none; transition: opacity var(--duration-medium) var(--easing-standard); padding: 16px; box-sizing: border-box;}
+        .dialog-backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center; z-index: 2000; opacity: 0; pointer-events: none; transition: opacity var(--duration-medium); padding: 16px; box-sizing: border-box;}
         .dialog-backdrop.active { opacity: 1; pointer-events: all; }
         
-        .dialog-surface { background-color: var(--md-sys-color-surface-container); width: 100%; max-width: 640px; max-height: 90vh; overflow-y: auto; border-radius: var(--shape-corner-large); padding: 32px; box-shadow: 0 30px 60px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); transform: scale(0.95) translateY(10px); transition: transform var(--duration-medium) var(--easing-standard); box-sizing: border-box;}
-        .dialog-surface.large { max-width: 950px; padding: 0; display: flex; height: 650px; overflow: hidden;} /* Per Fascicolo */
-        .dialog-backdrop.active .dialog-surface { transform: scale(1) translateY(0); }
+        .dialog-surface { background-color: var(--md-sys-color-surface-container-high); width: 100%; max-width: 600px; max-height: 90vh; overflow-y: auto; border-radius: var(--shape-corner-extra-large); padding: 32px; box-shadow: var(--md-elevation-3); transform: scale(0.95); transition: transform var(--duration-medium); box-sizing: border-box;}
+        .dialog-surface.large { max-width: 900px; padding: 0; display: flex; height: 600px; overflow: hidden;} 
+        .dialog-backdrop.active .dialog-surface { transform: scale(1); }
         
-        .dialog-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; position: sticky; top: -32px; background: var(--md-sys-color-surface-container); padding: 20px 0; z-index: 10;}
-        .dialog-header h2 { margin: 0; font-weight: 600; font-size: 22px; color: #FFF; }
-        .close-btn { background: rgba(255,255,255,0.05); border: none; color: #FFF; cursor: pointer; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; transition: background 0.2s;}
-        .close-btn:hover { background: #ef4444; }
+        .dialog-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; position: sticky; top: -32px; background: var(--md-sys-color-surface-container-high); padding: 20px 0; z-index: 10; border-bottom: 1px solid var(--md-sys-color-outline-variant);}
+        .dialog-header h2 { margin: 0; font-weight: 400; font-size: 22px; color: var(--md-sys-color-on-surface); }
+        .close-btn { background: transparent; border: none; color: var(--md-sys-color-on-surface-variant); cursor: pointer; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; transition: background 0.2s;}
+        .close-btn:hover { background: var(--md-sys-color-surface-variant); color: var(--md-sys-color-on-surface);}
 
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
         .full-width { grid-column: span 2; }
-        .person-group { background-color: rgba(15, 23, 42, 0.5); padding: 20px; border-radius: var(--shape-corner-medium); margin-bottom: 16px; border: 1px solid rgba(255,255,255,0.03); }
+        .person-group { border: 1px solid var(--md-sys-color-outline-variant); padding: 20px; border-radius: var(--shape-corner-medium); margin-bottom: 16px; }
 
-        /* FASCICOLO TABS */
-        .modal-sidebar { width: 280px; background: #0f172a; padding: 40px 0; border-right: 1px solid rgba(255,255,255,0.05); overflow-y: auto;}
-        .modal-sidebar h3 { padding: 0 30px 20px; font-size: 12px; color: #475569; text-transform: uppercase; letter-spacing: 2px; margin:0;}
-        .modal-nav-item { padding: 16px 30px; color: #94a3b8; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 15px; font-weight: 600; border-left: 4px solid transparent; font-size: 14px;}
-        .modal-nav-item:hover { background: rgba(59, 130, 246, 0.05); color: #f8fafc; }
-        .modal-nav-item.active { background: rgba(59, 130, 246, 0.1); color: #3b82f6; border-left-color: #3b82f6; }
-        .fascicolo-content-area { flex-grow: 1; padding: 50px; position: relative; background-image: radial-gradient(circle at top right, rgba(59, 130, 246, 0.05), transparent); overflow-y: auto;}
+        /* TABS MD3 per Fascicolo */
+        .modal-sidebar { width: 260px; background: var(--md-sys-color-surface-container); padding: 32px 16px; border-right: 1px solid var(--md-sys-color-surface-container-high); overflow-y: auto;}
+        .modal-nav-item { padding: 16px 20px; color: var(--md-sys-color-on-surface-variant); cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 12px; font-weight: 500; border-radius: var(--shape-corner-full); font-size: 14px; margin-bottom: 8px;}
+        .modal-nav-item:hover { background: var(--md-sys-color-surface-container-high); color: var(--md-sys-color-on-surface); }
+        .modal-nav-item.active { background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); font-weight: 600;}
+        .fascicolo-content-area { flex-grow: 1; padding: 40px; background: var(--md-sys-color-surface-container-high); overflow-y: auto; position: relative;}
 
-        /* AVVISI & SEGNALAZIONI SPECIFICS */
-        .avviso-item { padding: 18px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid var(--md-sys-color-primary); background: rgba(255,255,255,0.03); cursor: pointer; transition: 0.2s; position: relative; color: #f8fafc;}
-        .avviso-item:hover { background: rgba(255,255,255,0.06); }
-        .avviso-item.letto { opacity: 0.6; border-left-color: #475569 !important; background: transparent; cursor: default;}
-        .avviso-item.letto:hover { background: transparent; }
+        /* AVVISI E SEGNALAZIONI */
+        .avviso-item { padding: 16px; border-radius: var(--shape-corner-medium); margin-bottom: 12px; border-left: 4px solid var(--md-sys-color-primary); background: var(--md-sys-color-surface); cursor: pointer; transition: transform 0.2s;}
+        .avviso-item:hover { transform: scale(1.01); background: var(--md-sys-color-surface-container); }
+        .avviso-item.letto { opacity: 0.6; border-left-color: var(--md-sys-color-outline); cursor: default;}
+        .avviso-item.letto:hover { transform: none; }
+        .avviso-item h5 { margin: 0 0 8px 0; font-size: 16px; color: var(--md-sys-color-on-surface); }
+        .avviso-item p { margin: 0; font-size: 14px; line-height: 1.5; color: var(--md-sys-color-on-surface-variant); white-space: pre-wrap;}
         
-        .tab-buttons { display: flex; background: rgba(15, 23, 42, 0.5); border-radius: 8px; overflow: hidden; margin-bottom: 24px; padding: 4px;}
-        .tab-btn { flex: 1; padding: 10px; background: transparent; border: none; color: var(--md-sys-color-on-surface-variant); font-weight: bold; cursor: pointer; transition: 0.3s; font-family: 'Lexend'; border-radius: 6px;}
-        .tab-btn.active { background: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary); }
+        .tab-buttons { display: flex; background: var(--md-sys-color-surface); border-radius: var(--shape-corner-full); overflow: hidden; margin-bottom: 24px; padding: 4px;}
+        .tab-btn { flex: 1; padding: 12px; background: transparent; border: none; color: var(--md-sys-color-on-surface-variant); font-weight: 500; cursor: pointer; transition: 0.3s; border-radius: var(--shape-corner-full);}
+        .tab-btn.active { background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); font-weight: 600;}
 
-        .filter-bar { display: flex; gap: 12px; align-items: center; background: rgba(30, 41, 59, 0.6); padding: 8px 20px; border-radius: 50px; flex-wrap: wrap; margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(8px);}
-        .filter-label { display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 13px; font-weight: 500; color: var(--md-sys-color-on-surface-variant); padding: 4px; }
+        .filter-bar { display: flex; gap: 12px; align-items: center; background: var(--md-sys-color-surface-container); padding: 8px 20px; border-radius: var(--shape-corner-full); flex-wrap: wrap; margin-bottom: 24px;}
+        .filter-label { display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 14px; font-weight: 500; color: var(--md-sys-color-on-surface-variant); }
 
         /* =========================================
-           RESPONSIVE - OTTIMIZZAZIONE PER SMARTPHONE
+           RESPONSIVE MOBILE
         ========================================= */
         @media (max-width: 992px) {
             .fs-layout { grid-template-columns: 1fr; }
         }
-
         @media (max-width: 768px) {
             .sidebar { position: fixed; left: -320px; top: 0; width: 280px; transition: left 0.3s cubic-bezier(0.2, 0, 0, 1); box-shadow: 4px 0 24px rgba(0,0,0,0.6); padding: 20px;}
             .sidebar.open { left: 0; }
-            .mobile-topbar { display: flex; margin: -60px -60px 24px -60px; }
-            .main-content { padding: 20px; padding-top: 60px; } 
+            .mobile-topbar { display: flex; margin: -40px -40px 24px -40px; }
+            .main-content { padding: 20px; padding-top: 40px; } 
             .page-header div h1 { font-size: 24px; }
-            .filter-bar { border-radius: 12px; padding: 12px; }
+            .filter-bar { border-radius: 16px; padding: 12px; }
             .filter-bar input[type="text"] { width: 100% !important; }
-            .dialog-surface { padding: 20px; width: 100%; border-radius: var(--shape-corner-medium); }
+            .dialog-surface { padding: 24px; width: 100%; border-radius: var(--shape-corner-large); }
             .dialog-surface.large { flex-direction: column; height: 90vh; overflow-y: auto;}
-            .modal-sidebar { width: 100%; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 20px 0; display: flex; overflow-x: auto;}
-            .modal-sidebar h3 { display: none; }
-            .modal-nav-item { padding: 10px 15px; border-left: none; border-bottom: 2px solid transparent; white-space: nowrap;}
-            .modal-nav-item.active { border-left: none; border-bottom-color: var(--md-sys-color-primary); }
+            .modal-sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--md-sys-color-surface-container-highest); padding: 16px 0; display: flex; overflow-x: auto;}
+            .modal-nav-item { padding: 10px 16px; white-space: nowrap;}
             .fascicolo-content-area { padding: 20px; }
             .form-grid { grid-template-columns: 1fr; }
             .full-width { grid-column: span 1; }
-            .dialog-header { top: -20px; }
+            .dialog-header { top: -24px; }
+            .card-status { left: auto; right: 16px; } 
         }
     </style>
 </head>
@@ -315,34 +334,42 @@
 
     <div id="login-view">
         <div class="login-card">
-            <h3>🔐 DATABASE QUESTURA</h3>
-            <input type="password" id="login-code" class="md-input" placeholder="INSERISCI CODICE" style="text-align: center; letter-spacing: 2px; font-weight: bold;" onkeypress="if(event.key === 'Enter') doLogin()">
-            <button id="btn-login" class="md-btn" style="width: 100%;" onclick="doLogin()">ACCEDI AL SISTEMA</button>
-            <div id="login-error" style="margin-top: 20px; font-size: 14px; min-height: 20px; color: #94a3b8; font-weight: 300;"></div>
+            <img src="https://i.imgur.com/tkb2tfQ.png" alt="Logo Polizia di Stato" class="police-logo-login">
+            <h1>Sistema S.D.I.</h1>
+            <p class="subtitle">Dipartimento della Pubblica Sicurezza</p>
+            
+            <input type="password" id="login-code" class="md-input" placeholder="INSERISCI CODICE" style="text-align: center; letter-spacing: 2px; font-weight: bold; border-radius: var(--shape-corner-full);" onkeypress="if(event.key === 'Enter') doLogin()">
+            
+            <button id="btn-login" class="md-btn" style="width: 100%;" onclick="doLogin()">
+                <span class="material-symbols-outlined">login</span> ACCEDI AL SISTEMA
+            </button>
+            <div id="login-error" style="margin-top: 20px; font-size: 14px; min-height: 20px; color: var(--md-sys-color-on-surface-variant); font-weight: 400; display: none;"></div>
         </div>
     </div>
 
     <div id="app-view">
-        
         <div id="sidebar-overlay" onclick="toggleSidebar()"></div>
 
         <aside class="sidebar" id="main-sidebar">
-            <div class="beta-tag">V. 0.6 Beta</div>
-            
-            <div class="profile-container">
-                <div class="profile-header">
-                    <div class="profile-avatar">👤</div>
-                    <div class="profile-info">
+            <div class="sidebar-header">
+                <img src="https://i.imgur.com/tkb2tfQ.png" alt="Logo PS" class="police-logo-side">
+                <div>
+                    <h2>Database Questura</h2>
+                    <span style="font-weight:400; font-size:12px; color:var(--md-sys-color-on-surface-variant);">S.D.I. Centralizzato</span>
+                </div>
+            </div>
+
+            <div class="user-profile-compact">
+                <div class="user-profile-top">
+                    <span class="material-symbols-outlined avatar">account_circle</span>
+                    <div>
                         <h4 id="user-name">Caricamento...</h4>
-                        <span id="user-qualifica">Qualifica...</span>
+                        <p id="user-qualifica">Sincronizzazione...</p>
                     </div>
                 </div>
-
-                <div class="session-info">
-                    <small>Sessione Attiva</small>
-                    <div id="data-accesso" style="color:#e2e8f0; font-size: 13px; font-weight:600;">--/--/----</div>
-                    <button class="md-btn md-btn-secondary" style="width: 100%; margin-top: 12px; height: 36px; font-size: 12px;" onclick="openFascicolo()">👤 Fascicolo Personale</button>
-                </div>
+                <button class="md-btn md-btn-secondary" style="width: 100%; height: 36px; font-size: 13px; margin-top: 16px;" onclick="openFascicolo()">
+                    <span class="material-symbols-outlined" style="font-size: 18px;">folder_shared</span> Fascicolo Personale
+                </button>
             </div>
 
             <div class="sidebar-nav-container">
@@ -366,19 +393,26 @@
                         <div class="active-indicator"></div><span class="material-symbols-outlined">event</span> Eventi Programmati
                     </div>
                     
-                    <div style="margin-top: 16px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 12px;"></div>
+                    <div style="margin-top: 16px; border-top: 1px solid var(--md-sys-color-surface-container-high); padding-top: 12px;"></div>
                     
-                    <div class="md-btn" style="background: #2dd4bf; color: #0f172a; width: 100%; margin-top: 10px;" onclick="openDialog('dialog-notifiche')">
-                        Centro Comunicazioni
+                    <div class="nav-item ripple" onclick="openDialog('dialog-notifiche')">
+                        <span class="material-symbols-outlined">notifications</span> Centro Comunicazioni
                         <div class="badge-notifiche" id="badge-conteggio">0</div>
                     </div>
+                    <div class="nav-item ripple" onclick="openSegnalazioni()">
+                        <span class="material-symbols-outlined">report</span> Segnala / Proponi
+                    </div>
                     
-                    <button class="md-btn md-btn-secondary" style="width: 100%; margin-top: 10px; border-color: rgba(255,255,255,0.1); color: #cbd5e1;" onclick="openSegnalazioni()">Invia Segnalazione / Proposta</button>
-                    
-                    <div class="nav-item ripple" style="color: var(--md-sys-color-error); justify-content: center; margin-top: 20px;" onclick="doLogout()">
-                        Scollegati dal Terminale
+                    <div class="nav-item ripple" style="color: var(--md-sys-color-error); margin-top:20px;" onclick="doLogout()">
+                        <div class="active-indicator" style="background-color: var(--md-sys-color-error-container);"></div>
+                        <span class="material-symbols-outlined">logout</span> Scollegati dal Terminale
                     </div>
                 </nav>
+            </div>
+
+            <div class="sidebar-footer">
+                <span class="ufficiale">Sito Ufficiale della Polizia di Stato<br>Server IPRP | Solo a scopo Roleplay.</span>
+                <span class="creato">Creato da Ryze - IPRP X</span>
             </div>
         </aside>
 
@@ -393,7 +427,7 @@
             <div id="view-dashboard" class="view-section">
                 <div class="page-header">
                     <div>
-                        <h1>Dashboard <strong>Operativa</strong></h1>
+                        <h1>Dashboard Operativa</h1>
                         <p>Seleziona un modulo operativo per iniziare.</p>
                     </div>
                 </div>
@@ -401,28 +435,23 @@
                 <div class="card-grid">
                     <div class="md-card ripple" onclick="switchView('sdi')">
                         <span class="material-symbols-outlined" style="font-size: 36px; color: var(--md-sys-color-primary); margin-bottom: 16px;">edit_document</span>
-                        <h3>Registrazione Controllo SDI</h3>
-                        <p>Inserimento e archiviazione dati relativi a controlli sul territorio, soggetti e veicoli identificati.</p>
+                        <h3>Verifica Soggetti SDI</h3>
+                        <p>Modulo da eseguire qualvolta si fermino dei soggetti per controlli stradali o pedonali.</p>
                     </div>
                     <div class="md-card ripple" onclick="switchView('fuoriservizio')">
-                        <span class="material-symbols-outlined" style="font-size: 36px; color: #f43f5e; margin-bottom: 16px;">directions_walk</span>
+                        <span class="material-symbols-outlined" style="font-size: 36px; color: var(--md-sys-color-error); margin-bottom: 16px;">directions_walk</span>
                         <h3>Fuori Servizio / Permessi</h3>
                         <p>Modulo per richiedere e gestire i propri permessi temporanei o di fuori servizio autorizzato.</p>
                     </div>
                     <div class="md-card ripple" onclick="switchView('interpellanze')">
-                        <span class="material-symbols-outlined" style="font-size: 36px; color: #8b5cf6; margin-bottom: 16px;">badge</span>
+                        <span class="material-symbols-outlined" style="font-size: 36px; color: #d8b4fe; margin-bottom: 16px;">badge</span>
                         <h3>Interpellanze Reparti</h3>
                         <p>Sezione dedicata alle comunicazioni e richieste dei vari Reparti della Polizia di Stato.</p>
                     </div>
                     <div class="md-card ripple" onclick="switchView('bandi')">
-                        <span class="material-symbols-outlined" style="font-size: 36px; color: #10B981; margin-bottom: 16px;">work</span>
+                        <span class="material-symbols-outlined" style="font-size: 36px; color: #6ee7b7; margin-bottom: 16px;">work</span>
                         <h3>Bandi Interni</h3>
                         <p>Consulta e candidati ai bandi formativi disponibili per la tua qualifica.</p>
-                    </div>
-                    <div class="md-card ripple" onclick="switchView('eventi')">
-                        <span class="material-symbols-outlined" style="font-size: 36px; color: #F59E0B; margin-bottom: 16px;">event</span>
-                        <h3>Eventi in Programma</h3>
-                        <p>Calendario e lista degli eventi ufficiali programmati sul territorio.</p>
                     </div>
                 </div>
             </div>
@@ -436,7 +465,7 @@
                     <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
                         <div class="filter-bar" style="margin-bottom: 0;">
                             <span class="material-symbols-outlined" style="color:var(--md-sys-color-outline)">search</span>
-                            <input type="text" id="sdi-search" class="md-input" style="margin: 0; padding: 0; width: 200px; background:transparent; border:none; box-shadow: none;" placeholder="Cerca SDI o Nome..." onkeyup="filterSDITable()">
+                            <input type="text" id="sdi-search" class="md-input" style="margin: 0; padding: 0; width: 200px; background:transparent; border:none; box-shadow: none;" placeholder="Cerca Protocollo o Nome..." onkeyup="filterSDITable()">
                         </div>
                         <button class="md-btn" onclick="openDialog('dialog-nuovo-sdi')">
                             <span class="material-symbols-outlined">add</span> COMPILA SDI
@@ -447,7 +476,7 @@
                 <div class="summary-cards">
                     <div class="summary-card"><span>Controlli Totali</span><h2 id="tot-sdi">0</h2></div>
                     <div class="summary-card"><span>Registrati Oggi</span><h2 id="tot-sdi-oggi">0</h2></div>
-                    <div class="summary-card"><span>Ultimo Protocollo</span><h2 id="last-sdi" style="font-size: 16px; color: #FFF; margin-top: 16px; font-family: monospace;">Nessuno</h2></div>
+                    <div class="summary-card"><span>Ultimo Protocollo</span><h2 id="last-sdi" style="font-size: 16px; color: var(--md-sys-color-on-surface); margin-top: 16px; font-family: monospace;">Nessuno</h2></div>
                 </div>
 
                 <div class="table-container">
@@ -478,26 +507,19 @@
                 <div class="fs-layout">
                     <div class="fs-left-col" style="display: flex; flex-direction: column; gap: 24px;">
                         
-                        <div class="md-card no-hover" style="padding: 20px;">
-                            <h3 style="font-size: 16px; margin-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px;">Il Tuo Profilo</h3>
-                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                        <div class="md-card no-hover" style="padding: 24px;">
+                            <h3 style="font-size: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--md-sys-color-surface-container-high); padding-bottom: 8px;">Il Tuo Profilo</h3>
+                            <div style="display: flex; align-items: center; gap: 12px;">
                                 <span class="material-symbols-outlined" style="font-size: 36px; color: var(--md-sys-color-primary);">account_circle</span>
                                 <div>
-                                    <b id="fs-nome-display" style="font-size: 15px; color: #FFF;">Caricamento...</b>
+                                    <b id="fs-nome-display" style="font-size: 15px; color: var(--md-sys-color-on-surface);">Caricamento...</b>
                                     <div id="fs-qualifica-display" style="font-size: 12px; color: var(--md-sys-color-primary);">Sincronizzazione...</div>
-                                </div>
-                            </div>
-                            <div style="display: flex; align-items: center; gap: 12px; margin-top: 16px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px;">
-                                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" style="width:24px; height:24px;">
-                                <div>
-                                    <span style="font-size: 11px; color: var(--md-sys-color-outline); text-transform: uppercase;">Discord ID</span><br>
-                                    <b id="fs-discord-display" style="font-size: 13px; color: #FFF;">Caricamento...</b>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="md-card no-hover" style="padding: 20px; flex-grow: 1;">
-                            <h3 style="font-size: 16px; margin-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px;">Richieste Odierne</h3>
+                        <div class="md-card no-hover" style="padding: 24px; flex-grow: 1;">
+                            <h3 style="font-size: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--md-sys-color-surface-container-high); padding-bottom: 8px;">Richieste Odierne</h3>
                             <div id="fs-requests-container" style="display:flex; flex-direction:column; gap:12px;">
                                 <p style="color: var(--md-sys-color-outline); text-align:center; font-size: 13px;">Caricamento richieste in corso...</p>
                             </div>
@@ -521,37 +543,37 @@
                             </div>
 
                             <h3 style="color: var(--md-sys-color-primary); margin-top:0; margin-bottom:20px; font-size: 18px;">Invia Nuova Richiesta</h3>
-                            <div class="form-grid" style="grid-template-columns: 1fr 1fr;">
+                            <div class="form-grid">
                                 <input type="hidden" id="fs-form-nome">
                                 <div>
-                                    <label style="font-size:13px; color:var(--md-sys-color-outline); margin-bottom:4px; display:block; font-weight:bold;">Inizio (hh:mm)</label>
+                                    <label style="font-size:13px; color:var(--md-sys-color-outline); margin-bottom:4px; display:block;">Inizio (hh:mm)</label>
                                     <input type="time" id="fs-form-inizio" class="md-input" required>
                                 </div>
                                 <div>
-                                    <label style="font-size:13px; color:var(--md-sys-color-outline); margin-bottom:4px; display:block; font-weight:bold;">Fine (hh:mm)</label>
+                                    <label style="font-size:13px; color:var(--md-sys-color-outline); margin-bottom:4px; display:block;">Fine (hh:mm)</label>
                                     <input type="time" id="fs-form-fine" class="md-input" required>
                                 </div>
                                 <div class="full-width">
-                                    <label style="font-size:13px; color:var(--md-sys-color-outline); margin-bottom:4px; display:block; font-weight:bold;">Motivazione</label>
-                                    <textarea id="fs-form-motivazione" class="md-input" style="resize:none; min-height:80px;" placeholder="Specifica la motivazione della richiesta..." required></textarea>
+                                    <label style="font-size:13px; color:var(--md-sys-color-outline); margin-bottom:4px; display:block;">Motivazione</label>
+                                    <textarea id="fs-form-motivazione" class="md-input" style="resize:none; min-height:80px;" placeholder="Specifica la motivazione..." required></textarea>
                                 </div>
                             </div>
-                            <p id="fs-form-error" style="color: #ef4444; font-size: 14px; font-weight: bold; margin-top: 0px; min-height: 20px;"></p>
+                            <p id="fs-form-error" style="color: var(--md-sys-color-error); font-size: 14px; font-weight: 500; margin-top: 0px; min-height: 20px;"></p>
                             <button class="md-btn" id="btn-richiedi-fs" style="width: 100%;" onclick="inviaRichiestaFS()">Invia Richiesta</button>
                         </div>
 
                         <div class="admin-section" id="fs-admin-container" style="margin-bottom: 0;">
-                            <h3 style="font-weight: 500; color: var(--md-sys-color-on-surface); margin-top:0; font-size: 16px;">Area Valutatori</h3>
+                            <h3 style="font-weight: 400; color: var(--md-sys-color-on-surface); margin-top:0; font-size: 16px;">Area Valutatori</h3>
                             <div id="fs-admin-login" style="display: flex; gap: 12px; justify-content: center; align-items: center; margin-top: 16px;">
                                 <span style="font-weight:bold; color:var(--md-sys-color-outline);">PDS-A-</span>
                                 <input type="password" id="fs-admin-code" class="md-input" placeholder="****" style="margin: 0; width: 100px; text-align: center; border-radius: var(--shape-corner-full);" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-                                <button class="md-btn md-btn-warning" onclick="sbloccaAdminFS()">Sblocca</button>
+                                <button class="md-btn" style="background-color: #facc15; color: #0f172a;" onclick="sbloccaAdminFS()">Sblocca</button>
                             </div>
                             <div id="fs-admin-error" style="color:var(--md-sys-color-error); font-size:13px; margin-top:12px; font-weight:500;"></div>
                             
                             <div id="fs-admin-panel" style="display: none; margin-top: 16px;">
                                 <span style="color: #10b981; font-weight: 500; font-size: 14px;">✅ Area Admin Sbloccata</span>
-                                <p style="font-size: 12px; color: var(--md-sys-color-outline); margin-top: 8px;">Puoi valutare le richieste in sospeso tramite gli appositi tasti nella colonna di sinistra.</p>
+                                <p style="font-size: 12px; color: var(--md-sys-color-outline); margin-top: 8px;">Puoi valutare le richieste in sospeso tramite i tasti nella colonna di sinistra.</p>
                             </div>
                         </div>
 
@@ -567,7 +589,7 @@
                     </div>
                     <div class="filter-bar">
                         <span class="material-symbols-outlined" style="color:var(--md-sys-color-outline)">search</span>
-                        <input type="text" id="search-bandi" class="md-input" style="margin: 0; padding: 0; width: 200px; background:transparent; border:none; box-shadow:none;" placeholder="Cerca bandi..." oninput="renderBandi()">
+                        <input type="text" id="search-bandi" class="md-input" style="margin: 0; padding: 0; width: 200px; background:transparent; border:none;" placeholder="Cerca bandi..." oninput="renderBandi()">
                         
                         <div style="width: 1px; height: 24px; background: var(--md-sys-color-outline); margin: 0 10px;"></div>
                         <label class="filter-label"><input type="checkbox" id="filter-open-bandi" onchange="renderBandi()"> Solo Aperte</label>
@@ -585,14 +607,14 @@
                         <h1>Interpellanze Reparti - PDS</h1>
                         <p>Consulta i posti disponibili e richiedi l'assegnazione ad un Reparto.</p>
                     </div>
-                    <button class="md-btn md-btn-secondary" onclick="accediGestionale()" id="btn-gestionale-header" style="border-radius: 12px;">
+                    <button class="md-btn md-btn-secondary" onclick="accediGestionale()" id="btn-gestionale-header" style="border-radius: var(--shape-corner-full);">
                         <span class="material-symbols-outlined">admin_panel_settings</span> Area Dirigenti
                     </button>
                 </div>
                 
                 <div class="filter-bar">
                     <span class="material-symbols-outlined" style="color:var(--md-sys-color-outline)">search</span>
-                    <input type="text" id="search-interpellanze" class="md-input" style="margin: 0; padding: 0; width: 200px; background:transparent; border:none; box-shadow:none;" placeholder="Cerca Reparto..." oninput="renderInterpellanze()">
+                    <input type="text" id="search-interpellanze" class="md-input" style="margin: 0; padding: 0; width: 200px; background:transparent; border:none;" placeholder="Cerca Reparto..." oninput="renderInterpellanze()">
                     <div style="width: 1px; height: 24px; background: var(--md-sys-color-outline); margin: 0 10px;"></div>
                     <label class="filter-label"><input type="checkbox" id="filter-open-int" onchange="renderInterpellanze()"> Solo Aperte</label>
                     <label class="filter-label"><input type="checkbox" id="filter-req-int" onchange="renderInterpellanze()"> Ho i requisiti</label>
@@ -623,24 +645,23 @@
     </div>
 
     <div id="dialog-fascicolo" class="dialog-backdrop">
-        <div class="dialog-surface large" style="padding:0;">
+        <div class="dialog-surface large">
             <div class="modal-sidebar">
-                <h3>Documentazione</h3>
-                <div class="modal-nav-item active" onclick="switchProfileTab('note', this)">📝 Note</div>
-                <div class="modal-nav-item" onclick="switchProfileTab('sanzioni', this)">⚖️ Sanzioni</div>
-                <div class="modal-nav-item" onclick="switchProfileTab('documenti', this)">📂 Documenti</div>
-                <div class="modal-nav-item" onclick="switchProfileTab('ore', this)">⏱️ Ore di Servizio</div>
+                <div class="modal-nav-item active" onclick="switchProfileTab('note', this)"><span class="material-symbols-outlined">notes</span> Note Personali</div>
+                <div class="modal-nav-item" onclick="switchProfileTab('sanzioni', this)"><span class="material-symbols-outlined">gavel</span> Sanzioni</div>
+                <div class="modal-nav-item" onclick="switchProfileTab('documenti', this)"><span class="material-symbols-outlined">folder</span> Documenti</div>
+                <div class="modal-nav-item" onclick="switchProfileTab('ore', this)"><span class="material-symbols-outlined">schedule</span> Ore Servizio</div>
             </div>
             <div class="fascicolo-content-area">
-                <button class="close-btn" style="position: absolute; top: 20px; right: 20px;" onclick="closeDialog('dialog-fascicolo')"><span class="material-symbols-outlined">close</span></button>
-                <h2 id="profile-tab-title" style="font-size: 32px; margin-top:0; margin-bottom: 10px; font-weight: 700; color: #FFF;">Note Personali</h2>
-                <p style="color: #64748b; margin-bottom: 30px;">Visualizzazione dei dati archiviati nel database centrale.</p>
+                <button class="close-btn" style="position: absolute; top: 24px; right: 24px;" onclick="closeDialog('dialog-fascicolo')"><span class="material-symbols-outlined">close</span></button>
+                <h2 id="profile-tab-title" style="font-size: 28px; margin-top:0; margin-bottom: 8px; font-weight: 400; color: var(--md-sys-color-on-surface);">Note Personali</h2>
+                <p style="color: var(--md-sys-color-on-surface-variant); margin-bottom: 32px;">Visualizzazione dei dati archiviati nel database centrale.</p>
                 
                 <div id="profile-tab-content">
-                    <div style="background: rgba(15, 23, 42, 0.4); border: 1px dashed rgba(255,255,255,0.1); padding: 60px; border-radius: 20px; text-align: center;">
-                        <span style="font-size: 40px; display: block; margin-bottom: 15px;">⏳</span>
-                        <h3 style="color: #f1f5f9; margin-bottom: 10px;">Modulo in arrivo...</h3>
-                        <p style="color: #94a3b8;">Il sistema sta sincronizzando i dati del tuo fascicolo operativo.</p>
+                    <div style="background: var(--md-sys-color-surface); border: 1px dashed var(--md-sys-color-outline-variant); padding: 60px; border-radius: var(--shape-corner-medium); text-align: center;">
+                        <span class="material-symbols-outlined" style="font-size: 48px; color: var(--md-sys-color-primary); margin-bottom: 16px;">sync</span>
+                        <h3 style="color: var(--md-sys-color-on-surface); margin-bottom: 8px; font-weight: 500;">Modulo in sincronizzazione...</h3>
+                        <p style="color: var(--md-sys-color-on-surface-variant);">Il sistema sta recuperando i dati dal fascicolo operativo.</p>
                     </div>
                 </div>
             </div>
@@ -657,7 +678,7 @@
             <div id="sdi-step-1">
                 <div id="persons-container">
                     <div class="person-group">
-                        <h4 style="margin:0 0 16px 0; color: var(--md-sys-color-primary); font-weight: 600;">Soggetto 1 (Principale)</h4>
+                        <h4 style="margin:0 0 16px 0; color: var(--md-sys-color-primary); font-weight: 500;">Soggetto 1 (Principale)</h4>
                         <div class="form-grid">
                             <input type="text" class="md-input full-width nome-input" placeholder="Cognome e Nome *">
                             <input type="text" class="md-input data-input" placeholder="Data di Nascita (gg/mm/aaaa) *">
@@ -670,17 +691,17 @@
                 </div>
 
                 <button class="md-btn md-btn-secondary" style="width: 100%; margin-bottom: 24px;" onclick="addPersonForm()">
-                    <span class="material-symbols-outlined">person_add</span> AGGIUNGI SOGGETTO AGGIUNTIVO
+                    <span class="material-symbols-outlined">person_add</span> AGGIUNGI SOGGETTO EXTRA
                 </button>
 
                 <div style="display: flex; justify-content: flex-end;">
-                    <button class="md-btn" onclick="goToSdiStep2()">AVANTI <span class="material-symbols-outlined">arrow_forward</span></button>
+                    <button class="md-btn" onclick="goToSdiStep2()">AVANTI E ASSEGNA UNITA' <span class="material-symbols-outlined">arrow_forward</span></button>
                 </div>
             </div>
 
             <div id="sdi-step-2" class="hidden">
-                <h4 style="margin:0 0 16px 0; font-weight: 600;">Dettagli Operativi</h4>
-                <select id="volante-select" class="md-input full-width" style="appearance: none;">
+                <h4 style="margin:0 0 16px 0; font-weight: 500;">Dettagli Operativi</h4>
+                <select id="volante-select" class="md-input full-width">
                     <option value="" disabled selected>Seleziona Unità procedente *</option>
                     <option value="Volante 1">Volante 1</option>
                     <option value="Volante 2">Volante 2</option>
@@ -713,8 +734,8 @@
                 <button class="close-btn" onclick="closeDialog('dialog-notifiche')"><span class="material-symbols-outlined">close</span></button>
             </div>
             
-            <div style="background: rgba(15, 23, 42, 0.5); padding: 16px; border-radius: 12px; margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.05);">
-                <input type="text" id="cerca-avvisi" class="md-input" style="margin-bottom: 12px; padding: 12px; background: #0f172a;" placeholder="Cerca per titolo..." oninput="applicaFiltriAvvisi()">
+            <div style="background: var(--md-sys-color-surface); padding: 16px; border-radius: var(--shape-corner-medium); margin-bottom: 24px; border: 1px solid var(--md-sys-color-outline-variant);">
+                <input type="text" id="cerca-avvisi" class="md-input" style="margin-bottom: 12px; padding: 12px; background: var(--md-sys-color-surface-container-highest);" placeholder="Cerca per titolo..." oninput="applicaFiltriAvvisi()">
                 <div style="display: flex; gap: 16px;">
                     <label class="filter-label"><input type="checkbox" id="filtro-letti" onchange="applicaFiltriAvvisi()" checked> Mostra Letti</label>
                     <label class="filter-label"><input type="checkbox" id="filtro-non-letti" onchange="applicaFiltriAvvisi()" checked> Mostra Non Letti</label>
@@ -735,18 +756,14 @@
             </div>
             
             <div class="tab-buttons">
-                <button class="tab-btn active" id="tabBtnSegnala" onclick="switchSegnalaTab('segnala')">Segnala</button>
-                <button class="tab-btn" id="tabBtnProponi" onclick="switchSegnalaTab('proponi')">Proponi</button>
+                <button class="tab-btn active" id="tabBtnSegnala" onclick="switchSegnalaTab('segnala')">Segnala Bug</button>
+                <button class="tab-btn" id="tabBtnProponi" onclick="switchSegnalaTab('proponi')">Proponi Idea</button>
             </div>
 
             <div id="form-segnala-content">
-                <label style="font-size:13px; color:#94a3b8; display:block; margin-bottom:4px;">Oggetto *</label>
-                <input type="text" id="segn-tipo" class="md-input" placeholder="Es. Bug visivo, Modifica divisa">
-                
-                <label style="font-size:13px; color:#94a3b8; display:block; margin-bottom:4px;">Descrizione dettagliata *</label>
-                <textarea id="segn-desc" class="md-input" style="resize: vertical; min-height: 100px;" placeholder="Scrivi qui i dettagli..."></textarea>
-                
-                <button class="md-btn md-btn-success" id="btn-invia-segn" style="width: 100%; margin-top: 10px;" onclick="inviaSegnalazione()">TRASMETTI DATI</button>
+                <input type="text" id="segn-tipo" class="md-input" placeholder="Oggetto (es. Bug Divise) *">
+                <textarea id="segn-desc" class="md-input" style="resize: vertical; min-height: 100px;" placeholder="Descrizione dettagliata... *"></textarea>
+                <button class="md-btn" id="btn-invia-segn" style="width: 100%; margin-top: 10px;" onclick="inviaSegnalazione()">TRASMETTI DATI</button>
             </div>
         </div>
     </div>
@@ -784,13 +801,13 @@
                     <input type="text" class="md-input" id="int-nome-read" readonly>
                     <input type="text" class="md-input" id="int-qual-read" readonly>
                 </div>
-                <label style="font-size:12px; color:var(--md-sys-color-outline); margin-bottom:4px; display:block;">Descrizione di te stesso</label>
+                <label style="font-size:13px; color:var(--md-sys-color-outline); margin-bottom:4px; display:block;">Descrizione di te stesso</label>
                 <textarea id="int-desc-se" class="md-input" style="resize: vertical; min-height: 60px;" placeholder="Parlaci di te..." required></textarea>
                 
-                <label style="font-size:12px; color:var(--md-sys-color-outline); margin-bottom:4px; display:block;">Perché vorresti entrare in questo reparto?</label>
+                <label style="font-size:13px; color:var(--md-sys-color-outline); margin-bottom:4px; display:block;">Perché vorresti entrare in questo reparto?</label>
                 <textarea id="int-perche" class="md-input" style="resize: vertical; min-height: 60px;" placeholder="Spiega le tue motivazioni..." required></textarea>
                 
-                <label style="font-size:12px; color:var(--md-sys-color-outline); margin-bottom:4px; display:block;">Di cosa si occupa questo reparto?</label>
+                <label style="font-size:13px; color:var(--md-sys-color-outline); margin-bottom:4px; display:block;">Di cosa si occupa questo reparto?</label>
                 <textarea id="int-occupa" class="md-input" style="resize: vertical; min-height: 60px;" placeholder="Dimostra la tua conoscenza..." required></textarea>
                 
                 <label class="filter-label" style="margin-bottom: 24px;"><input type="checkbox" id="int-confirm"> Confermo l'esattezza dei dati inseriti</label>
@@ -801,24 +818,24 @@
     </div>
 
     <div id="dialog-gestionale" class="dialog-backdrop">
-        <div class="dialog-surface large" style="display:block; padding:32px;">
-            <div class="dialog-header" style="top:-32px;">
+        <div class="dialog-surface large" style="flex-direction: column; overflow-y: auto; height: 90vh;">
+            <div class="dialog-header">
                 <h2>Gestione Reparto Operativo</h2>
                 <button class="close-btn" onclick="closeDialog('dialog-gestionale')"><span class="material-symbols-outlined">close</span></button>
             </div>
-            <div id="gestionale-content">
+            <div id="gestionale-content" style="padding: 32px;">
                 <h4 style="color:var(--md-sys-color-primary); font-size:18px; margin: 0 0 20px 0;">Reparto in gestione: <span id="gest-reparto-name" style="color:#FFF;"></span></h4>
                 
                 <div class="form-grid">
                     <div>
-                        <label style="font-size:12px; color:var(--md-sys-color-outline); margin-bottom:4px; display:block;">Stato Interpellanza</label>
+                        <label style="font-size:13px; color:var(--md-sys-color-outline); margin-bottom:4px; display:block;">Stato Interpellanza</label>
                         <select id="gest-stato" class="md-input" onchange="togglePostiGestionale()" style="margin-bottom: 0;">
                             <option value="Chiuso">CHIUSO</option>
                             <option value="Aperto">APERTO</option>
                         </select>
                     </div>
                     <div>
-                        <label style="font-size:12px; color:var(--md-sys-color-outline); margin-bottom:4px; display:block;">Posti Disponibili</label>
+                        <label style="font-size:13px; color:var(--md-sys-color-outline); margin-bottom:4px; display:block;">Posti Disponibili</label>
                         <input type="number" id="gest-posti" class="md-input" placeholder="Es. 5" disabled style="margin-bottom: 0;">
                     </div>
                 </div>
@@ -839,12 +856,12 @@
     <div id="dialog-valuta-fs" class="dialog-backdrop">
         <div class="dialog-surface" style="max-width: 400px;">
             <div class="dialog-header">
-                <h3 style="color:white; margin:0; font-size:22px;">Valuta Richiesta F.S.</h3>
+                <h2>Valuta F.S.</h2>
                 <button class="close-btn" onclick="closeDialog('dialog-valuta-fs')"><span class="material-symbols-outlined">close</span></button>
             </div>
-            <p style="color: #cbd5e1; font-size: 14px; margin-bottom: 20px;">Stai valutando la richiesta di <b id="fs-valuta-nome" style="color:white;"></b>.</p>
+            <p style="color: var(--md-sys-color-on-surface-variant); font-size: 14px; margin-bottom: 20px;">Stai valutando la richiesta di <b id="fs-valuta-nome" style="color:#FFF;"></b>.</p>
             
-            <label style="display:block; color:#cbd5e1; font-weight:bold; margin-bottom:8px; font-size:13px;">Modifica Fine (Opzionale se accetti)</label>
+            <label style="display:block; color:var(--md-sys-color-outline); margin-bottom:4px; font-size:13px;">Modifica Fine (Opzionale se accetti)</label>
             <input type="time" id="fs-valuta-fine" class="md-input" style="margin-top:8px;">
             
             <input type="hidden" id="fs-valuta-row">
@@ -859,7 +876,7 @@
     </div>
 
     <script>
-        // === URL DELLE APPS SCRIPT (ORIGINALI, NIENTE FIREBASE) ===
+        // === URL DELLE APPS SCRIPT (ORIGINALI) ===
         const LOGIN_API_URL = "https://script.google.com/macros/s/AKfycbyHmXjhjtECYJGwNYBYCIsPnXDI8LsoM1GZ2wqxgqgeoMbbvhLUUqfO_9kRly-egyPZ/exec";
         const LOGIN_CHECK_URL = "https://script.google.com/macros/s/AKfycbxWMqPUg4dVsnmZs9amo7exX24fNV9dMN8F4BcK-Qapq2UuUxYxrak163GTtpp_bynd/exec";
         const LOGIN_WEBHOOK = "https://discord.com/api/webhooks/1488451866898595920/mD4G-Ps73xWalanAiAGKfn2t_jHi3nAIVHaKZzwjK6_Psqd2LQ-uwpxjyTPKK61SUS9c";
@@ -1018,7 +1035,7 @@
                 dataAccesso = now.toLocaleDateString('it-IT') + " " + now.toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' });
                 sessionStorage.setItem("dataAccesso", dataAccesso);
             }
-            document.getElementById("data-accesso").textContent = dataAccesso;
+            if(document.getElementById("data-accesso")) document.getElementById("data-accesso").textContent = dataAccesso;
             
             initRipples();
             caricaAvvisi();
@@ -1078,14 +1095,14 @@
 
             title.innerText = labels[tab];
             content.innerHTML = `
-                <div style="background: var(--md-sys-color-surface); border: 1px dashed var(--md-sys-color-outline); padding: 60px; border-radius: var(--shape-corner-medium); text-align: center;">
+                <div style="background: var(--md-sys-color-surface); border: 1px dashed var(--md-sys-color-outline-variant); padding: 60px; border-radius: var(--shape-corner-medium); text-align: center;">
                     <span class="material-symbols-outlined" style="font-size: 48px; color: var(--md-sys-color-primary); margin-bottom: 16px;">sync</span>
                     <h3 style="color: var(--md-sys-color-on-surface); margin-bottom: 8px; font-weight: 500;">Modulo in sincronizzazione...</h3>
                     <p style="color: var(--md-sys-color-on-surface-variant);">Il sistema sta recuperando i dati dal fascicolo operativo.</p>
                 </div>`;
         }
 
-        // --- NUOVO: GESTIONE FUORI SERVIZIO / PERMESSI ---
+        // --- GESTIONE FUORI SERVIZIO / PERMESSI ---
         async function loadFuoriServizio() {
             if(fsLoaded) return;
             document.getElementById("fs-nome-display").innerText = userName;
@@ -1224,6 +1241,7 @@
                     document.getElementById("fs-form-motivazione").value = "";
                     errorBox.textContent = "";
                     btn.innerText = "Invia Richiesta";
+                    btn.disabled = false;
                     caricaRichiesteFS();
                     controllaBloccoOdiernoFS();
                 }, 1500);
@@ -1259,7 +1277,7 @@
                         `<button class="md-btn md-btn-warning" style="height:32px; padding:0 12px; margin-top:8px; border-radius:8px;" onclick="apriValutazioneFS('${req.idRiga}', '${req.nome.replace(/'/g, "\\'")}', '${req.inizio}', '${req.fine}', '${req.msgId}')">Valuta</button>` : '';
 
                     container.innerHTML += `
-                        <div style="display:flex; flex-direction:column; gap:8px; padding:16px; border-radius:var(--shape-corner-medium); background:var(--md-sys-color-surface-container); border:1px solid var(--md-sys-color-surface-container-high);">
+                        <div style="display:flex; flex-direction:column; gap:8px; padding:16px; border-radius:var(--shape-corner-medium); background:var(--md-sys-color-surface); border:1px solid var(--md-sys-color-surface-container-high);">
                             <div style="display:flex; justify-content:space-between; align-items:center;">
                                 <b style="color:var(--md-sys-color-on-surface); font-size:14px;">${req.nome}</b>
                                 <div class="fs-status-badge ${badgeClass}" style="font-size:10px; padding:4px 8px;">${req.stato}</div>
@@ -1570,7 +1588,7 @@
             setTimeout(() => { closeDialog('dialog-bando'); renderBandi(); btn.innerText = "INVIA CANDIDATURA"; btn.disabled = false; }, 800);
         }
 
-        // --- INTERPELLANZE REPARTI CON STATUS A SINISTRA ---
+        // --- INTERPELLANZE REPARTI ---
         let interpellanzeGlobali = [];
         let applicatiInterpellanze = [];
         let interpellanzeLoaded = false;
@@ -1771,12 +1789,12 @@
                     let html = `<h4 style="color:var(--md-sys-color-primary); margin-bottom:12px;">Candidature Ricevute (${res.dati.length})</h4>`;
                     res.dati.forEach(d => {
                         html += `
-                        <div class="candidatura-card">
-                            <p><span>Nome:</span> <b style="color:#FFF">${d.nome}</b> - <span>Qualifica:</span> <b style="color:#FFF">${d.qualifica}</b></p>
-                            <hr style="border:0; border-top:1px solid rgba(255,255,255,0.05); margin: 12px 0;">
-                            <p><span>Descrizione:</span><br>${d.descrizione}</p>
-                            <p><span>Perché vuole entrare:</span><br>${d.perche}</p>
-                            <p><span>Conoscenza reparto:</span><br>${d.occupa}</p>
+                        <div style="background:var(--md-sys-color-surface); border:1px solid var(--md-sys-color-outline-variant); padding:16px; border-radius:var(--shape-corner-medium); margin-bottom:16px;">
+                            <p style="margin:0 0 8px 0; font-size:14px; color:var(--md-sys-color-on-surface-variant);"><span style="color:var(--md-sys-color-primary); font-weight:600;">Nome:</span> <b style="color:#FFF">${d.nome}</b> - <span style="color:var(--md-sys-color-primary); font-weight:600;">Qualifica:</span> <b style="color:#FFF">${d.qualifica}</b></p>
+                            <hr style="border:0; border-top:1px solid var(--md-sys-color-surface-container-highest); margin: 12px 0;">
+                            <p style="margin:4px 0; font-size:14px;"><span style="color:var(--md-sys-color-primary); font-weight:500;">Descrizione:</span><br>${d.descrizione}</p>
+                            <p style="margin:4px 0; font-size:14px;"><span style="color:var(--md-sys-color-primary); font-weight:500;">Perché vuole entrare:</span><br>${d.perche}</p>
+                            <p style="margin:4px 0; font-size:14px;"><span style="color:var(--md-sys-color-primary); font-weight:500;">Conoscenza reparto:</span><br>${d.occupa}</p>
                         </div>`;
                     });
                     container.innerHTML = html;
@@ -1840,16 +1858,16 @@
             container.innerHTML += `<div class="category-title">${titolo}</div>`;
             let gridHtml = `<div class="card-grid">`;
             eventiArr.forEach(c => {
-                let warn = (c.polizia && c.polizia.toUpperCase().trim() === 'SI') ? `<div class="warning-box">⚠ SUPERVISIONE OBBLIGATORIA P.S. (Disp. Questore)</div>` : "";
+                let warn = (c.polizia && c.polizia.toUpperCase().trim() === 'SI') ? `<div style="background-color: var(--md-sys-color-error-container); color: var(--md-sys-color-on-error-container); padding: 12px; border-radius: var(--shape-corner-small); margin-top: 16px; text-align: center; font-weight: 500; font-size: 13px;">⚠ SUPERVISIONE OBBLIGATORIA P.S. (Disp. Questore)</div>` : "";
                 gridHtml += `
-                    <div class="md-card">
-                        <div class="card-status ${c.statusClass}">${c.statusText}</div>
+                    <div class="md-card no-hover">
+                        <div class="card-status ${c.statusClass}" style="left: auto; right: 16px;">${c.statusText}</div>
                         <h3 style="margin-top: 10px;">${c.titolo}</h3>
-                        <p style="font-size: 12px; color: var(--md-sys-color-primary); margin-bottom: 12px; font-weight:600;">Autorizzato da: ${c.autorizzatoDa}</p>
-                        <div style="background: rgba(255,255,255,0.03); padding: 12px; border-radius: 8px; margin-bottom: 12px;">
-                            <p><b>📅 Data:</b> ${c.dataEvento}</p>
-                            <p><b>⏰ Orario:</b> ${c.oraInizio} - ${c.oraFine}</p>
-                            <p><b>📍 Luogo:</b> ${c.luogo}</p>
+                        <p style="font-size: 12px; color: var(--md-sys-color-primary); margin-bottom: 12px; font-weight:500;">Autorizzato da: ${c.autorizzatoDa}</p>
+                        <div style="background: var(--md-sys-color-surface-container-highest); padding: 12px; border-radius: var(--shape-corner-small); margin-bottom: 12px;">
+                            <p style="margin-bottom:4px;"><b>📅 Data:</b> ${c.dataEvento}</p>
+                            <p style="margin-bottom:4px;"><b>⏰ Orario:</b> ${c.oraInizio} - ${c.oraFine}</p>
+                            <p style="margin-bottom:0;"><b>📍 Luogo:</b> ${c.luogo}</p>
                         </div>
                         <p><b>Soggetto:</b> ${c.nomeSoggetto}</p>
                         ${warn}
@@ -1866,13 +1884,13 @@
         function addPersonForm() {
             personCount++; const container = document.getElementById('persons-container');
             const newGroup = document.createElement('div'); newGroup.className = 'person-group';
-            newGroup.innerHTML = `<div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 16px;"><h4 style="margin:0; font-weight: 600; color:var(--md-sys-color-primary);">Soggetto ${personCount} (Aggiuntivo)</h4><button class="md-btn md-btn-error" style="padding: 0 12px; height: 32px; font-size:12px;" onclick="this.parentElement.parentElement.remove(); personCount--;">Rimuovi</button></div><div class="form-grid"><input type="text" class="md-input full-width nome-input" placeholder="Cognome e Nome *"><input type="text" class="md-input data-input" placeholder="Data di Nascita (gg/mm/aaaa) *"><input type="text" class="md-input doc-input" placeholder="N° Documento/Patente *"></div>`;
+            newGroup.innerHTML = `<div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 16px;"><h4 style="margin:0; font-weight: 500; color:var(--md-sys-color-primary);">Soggetto ${personCount} (Aggiuntivo)</h4><button class="md-btn md-btn-error" style="height: 32px; padding: 0 16px;" onclick="this.parentElement.parentElement.remove(); personCount--;">Rimuovi</button></div><div class="form-grid"><input type="text" class="md-input full-width nome-input" placeholder="Cognome e Nome *"><input type="text" class="md-input data-input" placeholder="Data di Nascita (gg/mm/aaaa) *"><input type="text" class="md-input doc-input" placeholder="N° Documento/Patente *"></div>`;
             container.appendChild(newGroup);
         }
 
         function resetSdiForm() {
             document.getElementById('sdi-step-1').classList.remove('hidden'); document.getElementById('sdi-step-2').classList.add('hidden');
-            document.getElementById('volante-select').value = ""; document.getElementById('persons-container').innerHTML = `<div class="person-group"><h4 style="margin:0 0 16px 0; color: var(--md-sys-color-primary); font-weight: 600;">Soggetto 1 (Principale)</h4><div class="form-grid"><input type="text" class="md-input full-width nome-input" placeholder="Cognome e Nome *"><input type="text" class="md-input data-input" placeholder="Data di Nascita (gg/mm/aaaa) *"><input type="text" class="md-input doc-input" placeholder="N° Documento/Patente *"><input type="text" id="luogo-input" class="md-input full-width" placeholder="Località Controllo (Via, Città) *"><input type="text" id="tipo-veicolo-input" class="md-input" placeholder="Tipo Veicolo (Auto, Moto)"><input type="text" id="targa-input" class="md-input" placeholder="Targa Veicolo"></div></div>`;
+            document.getElementById('volante-select').value = ""; document.getElementById('persons-container').innerHTML = `<div class="person-group"><h4 style="margin:0 0 16px 0; color: var(--md-sys-color-primary); font-weight: 500;">Soggetto 1 (Principale)</h4><div class="form-grid"><input type="text" class="md-input full-width nome-input" placeholder="Cognome e Nome *"><input type="text" class="md-input data-input" placeholder="Data di Nascita (gg/mm/aaaa) *"><input type="text" class="md-input doc-input" placeholder="N° Documento/Patente *"><input type="text" id="luogo-input" class="md-input full-width" placeholder="Località Controllo (Via, Città) *"><input type="text" id="tipo-veicolo-input" class="md-input" placeholder="Tipo Veicolo (Auto, Moto)"><input type="text" id="targa-input" class="md-input" placeholder="Targa Veicolo"></div></div>`;
             personCount = 1;
         }
 
@@ -1917,7 +1935,7 @@
             const tbody = document.getElementById('sdiBody'); const row = document.createElement('tr');
             row.setAttribute('onclick', `openSdiDetails('${newId}')`);
             let numExtra = extra.length; let badgeClass = numExtra === 0 ? 'badge error' : 'badge'; let badgeText = numExtra === 0 ? 'SOLO' : '+ ' + numExtra;
-            row.innerHTML = `<td style="color: var(--md-sys-color-primary); font-weight: 700;">${newId}</td><td>${data.dataOggi}</td><td style="text-transform: uppercase; font-weight:600">${data.nomePrincipale}</td><td>${data.luogo}</td><td><span class="${badgeClass}">${badgeText}</span></td><td><button class="md-btn md-btn-secondary" style="padding: 0 12px; height: 32px; font-size: 12px;">VEDI</button></td>`;
+            row.innerHTML = `<td style="color: var(--md-sys-color-primary); font-weight: 600;">${newId}</td><td style="color:var(--md-sys-color-on-surface-variant);">${data.dataOggi}</td><td style="text-transform: uppercase; font-weight:500; color:var(--md-sys-color-on-surface);">${data.nomePrincipale}</td><td style="color:var(--md-sys-color-on-surface-variant);">${data.luogo}</td><td><span class="${badgeClass}">${badgeText}</span></td><td><button class="md-btn md-btn-secondary" style="height: 32px; padding: 0 16px;">VEDI</button></td>`;
             tbody.insertBefore(row, tbody.firstChild); updateSummarySDI(); initRipples();
         }
 
@@ -1953,10 +1971,10 @@
         function openSdiDetails(id) {
             const data = sdiDataList.find(d => d.idSdi === id); if(!data) return;
             document.getElementById('detail-title').innerText = "Scheda Protocollo: " + id;
-            let html = `<div class="details-section" style="border-left: 4px solid var(--md-sys-color-primary);"><h4>Riferimenti Temporali e Località</h4><p><b>Data / Ora:</b> ${data.dataOggi}</p><p><b>Località:</b> ${data.luogo}</p><p><b>Unità Procede:</b> ${data.volante}</p><p><b>Operatore inserente:</b> <span style="font-size:13px; opacity:0.8">${data.operatore}</span></p></div><div class="details-section"><h4>Veicolo Associato</h4><p><b>Tipo Veicolo:</b> ${data.tipoVeicolo} | <b>Targa:</b> <span class="evidenziato">${data.targa}</span></p></div><div class="details-section"><h4>Soggetto Principale</h4><p style="text-transform: uppercase; font-size:18px; font-weight:700;">${data.nomePrincipale}</p><p><b>Nato il:</b> ${data.dataNascitaPrincipale}</p><p><b>Documento Identificativo:</b> <span class="evidenziato">${data.docPrincipale}</span></p></div>`;
+            let html = `<div class="details-section" style="border-left: 4px solid var(--md-sys-color-primary);"><h4>Riferimenti Temporali e Località</h4><p><b>Data / Ora:</b> ${data.dataOggi}</p><p><b>Località:</b> ${data.luogo}</p><p><b>Unità Procede:</b> ${data.volante}</p><p><b>Operatore inserente:</b> <span style="font-size:13px; opacity:0.8">${data.operatore}</span></p></div><div class="details-section"><h4>Veicolo Associato</h4><p><b>Tipo Veicolo:</b> ${data.tipoVeicolo} | <b>Targa:</b> <span class="evidenziato">${data.targa}</span></p></div><div class="details-section"><h4>Soggetto Principale</h4><p style="text-transform: uppercase; font-size:18px; font-weight:600; color:var(--md-sys-color-on-surface);">${data.nomePrincipale}</p><p><b>Nato il:</b> ${data.dataNascitaPrincipale}</p><p><b>Documento Identificativo:</b> <span class="evidenziato">${data.docPrincipale}</span></p></div>`;
             if(data.extraPersons && data.extraPersons.length > 0) {
                 html += `<div class="details-section"><h4>Soggetti Extra Controllati (${data.extraPersons.length})</h4>`;
-                data.extraPersons.forEach((p, index) => { html += `<div style="margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,0.05)"><p style="text-transform: uppercase; font-weight:700;">${index+2}. ${p.nome}</p><p style="font-size:14px;"><b>Nato il:</b> ${p.data} | <b>Doc:</b> N/D</p></div>`; }); html += `</div>`;
+                data.extraPersons.forEach((p, index) => { html += `<div style="margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid var(--md-sys-color-outline-variant)"><p style="text-transform: uppercase; font-weight:500; color:var(--md-sys-color-on-surface);">${index+2}. ${p.nome}</p><p style="font-size:14px;"><b>Nato il:</b> ${p.data} | <b>Doc:</b> N/D</p></div>`; }); html += `</div>`;
             }
             document.getElementById('detail-content').innerHTML = html; openDialog('dialog-details-sdi');
         }
